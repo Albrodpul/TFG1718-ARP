@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['table']});
+      
+     
+    $(document).ready(()=>{
+        var request = $.ajax({
+            url: '../../../api/v1/population-growth?apikey=multiPlan_C4_sos-2016-03-asu_ag',
+            type: "GET",
+            data: "{}",
+            contentType: "application/json",
+            dataType: "json"
+        });
+
+
+        request.done((dataFromServer,status)=>{
+          	var request=$.ajax({
+            	type: "GET",
+            	url: 'https://sos-2016-01.herokuapp.com/api/v1/electrical-consume?apikey=multiPlan_C4_sos-2016-01-asm_ag',
+            	data: "{}",
+            	contentType: "application/json; charset=utf-8",
+            	dataType: "json",
+          	});	
+          	request.done((dataFromServer2,status)=>{
+          		google.charts.setOnLoadCallback(drawTable);
+                function drawTable() {
+                    
+                    Array.prototype.unique=function(a){
+                        return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
+                    });
+                    dataForWidget=[];
+                    var years = [];
+                    for(i=0;i<dataFromServer.length;i++){
+                        var item = dataFromServer[i];
+                        years.push(item.year);
+                    }
+                    years = years.unique();
+                    for(i=0;i<years.length;i++){
+                        var a = [];
+                        a.push(years[i]);
+                        var acum_totalpopulation = 0;
+                        for(j=0;j<dataFromServer.length;j++){
+                            var item = dataFromServer[j];
+                            if(item.year==years[i]){
+                                var population_int = parseInt(item.total_population);
+
+                                acum_totalpopulation += population_int;
+
+                               
+                            }
+                        }
+                        a.push(acum_totalpopulation);
+                        
+
+                        var acum_electricpower = 0;
+                        for(k=0;k<dataFromServer2.length;k++){
+                            var item = dataFromServer2[k];
+                            if(item.year==years[i]){
+                                var ePowerConsum_int = parseInt(item.ePowerConsum);
+                                console.log("------");
+                                console.log(ePowerConsum_int);
+                                console.log(item.ePowerConsum);
+                                acum_electricpower += ePowerConsum_int;
+                                console.log(acum_electricpower);
+                            }
+                        }
+                        a.push(acum_electricpower);
+                        dataForWidget.push(a);
+                    }
+
+                    
+                    console.log(dataForWidget);
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Year');
+                    data.addColumn('number', 'Total population');
+                    data.addColumn('number', 'Electric power consumption');
+                    data.addRows(dataForWidget);
+
+                    var table = new google.visualization.Table(document.getElementById('table_div'));
+
+                    table.draw(data, {showRowNumber: true, width: '50%', height: '50%'});
+                }
+          	});
+        });
+	});         
+
+      
+    </script>
+  </head>
+  <body>
+        <div id="table_div"></div>
+  </body>
+</html>

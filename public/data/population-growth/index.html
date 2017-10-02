@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Population Growth Data</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+  <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<div class="jumbotron">
+<ol class="breadcrumb">
+    <li><a href="/about/">About</a></li>
+    <li class="active">Dynamic table</li>   
+    <li><a href="/data/population-growth/RESTClient">REST Client</a></li>     
+ </ol>
+  
+  <h2>Population Growth Data</h2>
+  
+  <table class="table table-bordered" id="location" border='1'>
+    <tr>
+        <th class="danger">Region</th>
+        <th class="danger">Year</th>
+        <th class="danger">Age</th>
+        <th class="danger">Men</th>
+        <th class="danger">Women</th>
+        <th class="danger">Total population</th>
+    </tr>
+</table>
+
+<br/>
+<a href="/about/" class="btn btn-primary btn-lg active">« Previous</a>
+</div>
+</div>
+
+<script>
+
+var service = '../../api/v1/population-growth?apikey=multiPlan_C4_sos-2016-03-asu_ag';
+
+$(document).ready(function(){
+
+    jQuery.support.cors = true;
+
+    $.ajax(
+    {
+        type: "GET",
+        url: service,
+        data: "{}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+
+        success: function (data) {
+          var trHTML = '';
+
+      
+        
+
+      $.each(data, function (i, item) {
+        console.log(data[i]);
+        
+          trHTML += "<tr class='info'><td>" + data[i].region + '</td><td>' + data[i].year + '</td><td>' + data[i].age + '</td><td>' + data[i].men + '</td><td>' + data[i].women + '</td><td>' + data[i].total_population + '</td></tr>';
+      });
+
+      $('#location').append(trHTML);  
+
+
+
+        },
+        
+        error: function (msg) {
+            alert(msg.responseText);
+        }
+    });
+})
+
+</script>
+</body>
+</html>

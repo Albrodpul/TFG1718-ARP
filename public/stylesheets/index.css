@@ -1,0 +1,25 @@
+body{
+	background: #F2F2F2;
+	width:85%;
+	margin-left: 7%;
+	font-size:18px;
+}
+
+.main{
+	border:1px solid #848484;
+	-moz-border-radius: 10px; /* Firefox */
+	-webkit-border-radius: 10px; /* Google Chrome y Safari */
+	border-radius: 10px;
+	padding:15px;
+	height: 80%;
+	background-color:#D8D8D8;
+}
+.theme{
+  border:1px solid #848484;
+	-moz-border-radius: 10px; /* Firefox */
+	-webkit-border-radius: 10px; /* Google Chrome y Safari */
+	border-radius: 10px;
+	padding:5px;
+  margin:20px;
+  background-color:#C0C0C0;
+}

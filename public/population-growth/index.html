@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+  <head>
+    <title>Population growth</title>
+    <meta charset="utf-8" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.css"></link>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.4.1/css/alertify.min.css"></link>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.4.1/css/themes/bootstrap.min.css"></link>
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script src="//cdn.jsdelivr.net/alertifyjs/1.4.1/alertify.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+  
+
+
+    <script type="text/javascript" src="rest.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container">
+    <h1>Population growth</h1>
+
+      
+   
+      <input onclick="botonAnadirDato()" type="button" class="btn btn-primary" value="Add new"></input>
+      <input onclick="botonEditarDato()" type="button" class="btn btn-primary" value="Edit data"></input>
+      <input onclick="botonEliminarTodo()" type="button" class="btn btn-warning" value="Delete All"></input>
+      <input onclick="cargaInicial()" type="button" class="btn btn-danger" value="Load Initial Data"></input>
+      </br>
+      </br>
+      <label>Key</label> 
+      <input type="text" name="apikey" id="apikey" value="multiPlan_C4_sos-2016-03-asu_ag"/>
+      
+
+      </br>
+      
+
+      <div class="container" id="formulario">
+      <form role="form" id="formulario">
+        <label for="form_region">Region:</label>
+          <input type="text" class="form-control" id="form_region" name="form_region" placeholder="Region" >
+        <label for="form_year">Year:</label>
+          <input type="text" class="form-control" id="form_year" name="form_year" placeholder="Year" >
+        <label for="form_age">Age:</label>
+          <input type="text" class="form-control" id="form_age" name="form_age" placeholder="Age" >
+        <label for="form_men">Men:</label>
+          <input type="text" class="form-control" id="form_men" name="form_men" placeholder="Men" >
+        <label for="form_women">Women:</label>
+          <input type="text" class="form-control" id="form_women" name="form_women" placeholder="Women" >
+        <label for="form_totalpopulation">Total population:</label>
+          <input type="text" class="form-control" id="form_totalpopulation" name="form_totalpopulation" placeholder="Totalpopulation" >
+
+        <input type="button" onclick="añadirDato()" name="AddData" value="Add"></input>
+      </form>
+      </div>
+
+      
+      </br>
+      </br>
+
+      <div class="container" id="formulario2">
+      <form role="form" id="formulario2">
+        <label for="form_region">Region:</label>
+          <input type="text" class="form-control" id="form2_region" name="form_region" placeholder="Region" >
+        <label for="form_year">Year:</label>
+          <input type="text" class="form-control" id="form2_year" name="form_year" placeholder="Year" >
+        <label for="form_age">Age:</label>
+          <input type="text" class="form-control" id="form2_age" name="form_age" placeholder="Age" >
+        <label for="form_men">Men:</label>
+          <input type="text" class="form-control" id="form2_men" name="form_men" placeholder="Men" >
+        <label for="form_women">Women:</label>
+          <input type="text" class="form-control" id="form2_women" name="form_women" placeholder="Women" >
+        <label for="form_totalpopulation">Total population:</label>
+          <input type="text" class="form-control" id="form2_totalpopulation" name="form_totalpopulation" placeholder="Totalpopulation" >
+
+        <input type="button" onclick="editarDato()" name="EditData" value="Edit"></input>
+      </form>
+      </div>
+
+      </br>
+      </br>
+
+
+
+    <!-- la clase form-control es de bootstrap y da estilo -->
+
+    
+
+    <div class="container" id="formularioEliminar">
+      <label>Delete: </label>
+      <input type="text" class="form-control" id="reg" placeholder="region" required="true">
+      <input type="text" class="form-control" id="yea" placeholder="year" required="true">
+      <form role="form">
+      <input type="button" class="btn btn-info" onclick="eliminardato()" name="Elimdato" value="Delete"></input>
+      </form>
+    </div>
+
+    
+    </br>
+
+    <div class="container" id="formularioBusqueda">
+      <label>Search: </label>
+      <input type="text" class="form-control" id="busqueda_region" placeholder="region">
+      <input type="text" class="form-control" id="busqueda_from" placeholder="from">
+      <input type="text" class="form-control" id="busqueda_to" placeholder="to">
+      <form role="form">
+        <input type="button" onclick="busqueda()" name="Buscar" value="Search"></input>
+      </form>
+    </div>
+
+    </br>
+    </br>
+
+   
+    <div id="tabla">
+      <table id="tablaid" class="display" width="100%">
+      <thead>
+        <tr>
+          <th>Region</th>
+          <th>Year</th>
+          <th>Age</th>
+          <th>Men</th>
+          <th>Women</th>
+          <th>Total population</th>
+        </tr>
+      </thead>
+      </table>
+    </div>
+    
+
+    
+
+    <div>
+      <label>Show </label><select id="limit" onchange="paginacion()">
+      <option value="3">3</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      </select><label> entries</label>
+    </div>
+
+    <div>
+      <label>Page: </label><select id="pag" onchange="paginacion2()">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      </select>
+    </div>
+   
+  </div>
+  </body>
+</html>

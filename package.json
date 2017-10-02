@@ -1,0 +1,33 @@
+{
+  "name": "sos-2016-03",
+  "version": "0.2.8",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sos-2016-03/sos-2016-03.git"
+  },
+  "author": "Alberto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sos-2016-03/sos-2016-03/issues"
+  },
+  "homepage": "https://github.com/sos-2016-03/sos-2016-03#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "governify": "0.0.10",
+    "jqwidgets-framework": "^4.1.1",
+    "js-yaml": "^3.6.1",
+    "passport": "^0.3.2",
+    "passport-localapikey": "0.0.3",
+    "passport-localapikey-update": "^0.5.0",
+    "request": "^2.72.0",
+    "swagger-tools": "^0.9.16"
+  }
+}

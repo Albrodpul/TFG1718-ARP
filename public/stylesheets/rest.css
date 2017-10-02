@@ -1,0 +1,16 @@
+body{
+	background: #F2F2F2;
+	width:85%;
+	margin-left: 7%;
+	font-size:18px;
+}
+table{
+	width: 100%;
+}
+table, th, td{
+	border:1px solid #848484;
+	font-size:20px;
+}
+tr{
+	text-align: center;
+}
