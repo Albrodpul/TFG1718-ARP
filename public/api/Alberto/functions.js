@@ -1,6 +1,6 @@
 exports.getRegionAño=function(array,region,year){
-	res=[];
-	for(i=0;i<array.length;i++){
+	var res=[];
+	for(var i=0;i<array.length;i++){
         if(array[i].year == year && array[i].region == region){
          	res.push(array[i]);
           	break;
@@ -10,11 +10,11 @@ exports.getRegionAño=function(array,region,year){
 };
 
 exports.getListaFTLO=function(array,from,to,limit,offset){
-	aux=[];
+	var aux=[];
 	if(from && to && limit && offset){
 		aux=getListaFT(array,from,to);
 		if(aux.length!=0){
-			res=getListaLO(aux,limit,offset);
+			var res=getListaLO(aux,limit,offset);
 		}else{
 			res=aux;
 		}
@@ -23,8 +23,8 @@ exports.getListaFTLO=function(array,from,to,limit,offset){
       	if(aux.length!=0){
       		res=getListaLO(aux,limit,offset);
         }else{
-					res=aux;
-				}
+			res=aux;
+		}
 	}else if(to && limit && offset){
 		aux=getListaT(array,to);
 		if(aux.length!=0){
@@ -93,15 +93,15 @@ exports.getListaFTLO=function(array,from,to,limit,offset){
 }
 
 function getListaLO(array,limit,offset){
-				aux=[];
+		var aux=[];
         aux=array.slice(offset,array.length);
         aux.splice(limit,aux.length);
         return aux;
 }
 
 function getListaL(array,limit){
-	aux=[];
-    for(i=0;i<array.length;i++){
+	var aux=[];
+    for(var i=0;i<array.length;i++){
     	aux.push(array[i]);
     }
     aux.splice(limit,array.length);
@@ -109,14 +109,14 @@ function getListaL(array,limit){
 }
 
 function getListaO(array,offset){
-	aux=[];
+	var aux=[];
     aux=array.slice(offset,array.length);
     return aux;
 }
 
 function getListaFT(array,from,to){
-	aux=[];
-    for(i=0;i<array.length;i++){
+	var aux=[];
+    for(var i=0;i<array.length;i++){
         if(array[i].year>=from && array[i].year<=to){
     	    aux.push(array[i]);
         }
@@ -125,8 +125,8 @@ function getListaFT(array,from,to){
 }
 
 function getListaT(array,to){
-	aux=[];
-	for(i=0;i<array.length;i++){
+	var aux=[];
+	for(var i=0;i<array.length;i++){
         if(array[i].year<=to){
             aux.push(array[i]);
         }
@@ -135,8 +135,8 @@ function getListaT(array,to){
 }
 
 function getListaF(array,from){
-	aux=[];
-    for(i=0;i<array.length;i++){
+	var aux=[];
+    for(var i=0;i<array.length;i++){
         if(array[i].year>=from){
           aux.push(array[i]);
         }
@@ -146,11 +146,11 @@ function getListaF(array,from){
 
 
 exports.getRegionFTLO=function(array,region,year,from,to,limit,offset){
-	aux=[];
+	var aux=[];
 	if(from && to && limit && offset){
 		aux=getRegionFT(array,region,year,from,to);
 		if(aux.length!=0){
-			res=getRegionLO(aux,region,year,limit,offset);
+			var res=getRegionLO(aux,region,year,limit,offset);
 		}else{
 			res=0;
 		}
@@ -264,20 +264,20 @@ exports.getRegionFTLO=function(array,region,year,from,to,limit,offset){
 }
 
 function getRegionLO(array,region,year,limit,offset){
-	aux=[];
-	for(i=0;i<array.length;i++){
+	var aux=[];
+	for(var i=0;i<array.length;i++){
         if(array[i].region == region || array[i].year == year){
             aux.push(array[i]);
         }
     }
-    aux2=aux.slice(offset,aux.length);
+    var aux2=aux.slice(offset,aux.length);
     aux2.splice(limit,aux.length);
     return aux2;
 }
 
 function getRegionL(array,region,year,limit){
-	aux=[];
-	for(i=0;i<array.length;i++){
+	var aux=[];
+	for(var i=0;i<array.length;i++){
         if(array[i].region == region || array[i].year == year){
             aux.push(array[i]);
         }
@@ -287,19 +287,19 @@ function getRegionL(array,region,year,limit){
 }
 
 function getRegionO(array,region,year,offset){
-	aux=[];
-	for(i=0;i<array.length;i++){
+	var aux=[];
+	for(var i=0;i<array.length;i++){
         if(array[i].region == region || array[i].year == year){
             aux.push(array[i]);
         }
     }
-    aux2=aux.slice(offset,aux.length);
+    var aux2=aux.slice(offset,aux.length);
     return aux2;
 }
 
 function getRegionFT(array,region,year,from,to){
-	aux=[];
-    for(i=0;i<array.length;i++){
+	var aux=[];
+    for(var i=0;i<array.length;i++){
         if((array[i].region == region || array[i].year == year) && array[i].year>=from && array[i].year<=to){
     	    aux.push(array[i]);
         }
@@ -308,8 +308,8 @@ function getRegionFT(array,region,year,from,to){
 }
 
 function getRegionT(array,region,year,to){
-	aux=[];
-	for(i=0;i<array.length;i++){
+	var aux=[];
+	for(var i=0;i<array.length;i++){
         if((array[i].region == region || array[i].year == year) && array[i].year<=to){
             aux.push(array[i]);
         }
@@ -318,8 +318,8 @@ function getRegionT(array,region,year,to){
 }
 
 function getRegionF(array,region,year,from){
-	aux=[];
-    for(i=0;i<array.length;i++){
+	var aux=[];
+    for(var i=0;i<array.length;i++){
         if((array[i].region == region || array[i].year == year) && array[i].year>=from){
           aux.push(array[i]);
         }
@@ -327,8 +327,8 @@ function getRegionF(array,region,year,from){
     return aux;
 }
 function getRegion(array,region,year){
-	aux=[];
-    for(i=0;i<array.length;i++){
+	var aux=[];
+    for(var i=0;i<array.length;i++){
         if(array[i].region == region || array[i].year == year){
           aux.push(array[i]);
         }
@@ -337,7 +337,7 @@ function getRegion(array,region,year){
 }
 
 exports.deleteRegionAño=function(array,region,year){
-    for(i=0;i<array.length;i++){
+    for(var i=0;i<array.length;i++){
         if(array[i].region == region && array[i].year == year){
  	        array.splice(i,1);
     	    break;
@@ -348,8 +348,8 @@ exports.deleteRegionAño=function(array,region,year){
 
 exports.deleteRegion=function(array,region,year){
 	var aux=Object.keys(array).length;
-    for(j=0;j<aux;j++){
-      	for(i=0;i<array.length;i++){
+    for(var j=0;j<aux;j++){
+      	for(var i=0;i<array.length;i++){
       		if(array[i].region == region || array[i].year == year){
           		array.splice(i,1);
          	}
@@ -369,7 +369,7 @@ exports.post=function(array,body){
         res=2;
       }
     }else{
-        for(i=0;i<array.length;i++){
+        for(var i=0;i<array.length;i++){
           if(array[i].region==body.region && array[i].year==body.year){
             res=1;
             break;
@@ -390,7 +390,7 @@ exports.post=function(array,body){
 exports.put=function(array,region,year,body){
 	var res=0;
 	var aux=Object.keys(body).length;
-	for(i=0;i<array.length;i++){
+	for(var i=0;i<array.length;i++){
         if(array[i].region == region && array[i].year == year){
         	res=1;
             if(array[i].region==body.region && array[i].year==body.year && body.region && body.year && body.men && body.women && body.totalbirth && aux==5 && res==1){
