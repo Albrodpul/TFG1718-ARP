@@ -1,196 +1,219 @@
-var express=require("express");
-var functions=require("./functions.js");
-var fs=require("fs");
-var bodyParser=require("body-parser");
-var app=express();
-var router=express.Router();
-/*var passport = require('passport')
-var LocalAPIKeyStrategy = require('passport-localapikey-update').Strategy;*/
-/*var keyWrite ="write";
-var keyRead="read";*/
-var births=[];
+var exports=module.exports={};
 
-//app.use(passport.initialize());
-app.use(bodyParser.json());
 
-/*passport.use(new LocalAPIKeyStrategy(
-  function(apikey, done) {
-    done(null,apikey);
-  }
-));
-
-function WriteAccess(req, res, next) {
-    passport.authenticate('localapikey', function(err, user, info) {
-        if(user==false)
-            return res.sendStatus(401);
-        else if (user!=keyWrite) {
-            return res.sendStatus(403);
+exports.initial=function(app,db,BASE_API_PATH){
+    
+    // GET a collection
+app.get(BASE_API_PATH + "/spain-births", function (request, response) {
+    console.log("INFO: New GET request to /spain-births");
+    db.find({}).toArray(function (err, births) {
+        if (err) {
+            console.error('WARNING: Error getting data from DB');
+            response.sendStatus(500); // internal server error
+        } else {
+            console.log("INFO: Sending contacts: " + JSON.stringify(births, 2, null));
+            response.send(births);
         }
-        return next();
-    })(req, res, next);
-};
-
-function ReadAccess(req, res, next) {
-    passport.authenticate('localapikey', function(err, user, info) {
-        if(user==false)
-            return res.sendStatus(401);
-        else if (user!=keyRead) {
-            return res.sendStatus(403);
-        }
-        return next();
-    })(req, res, next);
-};*/
-
-//API Alberto
-//Métodos GET
-//Devuelve la lista de recursos
-router.get("/",(req,res) => {
-  var limit = req.query.limit;
-  var offset = req.query.offset;
-  var from = req.query.from;
-  var to = req.query.to;
-  var birth=[];
-  birth=functions.getListaFTLO(births,from,to,limit,offset);
-  res.send(birth);
-
-});
-
-router.get("/loadInitialData",/*WriteAccess,*/(req,res)=>{
-    births=[];
-    fs.readFile('./public/api/Alberto/spain-births.json','utf8',(err,content) => {
-      aux=JSON.parse(content);
-      aux.forEach((birth) =>{
-        births.push(birth);
-      });
     });
-    res.sendStatus(200);
+});
+
+//LoadInitialData
+app.get(BASE_API_PATH + "/loadInitialData", function (request, response) {
+    console.log("INFO: New GET request to /loadInitialData");
+    db.remove({}, {multi: true}, function (err, result) {
+        var birthRemoved = JSON.parse(result);
+        if (err) {
+            console.error('WARNING: Error removing data from DB');
+            response.sendStatus(500); // internal server error
+        } else {
+            if (birthRemoved.n > 0) {
+                console.log("INFO: All the births (" + birthRemoved + ") have been succesfully deleted, sending 204...");
+                response.sendStatus(204); // no content
+            } else {
+                console.log("WARNING: There are no birth to delete");
+                response.sendStatus(404); // not found
+            }
+        }
+    });
+    db.find({}).toArray(function (err, births) {
+    console.log('INFO: Initialiting DB...');
+
+    if (err) {
+        console.error('WARNING: Error while getting initial data from DB');
+        return 0;
+    }
+    if (births.length === 0) {
+        console.log('INFO: Empty DB, loading initial data');
+
+        var birth=[{"region" : "Andalucia","year": "2009","men":"48751","women":"45865","totalbirth":"94616"},
+            {"region" : "Madrid","year": "2010","men":"37851","women":"36027","totalbirth":"73878"},
+            {"region" : "Cataluña","year": "2011","men":"41775","women":"39472","totalbirth":"81247"},
+            {"region" : "Galicia","year": "2012","men":"10990","women":"10099","totalbirth":"21089"},
+            {"region" : "País Vasco","year": "2013","men":"9832","women":"9284","totalbirth":"19116"}
+            ];
+        db.insert(birth);
+    } else {
+        console.log('INFO: DB has ' + births.length + ' contacts ');
+    }
+    });
 });
 
 
-//Devuelve una lista del recurso, por región, año + búsqueda, paginación
-router.get("/:region/",/*ReadAccess,*/(req,res) => {
-    var year = req.params.region;
-    var region = req.params.region;
-    var limit = req.query.limit;
-    var offset = req.query.offset;
-    var from = req.query.from;
-    var to = req.query.to;
-    birth=functions.getRegionFTLO(births,region,year,from,to,limit,offset);
-    if(birth!=0){
-      res.send(birth);
-    }else{
-      res.sendStatus(404);
+// GET a single resource
+app.get(BASE_API_PATH + "/spain-births/:region", function (request, response) {
+    var region = request.params.region;
+    if (!region) {
+        console.log("WARNING: New GET request to /spain-births/:region without region, sending 400...");
+        response.sendStatus(400); // bad request
+    } else {
+        console.log("INFO: New GET request to /spain-births/" + region);
+        db.find({region:region}).toArray( function (err, filteredBirths) {
+            if (err) {
+                console.error('WARNING: Error getting data from DB');
+                response.sendStatus(500); // internal server error
+            } else {
+
+                if (filteredBirths.length > 0) {
+                    var birth = filteredBirths[0]; //since we expect to have exactly ONE contact with this name
+                    console.log("INFO: Sending contact: " + JSON.stringify(birth, 2, null));
+                    response.send(birth);
+                } else {
+                    console.log("WARNING: There are not any birth with region " + region);
+                    response.sendStatus(404); // not found
+                }
+            }
+        });
     }
 });
 
-//Consulta un elemento por región y año
-router.get("/:region/:year",/*ReadAccess,*/(req,res) => {
-    var year = req.params.year;
-    var region = req.params.region;
-    var birth = functions.getRegionAño(births,region,year);
-    if(birth.length!=0){
-        res.send(birth);
-    }else{
-        res.sendStatus(404);
+
+//POST over a collection
+app.post(BASE_API_PATH + "/spain-births", function (request, response) {
+    var newBirth = request.body;
+    if (!newBirth) {
+        console.log("WARNING: New POST request to /spain-births/ without birth, sending 400...");
+        response.sendStatus(400); // bad request
+    } else {
+        console.log("INFO: New POST request to /contacts with body: " + JSON.stringify(newBirth, 2, null));
+        if (!newBirth.region || !newBirth.year || !newBirth.men || !newBirth.women || !newBirth.totalbirth) {
+            console.log("WARNING: The contact " + JSON.stringify(newBirth, 2, null) + " is not well-formed, sending 422...");
+            response.sendStatus(422); // unprocessable entity
+        } else {
+            db.find({region:newBirth.region,year:newBirth.year,men:newBirth.men,women:newBirth.women,totalbirth:newBirth.totalbirth}).toArray( function (err, births) {
+                if (err) {
+                    console.error('WARNING: Error getting data from DB');
+                    response.sendStatus(500); // internal server error
+                } else {
+
+                    if (births.length > 0) {
+                        console.log("WARNING: The birth " + JSON.stringify(newBirth, 2, null) + " already extis, sending 409...");
+                        response.sendStatus(409); // conflict
+                    } else {
+                        console.log("INFO: Adding contact " + JSON.stringify(newBirth, 2, null));
+                        db.insert(newBirth);
+                        response.sendStatus(201); // created
+                    }
+                }
+            });
+        }
     }
 });
 
 
-//Métodos POST
-//Método que añade un nuevo equipo; 409 si ya existe el elemento por región y año
-router.post("/",/*WriteAccess,*/(req,res) => {
-  var birth=req.body;
-  aux=functions.post(births,birth);
-  if(aux==1){
-    res.sendStatus(409);
-  }else if(aux==2){
-    res.sendStatus(400);
-  }else{
-    births=aux;
-    res.sendStatus(201);
-  }
+//POST over a single resource
+app.post(BASE_API_PATH + "/spain-births/:region", function (request, response) {
+    var region = request.params.region;
+    console.log("WARNING: New POST request to /spain-births/" + region + ", sending 405...");
+    response.sendStatus(405); // method not allowed
 });
 
-//Método inválido por región
-router.post("/:region",/*WriteAccess,*/(req,res) => {
-  res.sendStatus(405);
+
+//PUT over a collection
+app.put(BASE_API_PATH + "/spain-births", function (request, response) {
+    console.log("WARNING: New PUT request to /spain-births, sending 405...");
+    response.sendStatus(405); // method not allowed
 });
 
-//Método inválido por año
 
-router.post("/:year",/*WriteAccess,*/(req,res)=>{
-  res.sendStatus(405);
-})
+//PUT over a single resource
+app.put(BASE_API_PATH + "/spain-births/:region", function (request, response) {
+    var updatedBirth = request.body;
+    var region = request.params.region;
+    if (!updatedBirth) {
+        console.log("WARNING: New PUT request to /contacts/ without contact, sending 400...");
+        response.sendStatus(400); // bad request
+    } else {
+        console.log("INFO: New PUT request to /spain-births/" + region + " with data " + JSON.stringify(updatedBirth, 2, null));
+        if (!updatedBirth.region || !updatedBirth.year || !updatedBirth.men || !updatedBirth.women || !updatedBirth.totalbirth) {
+            console.log("WARNING: The contact " + JSON.stringify(updatedBirth, 2, null) + " is not well-formed, sending 422...");
+            response.sendStatus(422); // unprocessable entity
+        } else {
+            db.find({region:updatedBirth.region}).toArray( function (err, contacts) {
+                if (err) {
+                    console.error('WARNING: Error getting data from DB');
+                    response.sendStatus(500); // internal server error
+                } else {
 
-//Método inválido por región y año
-router.post("/:region/:year",/*WriteAccess,*/(req,res) => {
-  res.sendStatus(405);
-});
-
-//Métodos DELETE
-//Borra toda la lista
-router.delete("/",/*WriteAccess,*/(req,res) => {
-  births=[];
-  res.sendStatus(200);
-});
-
-//Borra un recurso individual por región o año; 404 si no está
-router.delete("/:region",/*WriteAccess,*/(req,res) => {
-  var region=req.params.region;
-  var year=req.params.region;
-	var cont=0;
-  var aux=Object.keys(births).length;
-  births=functions.deleteRegion(births,region,year);
-  if((aux-births.length)>0){
-    res.sendStatus(200);
-  }else{
-    res.sendStatus(404);
-  }
-});
-
-//Borra un recurso individual por región y año; 404 si no está
-router.delete("/:region/:year",/*WriteAccess,*/(req,res) => {
-  var region=req.params.region;
-  var year=req.params.year;
-  var aux=Object.keys(births).length;
-  births=functions.deleteRegionAño(births,region,year);
-  if((aux-births.length)>0){
-    res.sendStatus(200);
-  }else{
-    res.sendStatus(404);
-  }
-});
-
-//Métodos PUT
-//Método inválido
-router.put("/",/*WriteAccess,*/(req,res) => {
-  res.sendStatus(405);
-});
-
-//Método inválido
-router.put("/:region",/*WriteAccess,*/(req,res) => {
-  res.sendStatus(405);
-});
-
-//Método inválido
-router.put("/:year",/*WriteAccess,*/(req,res)=>{
-  res.sendStatus(405);
-});
-
-//Actualiza un recurso por región y año; devuelve 404 si no está; devuelve 400 si formato erróneo
-router.put("/:region/:year",/*WriteAccess,*/(req,res) => {
-    var region = req.params.region;
-    var year = req.params.year;
-    var regionUpdated = req.body;
-    aux=functions.put(births,region,year,regionUpdated);
-    if(aux==0){
-      res.sendStatus(404);
-    }else if(aux==2){
-      res.sendStatus(400);
-    }else{
-      births=aux;
-      res.sendStatus(200);
+                    if (contacts.length > 0) {
+                        db.update({region: updatedBirth.region}, updatedBirth);
+                        console.log("INFO: Modifying contact with region " + region + " with data " + JSON.stringify(updatedBirth, 2, null));
+                        response.send(updatedBirth); // return the updated contact
+                    } else {
+                        console.log("WARNING: There are not any contact with region " + region);
+                        response.sendStatus(404); // not found
+                    }
+                }
+            });
+        }
     }
 });
 
-module.exports=router;
+
+//DELETE over a collection
+app.delete(BASE_API_PATH + "/spain-births", function (request, response) {
+    console.log("INFO: New DELETE request to /spain-births");
+    db.remove({}, {multi: true}, function (err, result) {
+        var birthRemoved = JSON.parse(result);
+        if (err) {
+            console.error('WARNING: Error removing data from DB');
+            response.sendStatus(500); // internal server error
+        } else {
+            if (birthRemoved.n > 0) {
+                console.log("INFO: All the births (" + birthRemoved + ") have been succesfully deleted, sending 204...");
+                response.sendStatus(204); // no content
+            } else {
+                console.log("WARNING: There are no birth to delete");
+                response.sendStatus(404); // not found
+            }
+        }
+    });
+});
+
+
+//DELETE over a single resource
+app.delete(BASE_API_PATH + "/spain-births/:region", function (request, response) {
+    var region = request.params.region;
+    if (!region) {
+        console.log("WARNING: New DELETE request to /spain-births/:region without name, sending 400...");
+        response.sendStatus(400); // bad request
+    } else {
+        console.log("INFO: New DELETE request to /spain-births/" + region);
+        db.remove({region: region}, {}, function (err, result) {
+            var birthRemoved = JSON.parse(result);
+            if (err) {
+                console.error('WARNING: Error removing data from DB');
+                response.sendStatus(500); // internal server error
+            } else {
+                console.log("INFO: Birth removed: " + region);
+                if (birthRemoved.n === 1) {
+                    console.log("INFO: The birth with region " + region + " has been succesfully deleted, sending 204...");
+                    response.sendStatus(204); // no content
+                } else {
+                    console.log("WARNING: There are no birth to delete");
+                    response.sendStatus(404); // not found
+                }
+            }
+        });
+    }
+});
+}
