@@ -33,7 +33,13 @@ app.get(BASE_API_PATH + "/spain-births/loadInitialData", function (request, resp
     console.log("INFO: New GET request to /loadInitialData");
     console.log('INFO: Initialiting DB...');
         console.log('INFO: Empty DB, loading initial data');
-        db.remove();
+        db.remove({});
+        db.find({}).toArray(function(err,births){
+           if (err) {
+                console.error('WARNING: Error while getting initial data from DB');
+                return 0;
+            }    
+        if(births.length===0){
         var datos=[{"region" : "Andalucia","year": "2009","men":"48751","women":"45865","totalbirth":"94616"},
             {"region" : "Madrid","year": "2010","men":"37851","women":"36027","totalbirth":"73878"},
             {"region" : "Cataluña","year": "2011","men":"41775","women":"39472","totalbirth":"81247"},
@@ -43,7 +49,13 @@ app.get(BASE_API_PATH + "/spain-births/loadInitialData", function (request, resp
         db.insert(datos);
         console.log("INFO: Inserted");
         //response.sendStatus(200);
-        response.send(datos);
+        response.sendStatus(201, BASE_API_PATH + "/");
+        }
+        else {
+            console.log('INFO: DB has ' + births.length + ' objects ');
+            response.sendStatus(200);
+        }
+    });        
 });
 
 
