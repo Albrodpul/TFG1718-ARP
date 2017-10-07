@@ -158,7 +158,7 @@ app.post(BASE_API_PATH + "/spain-births", function (request, response) {
         response.sendStatus(400); // bad request
     } else {
         console.log("INFO: New POST request to /contacts with body: " + JSON.stringify(newBirth, 2, null));
-        if (!newBirth.region || !newBirth.year || !newBirth.men || !newBirth.women || !newBirth.totalbirth || !newBirth.length==5) {
+        if (!newBirth.region || !newBirth.year || !newBirth.men || !newBirth.women || !newBirth.totalbirth || newBirth.length!==5) {
             console.log("WARNING: The contact " + JSON.stringify(newBirth, 2, null) + " is not well-formed, sending 422...");
             response.sendStatus(422); // unprocessable entity
         } else {
@@ -173,7 +173,7 @@ app.post(BASE_API_PATH + "/spain-births", function (request, response) {
                                 }) === 0);
                     });
                     if (birthsBeforeInsertion.length > 0) {
-                        console.log("WARNING: The birth " + JSON.stringify(newBirth, 2, null) + " already extis, sending 409...");
+                        console.log("WARNING: The birth " + JSON.stringify(newBirth, 2, null) + " already exist, sending 409...");
                         response.sendStatus(409); // conflict
                     } else {
                         console.log("INFO: Adding contact " + JSON.stringify(newBirth, 2, null));
