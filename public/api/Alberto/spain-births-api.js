@@ -290,16 +290,16 @@ app.delete(BASE_API_PATH + "/spain-births", function (request, response) {
 //DELETE over multiple resource
 app.delete(BASE_API_PATH + "/spain-births/:region", function (request, response) {
     var region = request.params.region;
-    var year = request.params.year;
-    if (!region) {
+    var year = request.params.region;
+    if (!region || !year) {
         console.log("WARNING: New DELETE request to /spain-births/:region without name, sending 400...");
         response.sendStatus(400); // bad request
     } else {
-        if(!isNaN(region)){
+        if(isNaN(region)){
             console.log("INFO: New DELETE request to /spain-births/" + region);
             db.remove({
                 region: region
-            }, {}, function (err, result) {
+            }, {multi:true}, function (err, result) {
                 var birthRemoved = JSON.parse(result);
                 if (err) {
                     console.error('WARNING: Error removing data from DB');
@@ -319,7 +319,7 @@ app.delete(BASE_API_PATH + "/spain-births/:region", function (request, response)
             console.log("INFO: New DELETE request to /spain-births/" + year);
             db.remove({
                 year: year
-            }, {}, function (err, result) {
+            }, {multi:true}, function (err, result) {
                 var birthRemoved = JSON.parse(result);
                 if (err) {
                     console.error('WARNING: Error removing data from DB');
