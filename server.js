@@ -12,7 +12,7 @@ var MongoClient = require('mongodb').MongoClient;
 var mdbURL = "mongodb://test:test@ds159344.mlab.com:59344/tfg1718-arp";
 var BASE_API_PATH = "/api/v1";
 var db;
-var spainBirths=require("./public/api/Alberto/spain-births-api.js");
+var spainBirths=require("./public/api/spain-births-api.js");
 
 
 MongoClient.connect(mdbURL,{native_parser:true},function(err,database){
