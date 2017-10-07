@@ -17,13 +17,8 @@ app.get(BASE_API_PATH + "/spain-births", function (request, response) {
             response.sendStatus(500); // internal server error
         } else {
             birth=functions.getListaFTLO(births,from,to,limit,offset);
-            if(birth.length>0){
-                console.log("INFO: Sending contacts: " + JSON.stringify(birth, 2, null));
-                response.send(birth);
-            }else{
-                console.log("WARNING: There are not any birth");
-                response.sendStatus(404); // not found                
-            }
+            console.log("INFO: Sending contacts: " + JSON.stringify(birth, 2, null));
+            response.send(birth);
         }
     });
 });
