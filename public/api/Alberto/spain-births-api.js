@@ -91,26 +91,26 @@ app.get(BASE_API_PATH + "/spain-births/:region", function (request, response) {
                 }
             }
         });
-    }else{
-        console.log("Soy un numero");
-        db.find({
-            year: year
-            }).toArray( function (err, filteredBirths) {
-            if (err) {
-                console.error('WARNING: Error getting data from DB');
-                response.sendStatus(500); // internal server error
-            } else {
-                birth=functions.getRegionFTLO(filteredBirths, region,year,from,to,limit,offset);
-                if (birth.length > 0) {
-                    console.log("INFO: Sending contact: " + JSON.stringify(birth, 2, null));
-                    response.send(birth);
+        }else{
+            console.log("Soy un numero");
+            db.find({
+                year: year
+                }).toArray( function (err, filteredBirths) {
+                if (err) {
+                    console.error('WARNING: Error getting data from DB');
+                    response.sendStatus(500); // internal server error
                 } else {
-                    console.log("WARNING: There are not any birth with that params");
-                    response.sendStatus(404); // not found
+                    birth=functions.getRegionFTLO(filteredBirths, region,year,from,to,limit,offset);
+                    if (birth.length > 0) {
+                        console.log("INFO: Sending contact: " + JSON.stringify(birth, 2, null));
+                        response.send(birth);
+                    } else {
+                        console.log("WARNING: There are not any birth with that params");
+                        response.sendStatus(404); // not found
+                    }
                 }
-            }
-        });        
-    }
+            });        
+        }
     }
 });
 
@@ -284,36 +284,58 @@ app.delete(BASE_API_PATH + "/spain-births", function (request, response) {
             }
                
         }
-       
-});
+    });
 });
 
 //DELETE over multiple resource
 app.delete(BASE_API_PATH + "/spain-births/:region", function (request, response) {
     var region = request.params.region;
+    var year = request.params.year;
     if (!region) {
         console.log("WARNING: New DELETE request to /spain-births/:region without name, sending 400...");
         response.sendStatus(400); // bad request
     } else {
-        console.log("INFO: New DELETE request to /spain-births/" + region);
-        db.remove({
-            region: region
-        }, {}, function (err, result) {
-            var birthRemoved = JSON.parse(result);
-            if (err) {
-                console.error('WARNING: Error removing data from DB');
-                response.sendStatus(500); // internal server error
-            } else {
-                console.log("INFO: Birth removed: " + region);
-                if (birthRemoved.n !== 0) {
-                    console.log("INFO: The birth with region " + region + " has been succesfully deleted, sending 204...");
-                    response.sendStatus(204); // no content
+        if(!isNaN(region)){
+            console.log("INFO: New DELETE request to /spain-births/" + region);
+            db.remove({
+                region: region
+            }, {}, function (err, result) {
+                var birthRemoved = JSON.parse(result);
+                if (err) {
+                    console.error('WARNING: Error removing data from DB');
+                    response.sendStatus(500); // internal server error
                 } else {
-                    console.log("WARNING: There are no birth to delete");
-                    response.sendStatus(404); // not found
+                    console.log("INFO: Birth removed: " + region);
+                    if (birthRemoved.n !== 0) {
+                        console.log("INFO: The birth with region " + region + " has been succesfully deleted, sending 204...");
+                        response.sendStatus(204); // no content
+                    } else {
+                        console.log("WARNING: There are no birth to delete");
+                        response.sendStatus(404); // not found
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            console.log("INFO: New DELETE request to /spain-births/" + year);
+            db.remove({
+                year: year
+            }, {}, function (err, result) {
+                var birthRemoved = JSON.parse(result);
+                if (err) {
+                    console.error('WARNING: Error removing data from DB');
+                    response.sendStatus(500); // internal server error
+                } else {
+                    console.log("INFO: Birth removed: " + year);
+                    if (birthRemoved.n !== 0) {
+                        console.log("INFO: The birth with year " + year + " has been succesfully deleted, sending 204...");
+                        response.sendStatus(204); // no content
+                    } else {
+                        console.log("WARNING: There are no birth to delete");
+                        response.sendStatus(404); // not found
+                    }
+                }
+            });        
+        }
     }
 });
 
