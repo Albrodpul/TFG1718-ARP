@@ -49,7 +49,7 @@ app.get(BASE_API_PATH + "/spain-births/loadInitialData", function (request, resp
         db.insert(datos);
         console.log("INFO: Inserted");
         //response.sendStatus(200);
-        response.sendStatus(201, BASE_API_PATH + "/");
+        response.sendStatus(200, BASE_API_PATH + "/");
         }
         else {
             console.log('INFO: DB has ' + births.length + ' objects ');
