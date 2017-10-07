@@ -158,7 +158,7 @@ app.post(BASE_API_PATH + "/spain-births", function (request, response) {
         response.sendStatus(400); // bad request
     } else {
         console.log("INFO: New POST request to /contacts with body: " + JSON.stringify(newBirth, 2, null));
-        if (!newBirth.region || !newBirth.year || !newBirth.men || !newBirth.women || !newBirth.totalbirth || newBirth.length!==5) {
+        if (!newBirth.region || !newBirth.year || !newBirth.men || !newBirth.women || !newBirth.totalbirth || Object.keys(newBirth).length!==5) {
             console.log("WARNING: The contact " + JSON.stringify(newBirth, 2, null) + " is not well-formed, sending 422...");
             response.sendStatus(422); // unprocessable entity
         } else {
@@ -233,7 +233,7 @@ app.put(BASE_API_PATH + "/spain-births/:region/:year", function (request, respon
         response.sendStatus(400); // bad request
     } else {
         console.log("INFO: New PUT request to /spain-births/" + region + " with data " + JSON.stringify(updatedBirth, 2, null));
-        if (!updatedBirth.region || !updatedBirth.year || !updatedBirth.men || !updatedBirth.women || !updatedBirth.totalbirth) {
+        if (!updatedBirth.region || !updatedBirth.year || !updatedBirth.men || !updatedBirth.women || !updatedBirth.totalbirth || Object.keys(updatedBirth).length!==5) {
             console.log("WARNING: The contact " + JSON.stringify(updatedBirth, 2, null) + " is not well-formed, sending 422...");
             response.sendStatus(422); // unprocessable entity
         } else {
