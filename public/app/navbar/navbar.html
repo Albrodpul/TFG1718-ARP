@@ -1,0 +1,23 @@
+<nav>
+  <div class="nav-wrapper #039be5 blue">
+    <a href="#!" class="brand-logo"><i class="material-icons left">cloud</i>TFG1718 ARP</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li>
+      <button
+        class="btn btn-margin #ffffff white #000000 black-text"
+        ng-if="!vm.auth.isAuthenticated()"
+        ng-click="vm.auth.login()">
+          Log In
+      </button>
+      </li>
+      <li>
+      <button
+        class="btn btn-margin #ffffff white #000000 black-text"
+        ng-if="vm.auth.isAuthenticated()"
+        ng-click="vm.auth.logout()">
+          Log Out
+      </button>
+      </li>
+    </ul>
+  </div>
+</nav>

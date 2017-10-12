@@ -1,35 +1,63 @@
 <html>
+
 <head>
-	<title>TFG1718 - Alberto Jesús Rodríguez Pulido</title>
-	<!--<link href="stylesheets/index.css" rel="stylesheet">-->
-	<link rel="stylesheet" href="css/materialize/css/materialize.min.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<script src="js/jquery-1.12.2.min.js"></script>
-	<script src="css/materialize/js/materialize.min.js"></script>
-	<script>
-	$(document).ready(function(){
-		$('.collapsible').collapsible({
-			accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-		});
-	});
-	</script>
-	<style>
-	body{
-		font-size: 18px;
-	}
-	</style>
+  <title>TFG1718 - Alberto Jesús Rodríguez Pulido</title>
+  <base href="/">
+  <!-- Viewport settings-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!-- Basic style -->
+  <link rel="stylesheet" href="css/materialize/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="js/jquery-1.12.2.min.js"></script>
+  <script src="css/materialize/js/materialize.min.js"></script>
+  <link href="css/style.css" rel="stylesheet">
+  <script>
+    $(document).ready(function() {
+      $('.collapsible').collapsible({
+        accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+      });
+    });
+  </script>
 </head>
+
 <body class="container #e3f2fd blue lighten-5">
-<h3>TFG1718 - Alberto Jesús Rodríguez Pulido</h3>
-<br />
-<ul class="collapsible popout" data-collapsible="accordion">
-	<li>
-			<div class="collapsible-header"><i class="material-icons">child_care</i>Spain Births | Alberto Jesús Rodríguez Pulido</div>
-			<div class="collapsible-body #ffffff white"><p>Data about spanish births, by regions and years. Making difference between men and women, showing the total number of births.</p>
-			<div class="row"><p><a class="col s12 s12" href="/RESTClient">Spain Births GUI</a></p></div>
-</li>
-</ul>
-	</br>
-	<a href="/about/">About us</a>
+  <br />
+  <div ng-app="app">
+
+    <navbar></navbar>
+
+    <div class="container">
+      <ui-view></ui-view>
+    </div>
+
+  </div>
+  <br />
+  <div>
+    <ul class="collapsible popout" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">child_care</i>Spain Births | Alberto Jesús Rodríguez Pulido</div>
+        <div class="collapsible-body #ffffff white">
+          <p>Data about spanish births, by regions and years. Making difference between men and women, showing the total number of births.</p>
+          <div class="row">
+            <p><a class="col s12 s12" href="RESTClient/angular">Spain Births GUI</a></p>
+          </div>
+      </li>
+    </ul>
+    </div>
+    </br>
+    <a href="/about/">About us</a>
+
+    <script type="text/javascript" src="js/auth0-variables.js"></script>
+    <script type="text/javascript" src="js/angular/angular.js"></script>
+    <script type="text/javascript" src="js/@uirouter/angularjs/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="js/auth0-js/build/auth0.js"></script>
+    <script type="text/javascript" src="js/angular-auth0/dist/angular-auth0.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/app.run.js"></script>
+    <script type="text/javascript" src="app/navbar/navbar.directive.js"></script>
+    <script type="text/javascript" src="app/home/home.controller.js"></script>
+    <script type="text/javascript" src="app/callback/callback.controller.js"></script>
+    <script type="text/javascript" src="app/auth/auth.service.js"></script>
 </body>
+
 </html>

@@ -3,8 +3,9 @@ var functions=require("./functions.js");
 
 exports.initial=function(app,db,BASE_API_PATH){
     
+    
     // GET a collection
-app.get(BASE_API_PATH + "/spain-births", function (request, response) {
+app.get(BASE_API_PATH + "/", function (request, response) {
     var limit = request.query.limit;
     var offset = request.query.offset;
     var from = request.query.from;
@@ -24,7 +25,7 @@ app.get(BASE_API_PATH + "/spain-births", function (request, response) {
 });
 
 //LoadInitialData
-app.get(BASE_API_PATH + "/spain-births/loadInitialData", function (request, response) {
+app.get(BASE_API_PATH + "/loadInitialData", function (request, response) {
     console.log("INFO: New GET request to /loadInitialData");
     console.log('INFO: Initialiting DB...');
         console.log('INFO: Empty DB, loading initial data');
@@ -55,7 +56,7 @@ app.get(BASE_API_PATH + "/spain-births/loadInitialData", function (request, resp
 
 
 // GET REGION OR YEAR
-app.get(BASE_API_PATH + "/spain-births/:region", function (request, response) {
+app.get(BASE_API_PATH + "/:region", function (request, response) {
     var region = request.params.region;
     var year = request.params.region;
     var limit = request.query.limit;
@@ -111,7 +112,7 @@ app.get(BASE_API_PATH + "/spain-births/:region", function (request, response) {
 
 
 // GET REGION & YEAR
-app.get(BASE_API_PATH + "/spain-births/:region/:year", function (request, response) {
+app.get(BASE_API_PATH + "/:region/:year", function (request, response) {
     var region = request.params.region;
     var year = request.params.year;
     var limit = request.query.limit;
@@ -146,7 +147,7 @@ app.get(BASE_API_PATH + "/spain-births/:region/:year", function (request, respon
 });
 
 //POST over a collection
-app.post(BASE_API_PATH + "/spain-births", function (request, response) {
+app.post(BASE_API_PATH + "/", function (request, response) {
     var newBirth = request.body;
     if (!newBirth) {
         console.log("WARNING: New POST request to /spain-births/ without birth, sending 400...");
@@ -182,7 +183,7 @@ app.post(BASE_API_PATH + "/spain-births", function (request, response) {
 });
 
 //POST over multiple resource
-app.post(BASE_API_PATH + "/spain-births/:region/:year", function (request, response) {
+app.post(BASE_API_PATH + "/:region/:year", function (request, response) {
     var region = request.params.region;
     var year = request.params.year;
     console.log("WARNING: New POST request to /spain-births/" + region + year + ", sending 405...");
@@ -191,7 +192,7 @@ app.post(BASE_API_PATH + "/spain-births/:region/:year", function (request, respo
 
 
 //POST over a single resource
-app.post(BASE_API_PATH + "/spain-births/:region", function (request, response) {
+app.post(BASE_API_PATH + "/:region", function (request, response) {
     var region = request.params.region;
     console.log("WARNING: New POST request to /spain-births/" + region + ", sending 405...");
     response.sendStatus(405); // method not allowed
@@ -205,7 +206,7 @@ app.put(BASE_API_PATH + "/spain-births", function (request, response) {
 });
 
 //PUT over multiple resource
-app.put(BASE_API_PATH + "/spain-births/:region", function (request, response) {
+app.put(BASE_API_PATH + "/:region", function (request, response) {
     var region = request.params.region;
     var year = request.params.region;
     if(isNaN(region)){
@@ -219,7 +220,7 @@ app.put(BASE_API_PATH + "/spain-births/:region", function (request, response) {
 
 
 //PUT over a single resource
-app.put(BASE_API_PATH + "/spain-births/:region/:year", function (request, response) {
+app.put(BASE_API_PATH + "/:region/:year", function (request, response) {
     var updatedBirth = request.body;
     var region = request.params.region;
     var year = request.params.year;
@@ -262,7 +263,7 @@ app.put(BASE_API_PATH + "/spain-births/:region/:year", function (request, respon
 
 
 //DELETE over a collection
-app.delete(BASE_API_PATH + "/spain-births", function (request, response) {
+app.delete(BASE_API_PATH + "/", function (request, response) {
     console.log("INFO: New DELETE request to /spain-births");
     db.remove({}, {multi: true}, function (err, result) {
         var numRemoved = JSON.parse(result);
@@ -283,7 +284,7 @@ app.delete(BASE_API_PATH + "/spain-births", function (request, response) {
 });
 
 //DELETE over multiple resource
-app.delete(BASE_API_PATH + "/spain-births/:region", function (request, response) {
+app.delete(BASE_API_PATH + "/:region", function (request, response) {
     var region = request.params.region;
     var year = request.params.region;
     if (!region || !year) {
@@ -335,7 +336,7 @@ app.delete(BASE_API_PATH + "/spain-births/:region", function (request, response)
 });
 
 //DELETE over a single resource
-app.delete(BASE_API_PATH + "/spain-births/:region/:year", function (request, response) {
+app.delete(BASE_API_PATH + "/:region/:year", function (request, response) {
     var region = request.params.region;
     var year = request.params.year;
     if (!region) {
