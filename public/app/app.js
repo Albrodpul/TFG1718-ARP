@@ -27,6 +27,12 @@
         templateUrl: 'app/home/home.html',
         controllerAs: 'vm'
       })
+      .state('profile', {
+        url: '/profile',
+        controller: 'ProfileController',
+        templateUrl: 'app/profile/profile.html',
+        controllerAs: 'vm'
+      })      
       .state('callback', {
         url: '/callback',
         controller: 'CallbackController',
