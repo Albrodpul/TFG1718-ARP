@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");
 var helmet = require("helmet");
 var path = require('path');
 var port = (process.env.PORT || 11000);
-
+var calls=require("./public/app/calls/calls.js");
 var MongoClient = require('mongodb').MongoClient;
 var mdbURL = "mongodb://test:test@ds159344.mlab.com:59344/tfg1718-arp";
 var BASE_API_PATH = "/api/v1/spain-births";
@@ -32,7 +32,6 @@ app.use(helmet()); //improve security
 
 app.use('/', express.static(__dirname +  '/public'));
 
-app.get('/callback', function(req, res) {
-  res.sendFile(path.join(__dirname + '/public/index.html'));
-});
+app.get('/callback', calls.getCallback);
+app.get('/profile', calls.getProfile);
 
