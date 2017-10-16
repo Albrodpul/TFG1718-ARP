@@ -1,22 +1,39 @@
+<link rel="stylesheet" href="../../css/materialize/css/materialize.min.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="../../js/jquery-1.12.2.min.js"></script>
+<script src="../../css/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="../../js/preloader.js"></script>
 <nav>
   <div class="nav-wrapper #90caf9 blue lighten-3">
     <a href="/" class="brand-logo"><i class="material-icons left">cloud</i>TFG1718 ARP</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li>
-        <button class="btn btn-margin #ffffff white #000000 black-text" ng-if="!vm.auth.isAuthenticated()" ng-click="vm.auth.login()">
-          Log In
-      </button>
+        <a class="btn-margin" ng-if="!vm.auth.isAuthenticated()" ng-click="vm.auth.login()">
+          Sign in
+      </a>
       </li>
       <li>
-        <button class="btn btn-margin #ffffff white #000000 black-text" ng-if="vm.auth.isAuthenticated()" ui-sref="profile">
-          Profile
-      </button>
-      </li>
-      <li>
-        <button class="btn btn-margin #ffffff white #000000 black-text" ng-if="vm.auth.isAuthenticated()" ng-click="vm.auth.logout()">
-          Log Out
-      </button>
+        <a class="btn-margin dropdown-button" data-activates='dropdown1' data-beloworigin="true" ng-if="vm.auth.isAuthenticated()">
+          <img ng-src="{{ vm.profile.picture }}" class="circle" alt="avatar">
+      </a>
       </li>
     </ul>
   </div>
 </nav>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+      <li>
+        <a ng-if="vm.auth.isAuthenticated()" ui-sref="profile">
+          <i class="material-icons left">perm_identity</i>Profile
+      </a>
+      </li>
+      <li>
+        <a ng-if="vm.auth.isAuthenticated()" ng-click="vm.auth.logout()">
+          <i class="material-icons left">exit_to_app</i>Log out
+      </a>
+      </li>
+  </ul>
+  
+ 

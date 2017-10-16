@@ -1,36 +1,54 @@
 <!DOCTYPE html>
 <html ng-app="BirthListApp">
+
 <head>
-	<title>AngularJS REST Client</title>
-<link rel="stylesheet" href="../../css/materialize/css/materialize.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="css/spain-births-rest.css" rel="stylesheet">
-<script src="../../js/jquery-1.12.2.min.js"></script>
-<script src="../../css/materialize/js/materialize.min.js"></script>
-<script type="text/javascript" src="../../js/angular.min.js"></script>
-<script type="text/javascript" src="js/controllers.js"></script>
-<script type="text/javascript" src="js/select.js"></script>
+  <title>AngularJS REST Client</title>
+  <link rel="stylesheet" href="../../css/materialize/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/spain-births-rest.css" rel="stylesheet">
+  <script src="../../js/jquery-1.12.2.min.js"></script>
+  <script src="../../css/materialize/js/materialize.min.js"></script>
+  <script type="text/javascript" src="../../js/angular.min.js"></script>
+  <script type="text/javascript" src="js/controllers.js"></script>
+  <script type="text/javascript" src="js/select.js"></script>
+  <script src="../../js/preloader.js"></script>
 
 </head>
+
 <body class="card-panel #f5f5f5 grey lighten-5 z-depth-0">
-<div ng-controller="AppCtrl">
-  <nav>
-    <div class="nav-wrapper #90caf9 blue lighten-3">
-      <div>
-        <a href="/" class="breadcrumb">Homepage</a>
-        <a href="/about/" class="breadcrumb">About Me</a>
-        <a href="/data" class="breadcrumb">Data</a>
-        <a href="/RESTClient/angular" class="breadcrumb">AngularJS REST Client</a>
+<div class="preloader-background">
+	<div class="preloader-wrapper big active">
+		<div class="spinner-layer spinner-blue-only">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div>
+			<div class="gap-patch">
+				<div class="circle"></div>
+			</div>
+			<div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+</div>  
+  <div ng-controller="AppCtrl">
+    <nav>
+      <div class="nav-wrapper #90caf9 blue lighten-3">
+        <div>
+          <a href="/" class="breadcrumb">Homepage</a>
+          <a href="/about/" class="breadcrumb">About Me</a>
+          <a href="/data" class="breadcrumb">Data</a>
+          <a href="/RESTClient/angular" class="breadcrumb">AngularJS REST Client</a>
+        </div>
       </div>
-    </div>
-  </nav>
-<h4>AngularJS REST Client</h4>
-<div class="row centered">
-		<div class="col s1"><button class="#4caf50 green btn-floating btn-large waves-effect waves-light" ng-click="getAll()"><i class="material-icons">view_list</i></button></div>
-		<div class="col s1"><button class="btn-floating btn-large waves-effect waves-light red" ng-click="deleteAll()"><i class="material-icons">delete</i></button></div>
-		<div class="col s4"><button class="#5d4037 brown darken-2 btn-floating btn-large waves-effect waves-light" ng-click="loadBirth()"><i class="material-icons">restore</i></button></div>
-<div class="col s2">
-  <select ng-model="region" class="form-control">
+    </nav>
+    <h4>AngularJS REST Client</h4>
+    <div class="row centered">
+      <div class="col s1"><button class="#4caf50 green btn-floating btn-large waves-effect waves-light" ng-click="getAll()"><i class="material-icons">view_list</i></button></div>
+      <div class="col s1"><button class="btn-floating btn-large waves-effect waves-light red" ng-click="deleteAll()"><i class="material-icons">delete</i></button></div>
+      <div class="col s4"><button class="#5d4037 brown darken-2 btn-floating btn-large waves-effect waves-light" ng-click="loadBirth()"><i class="material-icons">restore</i></button></div>
+      <div class="col s2">
+        <select ng-model="region" class="form-control">
     <option value="">Region</option>
     <option value="Andalucia">Andalucia</option>
     <option value="Cataluña">Cataluña</option>
@@ -39,9 +57,9 @@
     <option value="País Vasco">País Vasco</option>
     <option value="Murcia">Murcia</option>
   </select>
-</div>
-<div class="col s1">
-  <select class="form-control" ng-model="year">
+      </div>
+      <div class="col s1">
+        <select class="form-control" ng-model="year">
     <option value="">Year</option>
     <option value="2009">2009</option>
     <option value="2010">2010</option>
@@ -50,9 +68,9 @@
     <option value="2013">2013</option>
     <option value="2014">2014</option>
   </select>
-</div>
-<div class="col s1">
-  <select class="form-control" ng-model="from">
+      </div>
+      <div class="col s1">
+        <select class="form-control" ng-model="from">
     <option value="">From</option>
     <option value="2009">2009</option>
     <option value="2010">2010</option>
@@ -61,9 +79,9 @@
     <option value="2013">2013</option>
     <option value="2014">2014</option>
   </select>
-</div>
-<div class="col s1">
-  <select class="form-control" ng-model="to">
+      </div>
+      <div class="col s1">
+        <select class="form-control" ng-model="to">
     <option value="">To</option>
     <option value="2009">2009</option>
     <option value="2010">2010</option>
@@ -72,24 +90,25 @@
     <option value="2013">2013</option>
     <option value="2014">2014</option>
   </select>
-</div>
-		<div class="col s1"><button class="#2e7d32 green darken-3 btn-floating btn-large waves-effect waves-light" ng-click="search(region,year,limit,offset,from,to)"><i class="material-icons">search</i></button></div>
-</div>
-  <div class="row">
-      <div class="col s12 center-align"><div ng-hide="!myValue" class="card-panel #f44336 red z-depth-0" ng-model="error">{{error}}</div>
-  </div>
-  </div>
-<div class="row">
-<div class="col s2">
-  <select class="form-control" ng-model="limit">
+      </div>
+      <div class="col s1"><button class="#2e7d32 green darken-3 btn-floating btn-large waves-effect waves-light" ng-click="search(region,year,limit,offset,from,to)"><i class="material-icons">search</i></button></div>
+    </div>
+    <div class="row">
+      <div class="col s12 center-align">
+        <div ng-hide="!myValue" class="card-panel #f44336 red z-depth-0" ng-model="error">{{error}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s2">
+        <select class="form-control" ng-model="limit">
     <option value="">Limit</option>
     <option value="3">3</option>
     <option value="4">4</option>
     <option value="5">5</option>
   </select>
-</div>
-<div class="col s2">
-  <select class="form-control" ng-model="offset">
+      </div>
+      <div class="col s2">
+        <select class="form-control" ng-model="offset">
     <option value="">Página</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -97,42 +116,43 @@
     <option value="4">4</option>
     <option value="5">5</option>
   </select>
-</div>
-		<div class="col s1"><button class="#2e7d32 green darken-3 btn-floating btn-large waves-effect waves-light" ng-click="search(region,year,limit,offset,from,to)"><i class="material-icons">done</i></button></div>
-</div>
-		<table id="myTable" class="striped">
-			<thead>
-				<tr class="#42a5f5 blue lighten-1 z-depth-0">
-					<th class="center-align white-text centered">Region</th>
-					<th class="center-align white-text centered">Year</th>
-					<th class="center-align white-text centered">Men</th>
-					<th class="center-align white-text centered">Women</th>
-					<th class="center-align white-text centered">Totalbirth</th>
-					<th class="center-align white-text centered" colspan="2">Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input class="form-control" ng-model="birth.region"/></td>
-					<td><input class="form-control" ng-model="birth.year"/></td>
-					<td><input class="form-control" ng-model="birth.men"/></td>
-					<td><input class="form-control" ng-model="birth.women"/></td>
-					<td><input class="form-control" ng-model="birth.totalbirth"/></td>
-					<td colspan="2" class="center-align"><button class="btn-floating btn-large waves-effect waves-light blue" ng-click="addBirth()"><i class="material-icons">add</i></button></td>
-				</tr>
-				<tr ng-repeat="birth in birthlist">
-					<td>{{birth.region}}</td>
-					<td>{{birth.year}}</td>
-					<td>{{birth.men}}</td>
-					<td>{{birth.women}}</td>
-					<td>{{birth.totalbirth}}</td>
-					<td><button class="btn-floating btn-large waves-effect waves-light #f44336 red" ng-click="deleteBirth(birth.region,birth.year)"><i class="material-icons">delete</i></button></td>
-					<td><button class="btn-floating btn-large waves-effect waves-light purple" ng-click="updateBirth(birth.region,birth.year)"><i class="material-icons">mode_edit</i></button></td>
-				</tr>
-			</tbody>
-		</table>
-  <br /><br />
-<a href="/data/">« Previous</a>
-</div>
+      </div>
+      <div class="col s1"><button class="#2e7d32 green darken-3 btn-floating btn-large waves-effect waves-light" ng-click="search(region,year,limit,offset,from,to)"><i class="material-icons">done</i></button></div>
+    </div>
+    <table id="myTable" class="striped">
+      <thead>
+        <tr class="#42a5f5 blue lighten-1 z-depth-0">
+          <th class="center-align white-text centered">Region</th>
+          <th class="center-align white-text centered">Year</th>
+          <th class="center-align white-text centered">Men</th>
+          <th class="center-align white-text centered">Women</th>
+          <th class="center-align white-text centered">Totalbirth</th>
+          <th class="center-align white-text centered" colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input class="form-control" ng-model="birth.region" /></td>
+          <td><input class="form-control" ng-model="birth.year" /></td>
+          <td><input class="form-control" ng-model="birth.men" /></td>
+          <td><input class="form-control" ng-model="birth.women" /></td>
+          <td><input class="form-control" ng-model="birth.totalbirth" /></td>
+          <td colspan="2" class="center-align"><button class="btn-floating btn-large waves-effect waves-light blue" ng-click="addBirth()"><i class="material-icons">add</i></button></td>
+        </tr>
+        <tr ng-repeat="birth in birthlist">
+          <td>{{birth.region}}</td>
+          <td>{{birth.year}}</td>
+          <td>{{birth.men}}</td>
+          <td>{{birth.women}}</td>
+          <td>{{birth.totalbirth}}</td>
+          <td><button class="btn-floating btn-large waves-effect waves-light #f44336 red" ng-click="deleteBirth(birth.region,birth.year)"><i class="material-icons">delete</i></button></td>
+          <td><button class="btn-floating btn-large waves-effect waves-light purple" ng-click="updateBirth(birth.region,birth.year)"><i class="material-icons">mode_edit</i></button></td>
+        </tr>
+      </tbody>
+    </table>
+    <br /><br />
+    <a href="/data/">« Previous</a>
+  </div>
 </body>
+
 </html>
