@@ -6,7 +6,7 @@ $(document).ready(function(){
 
     $.ajax({
         type: "GET",
-        url: service + 'spain-births?apikey=multiPlan_C4_sos-2016-03-arp_ag',
+        url: service + 'spain-births',
         data: "{}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",

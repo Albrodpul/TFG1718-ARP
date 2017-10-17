@@ -7,18 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="stylesheet" href="css/materialize/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="css/materialize/js/materialize.min.js"></script>
   <script type="text/javascript" src="js/preloader.js"></script>
   <script type="text/javascript" src="js/collapsible.js"></script>
-
-
 </head>
 
 <body class="container #e3f2fd blue lighten-5">
   <br />
-
+  <!--Preloader code-->
   <div class="preloader-background">
     <div class="preloader-wrapper big active">
       <div class="spinner-layer spinner-blue-only">
@@ -34,16 +32,17 @@
       </div>
     </div>
   </div>
+  <!--Navbar-->
   <div ng-app="app">
 
     <navbar></navbar>
-
     <div class="container">
       <ui-view></ui-view>
     </div>
 
   </div>
   <br />
+  <!--Collapsible-->
   <div>
     <ul class="collapsible popout" data-collapsible="accordion">
       <li>

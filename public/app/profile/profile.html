@@ -1,12 +1,25 @@
-
 <div class="panel panel-default profile-area">
-  <div class="panel-heading"><h4>Profile</h4></div>
-  <div class="panel-body">
+  <div class="panel-heading center-align">
+    <h5><i class="material-icons">person</i> <span class="nickname">{{ vm.profile.nickname }}</span></h5>
     <img ng-src="{{ vm.profile.picture }}" class="circle" alt="avatar">
-    <div>
-      <label><i class="material-icons">person</i> Nickname</label>
-      <h4 class="nickname">{{ vm.profile.nickname }}</h4>
-    </div>
-    <pre class="full-profile">{{ vm.profile | json }}</pre>
+  </div>
+  <div class="panel-body">
+    <table rules="all" cellpadding="5" class="bordered">
+      <tr class="#42a5f5 card-panel blue lighten-1 z-depth-0">
+        <td class="center-align white-text centered">Group member</td>
+        <td class="center-align white-text centered">{{ vm.profile.name }}</td>
+      </tr>
+      <tr class="#ffffff white z-index 0">
+        <td>Name</td>
+        <td>{{ vm.profile.given_name }}</td>
+      </tr>
+      <tr class="#ffffff white z-index 0">
+        <td>Surname</td>
+        <td>{{ vm.profile.family_name }}</td>
+      </tr>
+      <tr class="#ffffff white z-index 0">
+        <td>Gender</td>
+        <td class="gender">{{ vm.profile.gender }}</td>
+      </tr>
   </div>
 </div>
