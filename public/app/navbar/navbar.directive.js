@@ -1,5 +1,4 @@
 (function() {
-  console.log("App working");
   'use strict';
   
   angular
@@ -7,7 +6,6 @@
     .directive('navbar', navbar);
     
   function navbar() {
-    console.log("App working2");
     return {
       templateUrl: 'app/navbar/navbar.html',
       controller: navbarController,
@@ -18,7 +16,6 @@
   navbarController.$inject = ['authService'];
     
   function navbarController(authService) {
-    console.log("App working3");
     var vm = this;
     vm.auth = authService;
   }

@@ -1,9 +1,5 @@
-<link rel="stylesheet" href="../../css/materialize/css/materialize.min.css">
-<link rel="stylesheet" href="../../css/style.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="../../js/jquery-1.12.2.min.js"></script>
-<script src="../../css/materialize/js/materialize.min.js"></script>
-<script type="text/javascript" src="../../js/preloader.js"></script>
+<script type="text/javascript" src="js/dropdown.js"></script>
+
 <nav>
   <div class="nav-wrapper #90caf9 blue lighten-3">
     <a href="/" class="brand-logo"><i class="material-icons left">cloud</i>TFG1718 ARP</a>
@@ -14,7 +10,7 @@
       </a>
       </li>
       <li>
-        <a class="btn-margin dropdown-button" data-activates='dropdown1' data-beloworigin="true" ng-if="vm.auth.isAuthenticated()">
+        <a class="btn-margin dropdown-button" data-activates='dropdown' data-beloworigin="true" ng-if="vm.auth.isAuthenticated()">
           <img ng-src="{{ vm.profile.picture }}" class="circle" alt="avatar">
       </a>
       </li>
@@ -23,7 +19,7 @@
 </nav>
 
   <!-- Dropdown Structure -->
-  <ul id='dropdown1' class='dropdown-content'>
+  <ul id='dropdown' class='dropdown-content'>
       <li>
         <a ng-if="vm.auth.isAuthenticated()" ui-sref="profile">
           <i class="material-icons left">perm_identity</i>Profile
@@ -35,5 +31,4 @@
       </a>
       </li>
   </ul>
-  
- 
+
