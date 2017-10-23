@@ -1,33 +1,31 @@
 <html>
+
 <head>
-<link rel="stylesheet" type="text/css" href="css/rest.css" />
-<script src="../../js/jquery-3.2.1.min.js"></script>
-<script src="js/rest.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/rest.css" />
+    <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="js/rest.js"></script>
 </head>
+
 <body>
-<h1>JQuery REST Client</h1>
-URL: <input id="url" size="60" value="../../api/v1/spain-births"/>
-<hr />
-<p>Payload:</p>
-<textarea id="payload" cols="100" rows="2" value=''></textarea>
-<p>Method:</p>
-GET <input name="method" type="radio" id="GET" checked="checked"/>&nbsp;
-POST <input name="method" type="radio" id="POST"/>&nbsp;
-PUT <input name="method" type="radio" id="PUT"/>&nbsp;
-DELETE <input name="method" type="radio" id="DELETE"/>&nbsp;
-<input type="button" id="button" value="Send"></value>
-<hr />
-HTTP Status: <span id="status"></span>
-<br /><br />
-<span id="data"></span>
-<br /><br />
-<ul id="list"></ul>
-<hr />
-<table id="data2" border='1' rules="all" cellpadding="5">
-</table>
-<hr />
-Log: <span id="log"></span>
-<br /><br />
-<a href="/about/">« Previous</a>
+    <h1>JQuery REST Client</h1>
+    URL: <input id="url" size="60" value="../../api/v1/spain-births" />
+    <hr />
+    <p>Payload:</p>
+    <textarea id="payload" cols="100" rows="2" value=''></textarea>
+    <p>Method:</p>
+    GET <input name="method" type="radio" id="GET" checked="checked" />&nbsp; POST <input name="method" type="radio" id="POST" />&nbsp; PUT <input name="method" type="radio" id="PUT" />&nbsp; DELETE <input name="method" type="radio" id="DELETE" />&nbsp;
+    <input type="button" id="button" value="Send"></value>
+    <hr /> HTTP Status: <span id="status"></span>
+    <br /><br />
+    <span id="data"></span>
+    <br /><br />
+    <ul id="list"></ul>
+    <hr />
+    <table id="data2" border='1' rules="all" cellpadding="5">
+    </table>
+    <hr /> Log: <span id="log"></span>
+    <br /><br />
+    <a href="/about/">« Previous</a>
 </body>
+
 </html>

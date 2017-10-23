@@ -228,7 +228,7 @@ app.put(BASE_API_PATH + "/:region/:year", function (request, response) {
         console.log("WARNING: New PUT request to /contacts/ without contact, sending 400...");
         response.sendStatus(400); // bad request
     } else {
-        console.log("INFO: New PUT request to /spain-births/" + region + " with data " + JSON.stringify(updatedBirth, 2, null));
+        console.log("INFO: New PUT request to /spain-births/" + region + "/" + year +" with data " + JSON.stringify(updatedBirth, 2, null));
         if (!updatedBirth.region || !updatedBirth.year || !updatedBirth.men || !updatedBirth.women || !updatedBirth.totalbirth || Object.keys(updatedBirth).length!==5) {
             console.log("WARNING: The contact " + JSON.stringify(updatedBirth, 2, null) + " is not well-formed, sending 422...");
             response.sendStatus(422); // unprocessable entity
