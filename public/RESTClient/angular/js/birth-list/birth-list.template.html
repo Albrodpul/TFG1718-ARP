@@ -1,6 +1,6 @@
   <script type="text/javascript" src="js/select.js"></script>
   
-  <div ng-controller="BirthListCtrl">
+  
     <nav>
       <div class="nav-wrapper #90caf9 blue lighten-3">
         <div>
@@ -115,10 +115,10 @@
           <td>{{birth.women}}</td>
           <td>{{birth.totalbirth}}</td>
           <td><button class="btn-floating btn-large waves-effect waves-light #f44336 red" ng-click="deleteBirth(birth.region,birth.year)"><i class="material-icons">delete</i></button></td>
-          <td><a class="btn-floating btn-large waves-effect waves-light purple" href="#!/births/{{birth.region}}/{{birth.year}}"><i class="material-icons">mode_edit</i></a></td>
+          <td><a class="btn-floating btn-large waves-effect waves-light purple" href="#!/{{birth.region}}/{{birth.year}}"><i class="material-icons">mode_edit</i></a></td>
         </tr>
       </tbody>
     </table>
     <br /><br />
     <a href="/data/">« Previous</a>
-  </div>
+  
