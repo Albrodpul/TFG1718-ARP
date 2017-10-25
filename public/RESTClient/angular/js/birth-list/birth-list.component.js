@@ -26,22 +26,6 @@
                       refresh();
                   };
                   
-                  $scope.addBirth = function() {
-                      console.log("Inserting birth...");
-                      console.log($scope.newBirth);
-                      $http
-                          .post(baseURL, $scope.newBirth)
-                          .then(function(response) {
-                              $scope.myValue = false;
-                              refresh();
-                              
-                          }, function(response) {
-                              if (response.status != 201) {
-                                  $scope.myValue = true;
-                                  $scope.error = response.status + " " + response.statusText;
-                              }
-                          });
-                  };
 
 
                   $scope.deleteBirth = function(region, year) {

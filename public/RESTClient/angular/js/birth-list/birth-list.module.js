@@ -2,5 +2,6 @@
 
 angular.module('birthList',[
     'birthLoad',
-    'birthDeleteAll'
+    'birthDeleteAll',
+    'birthPost'
     ]);

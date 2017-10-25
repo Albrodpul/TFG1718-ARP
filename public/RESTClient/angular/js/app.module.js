@@ -5,6 +5,7 @@ angular.module('birthApp', [
     'birthList',
     'birthEdit',
     'birthLoad',
-    'birthDeleteAll'
+    'birthDeleteAll',
+    'birthPost'
     ]);
 
