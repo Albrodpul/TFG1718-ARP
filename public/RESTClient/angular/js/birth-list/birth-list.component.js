@@ -16,6 +16,7 @@
                           .then(function(response) {
                               $scope.births = response.data;
                               $scope.myValue = false;
+                              $scope.newBirth = [];
                           });
                   };
 

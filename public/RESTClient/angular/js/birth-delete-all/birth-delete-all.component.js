@@ -16,6 +16,7 @@ angular
                     .then(function(response) {
                         $scope.$parent.births = response.data;
                         $scope.$parent.myValue = false;
+                        $scope.$parent.newBirth = [];
                     });
             };
 

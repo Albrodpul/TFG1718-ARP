@@ -16,15 +16,18 @@ angular
                     .then(function(response) {
                         $scope.$parent.births = response.data;
                         $scope.$parent.myValue = false;
+                        $scope.$parent.newBirth = [];
                     });
             };
 
 
-            $scope.addBirth = function() {
+            $scope.addBirth = function(region,year,men,women,totalbirth) {
                 console.log("Inserting birth...");
-                console.log($scope.$parent.newBirth);
+                console.log(region);
+                var birth = '{"region":"'+region+'","year":"'+year+'","men":"'+men+'","women":"'+women+'","totalbirth":"'+totalbirth+'"}';
+                console.log(birth);
                 $http
-                    .post(baseURL, $scope.$parent.newBirth)
+                    .post(baseURL, birth)
                     .then(function(response) {
                         $scope.$parent.myValue = false;
                         refresh();
