@@ -1,3 +1,5 @@
 'use strict'
 
-angular.module('birthList',[]);
+angular.module('birthList',[
+    'birthLoad'
+    ]);
