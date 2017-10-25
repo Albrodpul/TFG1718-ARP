@@ -4,7 +4,7 @@
           .module("birthList")
           .component("birthList", {
               templateUrl: 'js/birth-list/birth-list.template.html',
-              controller: ["$scope", "$http", function($scope, $http) {
+              controller: ["$scope", "$http","$timeout", function($scope, $http,$timeout) {
                   console.log("List Controller initialized");
 
                   $scope.vLimit = 3;
@@ -26,16 +26,15 @@
                       refresh();
                   };
                   
-
-
                   $scope.addBirth = function() {
                       console.log("Inserting birth...");
+                      console.log($scope.newBirth);
                       $http
                           .post(baseURL, $scope.newBirth)
                           .then(function(response) {
                               $scope.myValue = false;
                               refresh();
-                              $scope.newBirth = [];
+                              
                           }, function(response) {
                               if (response.status != 201) {
                                   $scope.myValue = true;
@@ -44,20 +43,6 @@
                           });
                   };
 
-                  $scope.updateBirth = function(region, year) {
-                      console.log("Updating birth...");
-                      $http
-                          .put(baseURL + '/' + region + '/' + year, $scope.birth)
-                          .then(function(response) {
-                              $scope.myValue = false;
-                              refresh();
-                          }, function(response) {
-                              if (response.status != 200) {
-                                  $scope.myValue = true;
-                                  $scope.error = response.status + " " + response.statusText;
-                              }
-                          });
-                  };
 
                   $scope.deleteBirth = function(region, year) {
                       console.log("Deleting birth with " + region + " " + year);
@@ -66,24 +51,6 @@
                           .then(function(response) {
                               refresh();
 
-                          });
-                  };
-                  $scope.deleteAll = function() {
-                      console.log("Deleting births");
-                      $http
-                          .delete(baseURL)
-                          .then(function(response) {
-                              refresh();
-
-                          });
-                  };
-
-
-                  $scope.loadBirth = function() {
-                      $http
-                          .get(baseURL + "/loadInitialData")
-                          .then(function(response) {
-                              refresh();
                           });
                   };
                   $scope.search = function(region, year, limit, offset, from, to) {

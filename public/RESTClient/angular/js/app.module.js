@@ -4,6 +4,7 @@ angular.module('birthApp', [
     'ngRoute',
     'birthList',
     'birthEdit',
-    'birthLoad'
+    'birthLoad',
+    'birthDeleteAll'
     ]);
 
