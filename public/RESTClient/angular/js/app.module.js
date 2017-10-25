@@ -3,6 +3,7 @@
 angular.module('birthApp', [
     'ngRoute',
     'birthList',
-    'birthEdit'
+    'birthEdit',
+    'birthLoad'
     ]);
 
