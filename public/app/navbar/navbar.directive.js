@@ -13,11 +13,25 @@
     }
   }
 
-  navbarController.$inject = ['authService'];
+  navbarController.$inject = ['$scope','authService'];
     
-  function navbarController(authService) {
+  function navbarController($scope,authService) {
     var vm = this;
     vm.auth = authService;
+    if (authService.isAuthenticated()) {
+    if (authService.getCachedProfile()) {
+      vm.profile = authService.getCachedProfile();
+    } else {
+      authService.getProfile(function(err, profile) {
+        vm.profile = profile;
+        $scope.$apply();
+      });
+    }      
+    } else {
+      
+      
+    }    
+    
   }
   
 })();

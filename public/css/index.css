@@ -34,6 +34,8 @@ body{
 
 .btn-margin {
   margin-right: 20px;
+  width: 80px;
+  height: 100%;
 }
 
 .brand-logo{
@@ -73,6 +75,10 @@ body{
     text-transform: capitalize;
 }
 
+.avatar{
+  width: 100%;
+  margin-top:7px;
+}
 
 
 
