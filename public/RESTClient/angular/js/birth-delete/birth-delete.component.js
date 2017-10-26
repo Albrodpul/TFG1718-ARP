@@ -9,12 +9,15 @@ angular
 
             var baseURL = '/api/v1/spain-births';
 
+
             $scope.deleteBirth = function(region, year) {
                 console.log("Deleting birth with " + region + " " + year);
                 $http
                     .delete(baseURL + '/' + region + '/' + year)
                     .then(function(response) {
-                        $route.reload();
+                        $scope.$parent.myValue = false;
+                        $scope.$parent.getAll();
+                        $scope.$parent.newBirth = [];
 
                     });
             };
