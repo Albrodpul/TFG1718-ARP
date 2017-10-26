@@ -4,13 +4,14 @@
           .module("birthList")
           .component("birthList", {
               templateUrl: 'js/birth-list/birth-list.template.html',
-              controller: ["$scope", "$http","$timeout", function($scope, $http,$timeout) {
+              controller: ["$scope", "$http", function($scope, $http) {
                   console.log("List Controller initialized");
 
                   $scope.vLimit = 3;
                   var baseURL = '/api/v1/spain-births';
 
                   var refresh = function() {
+                      console.log("Refreshing...");
                       $http
                           .get(baseURL + '?limit=' + $scope.vLimit)
                           .then(function(response) {
@@ -28,16 +29,6 @@
                   };
                   
 
-
-                  $scope.deleteBirth = function(region, year) {
-                      console.log("Deleting birth with " + region + " " + year);
-                      $http
-                          .delete(baseURL + '/' + region + '/' + year)
-                          .then(function(response) {
-                              refresh();
-
-                          });
-                  };
                   $scope.search = function(region, year, limit, offset, from, to) {
                       var vOffset = parseInt((parseInt(offset) - parseInt(1))) * parseInt($scope.vLimit);
                       var vOffset2 = parseInt((parseInt(offset) - parseInt(1))) * parseInt(limit);

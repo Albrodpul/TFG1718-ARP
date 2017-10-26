@@ -114,7 +114,7 @@
           <td>{{birth.men}}</td>
           <td>{{birth.women}}</td>
           <td>{{birth.totalbirth}}</td>
-          <td><button class="btn-floating btn-large waves-effect waves-light #f44336 red" ng-click="deleteBirth(birth.region,birth.year)"><i class="material-icons">delete</i></button></td>
+          <td><birth-delete></birth-delete></td>
           <td><a class="btn-floating btn-large waves-effect waves-light purple" href="#!/{{birth.region}}/{{birth.year}}"><i class="material-icons">mode_edit</i></a></td>
         </tr>
       </tbody>
