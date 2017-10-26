@@ -23,9 +23,7 @@ angular
 
             $scope.addBirth = function(region,year,men,women,totalbirth) {
                 console.log("Inserting birth...");
-                console.log(region);
                 var birth = '{"region":"'+region+'","year":"'+year+'","men":"'+men+'","women":"'+women+'","totalbirth":"'+totalbirth+'"}';
-                console.log(birth);
                 $http
                     .post(baseURL, birth)
                     .then(function(response) {
