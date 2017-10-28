@@ -13,19 +13,19 @@
     }
   }
 
-  navbarController.$inject = ['$scope','authService'];
+  navbarController.$inject = ['$scope','$timeout','authService'];
     
-  function navbarController($scope,authService) {
+  function navbarController($scope,$timeout,authService) {
     var vm = this;
     vm.auth = authService;
     if (authService.isAuthenticated()) {
     if (authService.getCachedProfile()) {
-      vm.profile = authService.getCachedProfile();
+      vm.profile = setTimeout(authService.getCachedProfile(),500);
     } else {
-      authService.getProfile(function(err, profile) {
+      setTimeout(authService.getProfile(function(err, profile) {
         vm.profile = profile;
         $scope.$apply();
-      });
+      }),500);
     }      
     } else {
       

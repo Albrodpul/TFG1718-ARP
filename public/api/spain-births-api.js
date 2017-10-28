@@ -155,7 +155,8 @@ app.post(BASE_API_PATH + "/", function (request, response) {
     } else {
         console.log("INFO: New POST request to /contacts with body: " + JSON.stringify(newBirth, 2, null));
         if (!newBirth.region || !newBirth.year || !newBirth.men || !newBirth.women || !newBirth.totalbirth || Object.keys(newBirth).length!==5
-            || newBirth.region === "undefined" || newBirth.year === "undefined" || newBirth.men === "undefined" || newBirth.women === "undefined" || newBirth.totalbirth === "undefined") {
+            || newBirth.region === "undefined" || newBirth.year === "undefined" || newBirth.men === "undefined" || newBirth.women === "undefined" || newBirth.totalbirth === "undefined"
+            || !isNaN(newBirth.region) || isNaN(newBirth.year) || isNaN(newBirth.men) || isNaN(newBirth.women) || isNaN(newBirth.totalbirth)) {
             console.log("WARNING: The contact " + JSON.stringify(newBirth, 2, null) + " is not well-formed, sending 422...");
             response.sendStatus(422); // unprocessable entity
         } else {
@@ -231,7 +232,8 @@ app.put(BASE_API_PATH + "/:region/:year", function (request, response) {
     } else {
         console.log("INFO: New PUT request to /spain-births/" + region + "/" + year +" with data " + JSON.stringify(updatedBirth, 2, null));
         if (!updatedBirth.region || !updatedBirth.year || !updatedBirth.men || !updatedBirth.women || !updatedBirth.totalbirth || Object.keys(updatedBirth).length!==5 
-        || updatedBirth.region === "undefined" || updatedBirth.year === "undefined" || updatedBirth.men === "undefined" || updatedBirth.women === "undefined" || updatedBirth.totalbirth === "undefined") {
+        || updatedBirth.region === "undefined" || updatedBirth.year === "undefined" || updatedBirth.men === "undefined" || updatedBirth.women === "undefined" || updatedBirth.totalbirth === "undefined"
+        || isNaN(updatedBirth.men) || isNaN(updatedBirth.women) || isNaN(updatedBirth.totalbirth)) {
             console.log("WARNING: The contact " + JSON.stringify(updatedBirth, 2, null) + " is not well-formed, sending 422...");
             response.sendStatus(422); // unprocessable entity
         } else {

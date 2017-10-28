@@ -23,12 +23,17 @@
     </thead>
     <tbody>
         <tr>
-            <td>{{updatedBirth.region}}</td>
-            <td>{{updatedBirth.year}}</td>
+            <td><input value="{{updatedBirth.region}}" disabled /></td>
+            <td><input value="{{updatedBirth.year}}" disabled /></td>
             <td><input ng-model="updatedBirth.men" /></td>
             <td><input ng-model="updatedBirth.women" /></td>
-            <td><input ng-model="updatedBirth.totalbirth" /></td>
-            <td><button class="btn-floating btn-large waves-effect waves-light purple" ng-click="put()"><i class="material-icons">mode_edit</i></a></td>
+            <td><input type="number" ng-model="updatedBirth.totalbirth" disabled value="{{updatedBirth.men -- updatedBirth.women}}"/></td>
+            <td><button class="btn-floating btn-large waves-effect waves-light purple" ng-click="put(
+                updatedBirth.region,
+                updatedBirth.year,
+                updatedBirth.men,
+                updatedBirth.women,
+                updatedBirth.men -- updatedBirth.women)"><i class="material-icons">mode_edit</i></a></td>
             </tr>
         </tbody>
     </table>

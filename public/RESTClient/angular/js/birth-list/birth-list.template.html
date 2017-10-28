@@ -102,11 +102,11 @@
   </thead>
   <tbody>
     <tr>
-      <td><input class="form-control" ng-model="newBirth.region" /></td>
-      <td><input class="form-control" ng-model="newBirth.year" /></td>
-      <td><input class="form-control" ng-model="newBirth.men" /></td>
-      <td><input class="form-control" ng-model="newBirth.women" /></td>
-      <td><input class="form-control" ng-model="newBirth.totalbirth" /></td>
+      <td><input type="text" class="form-control" ng-model="newBirth.region" placeholder="Andalucia" /></td>
+      <td><input type="number" class="form-control" ng-model="newBirth.year" placeholder="2009" /></td>
+      <td><input type="number" class="form-control" ng-model="newBirth.men" placeholder="43243" /></td>
+      <td><input type="number" class="form-control" ng-model="newBirth.women" placeholder="43432" /></td>
+      <td><input type="number" class="form-control" ng-model="newBirth.totalbirth" disabled value="{{newBirth.men -- newBirth.women}}" /></td>
       <td colspan="2" class="center-align">
         <birth-post></birth-post>
       </td>
