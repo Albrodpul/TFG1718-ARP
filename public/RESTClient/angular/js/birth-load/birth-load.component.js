@@ -26,6 +26,7 @@
                           .get(baseURL + "/loadInitialData")
                           .then(function(response) {
                               refresh();
+                              $scope.$parent.getAll();
                           });
                   };
               }

@@ -37,7 +37,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
                 console.error('WARNING: Error while getting initial data from DB');
                 return 0;
             }
-            if (births.length === 0) {
+            
 
                 fs.readFile('./public/api/spain-births.json', 'utf8', (err, content) => {
                     if (err) throw err;
@@ -49,11 +49,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
                 console.log("INFO: Inserted");
                 //response.sendStatus(200);
                 response.sendStatus(200, BASE_API_PATH + "/");
-            }
-            else {
-                console.log('INFO: DB has ' + births.length + ' objects ');
-                response.sendStatus(200);
-            }
+            
         });
     });
 
