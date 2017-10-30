@@ -18,8 +18,13 @@ angular
                               .then(function(response) {
                                     $scope.births = response.data;
                                     $scope.myValue = false;
-                                    $scope.newBirth = [];
-                                    
+                                    delete $scope.newBirth;
+                                    delete $scope.offset;
+                                    delete $scope.limit;
+                                    delete $scope.region;
+                                    delete $scope.year;
+                                    delete $scope.from;
+                                    delete $scope.to;
                               });
                         $http
                               .get(baseURL)
@@ -43,8 +48,6 @@ angular
 
                               });
                   };
-
-
 
                   refresh();
 
