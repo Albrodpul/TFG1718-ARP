@@ -31,7 +31,7 @@ angular
                                     var offsetlist = [];
                                     var regionlist = [];
                                     var yearlist = [];
-                                    var page = Math.round((response.data.length) / ($scope.vLimit));
+                                    var page = Math.ceil((response.data.length) / ($scope.vLimit));
                                     for (var i = 1; i <= page; i++) {
                                           offsetlist.push(i);
                                     }
