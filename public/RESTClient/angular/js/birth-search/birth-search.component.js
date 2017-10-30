@@ -6,6 +6,7 @@ angular
             console.log("Search Controller initialized");
 
             $scope.$parent.vLimit = 3;
+            var vLimit=3;
             var baseURL = '/api/v1/spain-births';
 
             $scope.search = function(region, year, limit, offset, from, to) {
@@ -36,6 +37,7 @@ angular
                 }
                 //búsqueda de región y límite
                 else if (region != undefined && limit != undefined && !year && !from && !to && !offset) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '?limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region)
@@ -44,6 +46,7 @@ angular
                 }
                 //búsqueda de región, límite y offset
                 else if (region != undefined && limit != undefined && !year && !from && !to && offset != undefined) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '?limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region)
@@ -68,6 +71,7 @@ angular
                 }
                 //búsqueda de región, from y límite
                 else if (region != undefined && from != undefined && !year && limit != undefined && !to && !offset) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '?from=' + from + '&limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region + '?from=' + from)
@@ -76,6 +80,7 @@ angular
                 }
                 //búsqueda de región, from, límite y offset
                 else if (region != undefined && from != undefined && !year && limit != undefined && !to && offset != undefined) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region + '?from=' + from)
@@ -100,6 +105,7 @@ angular
                 }
                 //búsqueda de región, to y limit
                 else if (region != undefined && to != undefined && !year && !from && limit != undefined && !offset) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '?to=' + to + '&limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region + '?to=' + to)
@@ -108,6 +114,7 @@ angular
                 }
                 //búsqueda de región, to, limit y offset
                 else if (region != undefined && to != undefined && !year && !from && limit != undefined && offset != undefined) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region + '?to=' + to)
@@ -132,6 +139,7 @@ angular
                 }
                 //búsqueda de región, from, to y limit
                 else if (region != undefined && from != undefined && to != undefined && limit != undefined && !year && !offset) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region + '?from=' + from + '&to=' + to)
@@ -140,6 +148,7 @@ angular
                 }
                 //búsqueda de región, from, to, limit y offset
                 else if (region != undefined && from != undefined && to != undefined && limit != undefined && !year && offset != undefined) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region + '?from=' + from + '&to=' + to)
@@ -164,7 +173,8 @@ angular
                 }
                 //búsqueda de año y límite
                 else if (year != undefined && limit != undefined && !region && !from && !to && !offset) {
-                    $http.get(baseURL + '/' + year + '?limit=' + $scope.$parent.limit).then(function(response) {
+                    vLimit=limit;
+                    $http.get(baseURL + '/' + year + '?limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + year)
                             .then(successCallbackSearch);
@@ -172,7 +182,8 @@ angular
                 }
                 //búsqueda de año, límite y offset
                 else if (year != undefined && limit != undefined && !region && !from && !to && offset != undefined) {
-                    $http.get(baseURL + '/' + year + '?limit=' + $scope.$parent.limit + '&offset=' + vOffset2).then(function(response) {
+                    vLimit=limit;
+                    $http.get(baseURL + '/' + year + '?limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + year)
                             .then(successCallbackSearch);
@@ -292,6 +303,7 @@ angular
                 }
                 //búsqueda de región, año, límite
                 else if (region != undefined && year != undefined && limit != undefined && !from && !to && !offset) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '/' + year + '?limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region + '/' + year)
@@ -300,6 +312,7 @@ angular
                 }
                 //búsqueda de región, año, límite y offset
                 else if (region != undefined && year != undefined && limit != undefined && !from && !to && offset != undefined) {
+                    vLimit=limit;
                     $http.get(baseURL + '/' + region + '/' + year + '?limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '/' + region + '/' + year)
@@ -404,6 +417,7 @@ angular
                 }
                 //búsqueda con límite
                 else if (limit != undefined && !region && !year && !from && !to && !offset) {
+                    vLimit=limit;
                     $http.get(baseURL + '?limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL)
@@ -412,6 +426,7 @@ angular
                 }
                 //búsqueda con límite y offset
                 else if (limit != undefined && !region && !year && !from && !to && offset != undefined) {
+                    vLimit=limit;
                     $http.get(baseURL + '?limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL)
@@ -420,6 +435,7 @@ angular
                 }
                 //búsqueda con límite y from
                 else if (limit != undefined && !region && !year && from != undefined && !to && !offset) {
+                    vLimit=limit;
                     $http.get(baseURL + '?from=' + from + '&limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '?from=' + from)
@@ -428,6 +444,7 @@ angular
                 }
                 //búsqueda con límite, from y offset
                 else if (limit != undefined && !region && !year && from != undefined && !to && offset != undefined) {
+                    vLimit=limit;
                     $http.get(baseURL + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '?from=' + from)
@@ -436,6 +453,7 @@ angular
                 }
                 //búsqueda con límite y to
                 else if (limit != undefined && !region && !year && !from && to != undefined && !offset) {
+                    vLimit=limit;
                     $http.get(baseURL + '?to=' + to + '&limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '?to=' + to)
@@ -444,6 +462,7 @@ angular
                 }
                 //búsqueda con límite, to y offset
                 else if (limit != undefined && !region && !year && !from && to != undefined && offset != undefined) {
+                    vLimit=limit;
                     $http.get(baseURL + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '?to=' + to)
@@ -452,6 +471,7 @@ angular
                 }
                 //búsqueda con límite, from y to
                 else if (limit != undefined && !region && !year && from != undefined && to != undefined && !offset) {
+                    vLimit=limit;
                     $http.get(baseURL + '?from=' + from + '&to=' + to + '&limit=' + limit).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '?from=' + from + '&to=' + to)
@@ -460,6 +480,7 @@ angular
                 }
                 //búsqueda con límite, from, to y offset
                 else if (limit != undefined && !region && !year && from != undefined && to != undefined && offset != undefined) {
+                    vLimit=limit;
                     $http.get(baseURL + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2).then(function(response) {
                         successCallback(response);
                         $http.get(baseURL + '?from=' + from + '&to=' + to)
@@ -529,7 +550,9 @@ angular
                 var offsetlist = [];
                 var regionlist = [];
                 var yearlist = [];
-                var page = Math.ceil((response.data.length) / ($scope.$parent.vLimit));
+                //console.log("Límite: "+vLimit);
+                var page = Math.ceil((response.data.length) / (vLimit));
+                //console.log("Páginas: "+page);
                 for (var i = 1; i <= page; i++) {
                     offsetlist.push(i);
                 }

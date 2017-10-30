@@ -27,28 +27,28 @@
   </select>
   </div>
   <div class="col s1">
-    <select material-select watch ng-model="offset" ng-options="offset for offset in offsetlist">
+    <select material-select watch ng-model="offset" ng-options="o for o in offsetlist">
     <option selected value="">Page</option>
   </select>
   </div>
 <birth-search></birth-search>  
 <div class="col s2 offset-s3">
-  <select material-select watch ng-model="region" ng-options="r for r in regionlist">
+  <select material-select watch ng-model="region" ng-options="r for r in regionlist | unique">
     <option value="">Region</option>
   </select>
 </div>
 <div class="col s1">
-  <select material-select watch ng-model="year" ng-options="y for y in yearlist">
+  <select material-select watch ng-model="year" ng-options="y for y in yearlist | unique">
     <option value="">Year</option>
   </select>
 </div>
 <div class="col s1">
-  <select material-select watch ng-model="from" ng-options="f for f in fromlist">
+  <select material-select watch ng-model="from" ng-options="f for f in fromlist | unique">
     <option value="">From</option>
   </select>
 </div>
 <div class="col s1">
-  <select material-select watch ng-model="to" ng-options="t for t in tolist">
+  <select material-select watch ng-model="to" ng-options="t for t in tolist | unique">
     <option value="">To</option>
   </select>
 </div>
