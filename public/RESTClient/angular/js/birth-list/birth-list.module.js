@@ -5,5 +5,6 @@ angular.module('birthList',[
     'birthDeleteAll',
     'birthPost',
     'birthDelete',
-    'birthSearch'
+    'birthSearch',
+    'ui.materialize'
     ]);

@@ -1,4 +1,3 @@
-<script type="text/javascript" src="js/select.js"></script>
 <nav>
   <div class="nav-wrapper #90caf9 blue lighten-3">
     <div>
@@ -23,33 +22,33 @@
 </div>
 <div class="row">
   <div class="col s1">
-    <select class="form-control" ng-model="limit" ng-options="l for l in limitlist">
+    <select material-select watch ng-model="limit" ng-options="l for l in limitlist">
     <option value="">Limit</option>
   </select>
   </div>
   <div class="col s1">
-    <select class="form-control" ng-model="offset" ng-options="o for o in offsetlist">
-    <option value="">Page</option>
+    <select material-select watch ng-model="offset" ng-options="offset for offset in offsetlist">
+    <option selected value="">Page</option>
   </select>
   </div>
 <birth-search></birth-search>  
 <div class="col s2 offset-s3">
-  <select ng-model="region" class="form-control" ng-options="r for r in regionlist">
+  <select material-select watch ng-model="region" ng-options="r for r in regionlist">
     <option value="">Region</option>
   </select>
 </div>
 <div class="col s1">
-  <select class="form-control" ng-model="year" ng-options="y for y in yearlist">
+  <select material-select watch ng-model="year" ng-options="y for y in yearlist">
     <option value="">Year</option>
   </select>
 </div>
 <div class="col s1">
-  <select class="form-control" ng-model="from" ng-options="f for f in fromlist">
+  <select material-select watch ng-model="from" ng-options="f for f in fromlist">
     <option value="">From</option>
   </select>
 </div>
 <div class="col s1">
-  <select class="form-control" ng-model="to" ng-options="t for t in tolist">
+  <select material-select watch ng-model="to" ng-options="t for t in tolist">
     <option value="">To</option>
   </select>
 </div>
@@ -93,4 +92,3 @@
 </table>
 <br /><br />
 <a href="/data/">« Previous</a>
-  
