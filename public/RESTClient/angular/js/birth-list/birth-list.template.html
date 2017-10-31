@@ -21,38 +21,37 @@
   </div>
 </div>
 <div class="row">
-  <div class="col s1">
-    <select material-select watch ng-model="limit" ng-options="l for l in limitlist">
-    <option value="">Limit</option>
+  <div class="col s2">
+    <select material-select watch ng-model="limit" ng-change="search(region, year, limit, offset, from, to)" ng-options="l for l in limitlist">
+    <option value="">Entries</option>
   </select>
   </div>
   <div class="col s1">
-    <select material-select watch ng-model="offset" ng-options="o for o in offsetlist">
+    <select material-select watch ng-model="offset" ng-change="search(region, year, limit, offset, from, to)" ng-options="o for o in offsetlist">
     <option selected value="">Page</option>
   </select>
   </div>
 <birth-search></birth-search>  
-<div class="col s2 offset-s3">
-  <select material-select watch ng-model="region" ng-options="r for r in regionlist | unique">
+<div class="col s2 offset-s4">
+  <select material-select watch ng-model="region" ng-change="search(region, year, limit, offset, from, to)" ng-options="r for r in regionlist | unique">
     <option value="">Region</option>
   </select>
 </div>
 <div class="col s1">
-  <select material-select watch ng-model="year" ng-options="y for y in yearlist | unique">
+  <select material-select watch ng-model="year" ng-change="search(region, year, limit, offset, from, to)" ng-options="y for y in yearlist | unique">
     <option value="">Year</option>
   </select>
 </div>
 <div class="col s1">
-  <select material-select watch ng-model="from" ng-options="f for f in fromlist | unique">
+  <select material-select watch ng-model="from" ng-change="search(region, year, limit, offset, from, to)" ng-options="f for f in fromlist | unique">
     <option value="">From</option>
   </select>
 </div>
 <div class="col s1">
-  <select material-select watch ng-model="to" ng-options="t for t in tolist | unique">
+  <select material-select watch ng-model="to" ng-change="search(region, year, limit, offset, from, to)" ng-options="t for t in tolist | unique">
     <option value="">To</option>
   </select>
 </div>
-<birth-search></birth-search>
 </div>
 
 <table id="myTable" class="striped">

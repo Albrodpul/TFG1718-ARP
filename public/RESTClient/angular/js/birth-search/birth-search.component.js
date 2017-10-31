@@ -10,6 +10,7 @@ angular
             var baseURL = '/api/v1/spain-births';
 
             $scope.search = function(region, year, limit, offset, from, to) {
+                
                 var vOffset = parseInt((parseInt(offset) - parseInt(1))) * parseInt($scope.$parent.vLimit);
                 var vOffset2 = parseInt((parseInt(offset) - parseInt(1))) * parseInt(limit);
                 //no hay búsqueda
