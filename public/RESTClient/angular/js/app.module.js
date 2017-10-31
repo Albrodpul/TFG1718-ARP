@@ -8,6 +8,7 @@ angular.module('birthApp', [
     'birthDeleteAll',
     'birthPost',
     'birthDelete',
+    'birthSearch',
     'ui.materialize',
     'angular.filter'
     ]);

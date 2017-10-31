@@ -1,3 +1,4 @@
+<!-- Navbar -->
 <nav>
   <div class="nav-wrapper #90caf9 blue lighten-3">
     <div>
@@ -10,50 +11,21 @@
 </nav>
 <h4>AngularJS REST Client</h4>
 
+<!-- Main buttons -->
 <div class="row centered">
   <div class="col s1"><button class="#4caf50 green btn-floating btn-large waves-effect waves-light" ng-click="getAll()"><i class="material-icons">view_list</i></button></div>
   <birth-delete-all></birth-delete-all>
   <birth-load></birth-load>
 </div>
+<!-- Error message -->
 <div class="row">
   <div class="col s12 center-align">
     <div ng-hide="!myValue" class="card-panel #f44336 red z-depth-0" ng-model="error">{{error}}</div>
   </div>
 </div>
-<div class="row">
-  <div class="col s2">
-    <select material-select watch ng-model="limit" ng-change="search(region, year, limit, offset, from, to)" ng-options="l for l in limitlist">
-    <option value="">Entries</option>
-  </select>
-  </div>
-  <div class="col s1">
-    <select material-select watch ng-model="offset" ng-change="search(region, year, limit, offset, from, to)" ng-options="o for o in offsetlist">
-    <option selected value="">Page</option>
-  </select>
-  </div>
-<birth-search></birth-search>  
-<div class="col s2 offset-s4">
-  <select material-select watch ng-model="region" ng-change="search(region, year, limit, offset, from, to)" ng-options="r for r in regionlist | unique">
-    <option value="">Region</option>
-  </select>
-</div>
-<div class="col s1">
-  <select material-select watch ng-model="year" ng-change="search(region, year, limit, offset, from, to)" ng-options="y for y in yearlist | unique">
-    <option value="">Year</option>
-  </select>
-</div>
-<div class="col s1">
-  <select material-select watch ng-model="from" ng-change="search(region, year, limit, offset, from, to)" ng-options="f for f in fromlist | unique">
-    <option value="">From</option>
-  </select>
-</div>
-<div class="col s1">
-  <select material-select watch ng-model="to" ng-change="search(region, year, limit, offset, from, to)" ng-options="t for t in tolist | unique">
-    <option value="">To</option>
-  </select>
-</div>
-</div>
-
+<!-- Search -->
+<birth-search></birth-search>
+<!-- Datatable -->
 <table id="myTable" class="striped">
   <thead>
     <tr class="#42a5f5 blue lighten-1 z-depth-0">

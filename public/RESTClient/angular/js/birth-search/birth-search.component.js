@@ -2,10 +2,11 @@ angular
     .module("birthSearch")
     .component("birthSearch", {
         templateUrl: 'js/birth-search/birth-search.template.html',
-        controller: ["$scope", "$http", function($scope, $http) {
+        controller: ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
             console.log("Search Controller initialized");
 
             $scope.$parent.vLimit = 3;
+            $rootScope.offset = $scope.offset;
             var vLimit=3;
             var baseURL = '/api/v1/spain-births';
 
@@ -578,5 +579,13 @@ angular
                 $scope.$parent.births = [];
                 $scope.$parent.error = response.status + " " + response.statusText;
             };
+            $scope.$on('clean', function(e) {  
+                delete $scope.limit;
+                delete $scope.offset;           
+                delete $scope.region;
+                delete $scope.year;
+                delete $scope.from;
+                delete $scope.to;
+            });
         }]
     });
