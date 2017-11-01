@@ -585,7 +585,6 @@ angular
                 delete $scope.region;
                 delete $scope.year;
                 delete $scope.from;
-                delete $scope.to;
             });
         }]
     });
