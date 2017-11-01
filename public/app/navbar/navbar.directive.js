@@ -17,7 +17,7 @@
   function navbarController($scope, authService) {
     var vm = this;
     vm.auth = authService;
-    /*vm.profile;
+    vm.profile;
     if (authService.isAuthenticated()) {
       if (authService.getCachedProfile()) {
         vm.profile = authService.getCachedProfile();
@@ -32,7 +32,7 @@
     else {
 
 
-    }*/
+    }
 
   }
 

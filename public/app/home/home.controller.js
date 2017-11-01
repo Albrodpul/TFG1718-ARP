@@ -13,7 +13,7 @@
     var vm = this;
     vm.auth = authService;
     vm.profile;
-    if (authService.isAuthenticated()) {
+    /*if (authService.isAuthenticated()) {
       if (authService.getCachedProfile()) {
         vm.profile = authService.getCachedProfile();
       }
@@ -27,7 +27,7 @@
     else {
 
 
-    }
+    }*/
   }
 
 })();
