@@ -24,7 +24,7 @@
                       refresh();
 
                       $scope.put = function(region,year,men,women,totalbirth) {
-                          var birth = '{"region":"'+region+'","year":"'+year+'","men":"'+men+'","women":"'+women+'","totalbirth":"'+totalbirth+'"}';
+                          var birth = '{"region":"'+region+'","year":'+year+',"men":'+men+',"women":'+women+',"totalbirth":'+totalbirth+'}';
                           $http.put(baseURL + "/" + $routeParams.region + "/" + $routeParams.year, birth)
                               .then(function(response) {
                                   $location.path("/");

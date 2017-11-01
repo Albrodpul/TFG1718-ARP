@@ -253,9 +253,9 @@ exports.initial = function(app, db, BASE_API_PATH) {
             }
             else {
                 db.find({
-                    region: updatedBirth.region,
+                    region: region,
                     $and: [{
-                        year: year
+                        year: Number(year)
                     }]
                 }).toArray(function(err, contacts) {
                     if (err) {
@@ -267,7 +267,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
                         if (contacts.length !== 0) {
                             db.update({
                                 region: updatedBirth.region,
-                                year: year
+                                year: Number(updatedBirth.year)
                             }, updatedBirth);
                             console.log("INFO: Modifying contact with region " + region + " " + year + " with data " + JSON.stringify(updatedBirth, 2, null));
                             response.send(updatedBirth); // return the updated contact
@@ -341,7 +341,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
             else {
                 console.log("INFO: New DELETE request to /spain-births/" + year);
                 db.remove({
-                    year: year
+                    year: Number(year)
                 }, { multi: true }, function(err, result) {
                     var birthRemoved = JSON.parse(result);
                     if (err) {
@@ -376,7 +376,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
             console.log("INFO: New DELETE request to /spain-births/" + region + year);
             db.remove({
                 region: region,
-                year: year
+                year: Number(year)
             }, {}, function(err, result) {
                 var birthRemoved = JSON.parse(result);
                 if (err) {
