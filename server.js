@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 var helmet = require("helmet");
 var path = require('path');
 var port = (process.env.PORT || 11000);
+var cors=require("cors");
 var calls=require("./public/app/calls/calls.js");
 var MongoClient = require('mongodb').MongoClient;
 var mdbURL = "mongodb://test:test@ds159344.mlab.com:59344/tfg1718-arp";
@@ -29,7 +30,7 @@ MongoClient.connect(mdbURL,{native_parser:true},function(err,database){
 var app = express();
 app.use(bodyParser.json()); //use default json enconding/decoding
 app.use(helmet()); //improve security
-
+app.use(cors());
 app.use('/', express.static(__dirname +  '/public'));
 
 app.get('/callback', calls.getCallback);

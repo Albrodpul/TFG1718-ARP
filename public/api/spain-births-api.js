@@ -71,7 +71,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
             if (isNaN(region)) {
                 console.log("INFO: New GET request to /spain-births/" + region);
                 db.find({
-                    region: region
+                   region: region
                 }).toArray(function(err, filteredBirths) {
                     if (err) {
                         console.error('WARNING: Error getting data from DB');
@@ -91,9 +91,9 @@ exports.initial = function(app, db, BASE_API_PATH) {
                 });
             }
             else {
-                console.log("Soy un numero");
+                console.log("Soy un numero "+region);
                 db.find({
-                    year: year
+                    year: Number(year)
                 }).toArray(function(err, filteredBirths) {
                     if (err) {
                         console.error('WARNING: Error getting data from DB');
@@ -133,7 +133,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
             console.log("INFO: New GET request to /spain-births/" + region + "/" + year);
             db.find({
                 region: region,
-                year: year
+                year: Number(year)
             }).toArray(function(err, filteredBirths) {
                 if (err) {
                     console.error('WARNING: Error getting data from DB');
