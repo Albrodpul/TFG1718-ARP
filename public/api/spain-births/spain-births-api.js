@@ -39,7 +39,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
             }
             
 
-                fs.readFile('./public/api/spain-births.json', 'utf8', (err, content) => {
+                fs.readFile('./public/api/spain-births/spain-births.json', 'utf8', (err, content) => {
                     if (err) throw err;
                     var json = JSON.parse(content);
                     db.insert(json, function(err, doc) {
@@ -214,7 +214,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
 
 
     //PUT over a collection
-    app.put(BASE_API_PATH + "/spain-births", function(request, response) {
+    app.put(BASE_API_PATH + "/", function(request, response) {
         console.log("WARNING: New PUT request to /spain-births, sending 405...");
         response.sendStatus(405); // method not allowed
     });
