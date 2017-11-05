@@ -2,11 +2,10 @@ angular
     .module("birthSearch")
     .component("birthSearch", {
         templateUrl: 'js/birth-search/birth-search.template.html',
-        controller: ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
+        controller: ["$scope", "$http", function($scope, $http) {
             console.log("Search Controller initialized");
 
             $scope.$parent.vLimit = 3;
-            $rootScope.offset = $scope.offset;
             var vLimit=3;
             var baseURL = '/api/v1/spain-births';
 

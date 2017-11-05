@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
   'use strict';
 
@@ -16,13 +16,25 @@
 
     if (authService.getCachedProfile()) {
       vm.profile = authService.getCachedProfile();
-    } else {
+      socialProfile(vm.profile);
+    }
+    else {
       authService.getProfile(function(err, profile) {
         vm.profile = profile;
         $scope.$apply();
+        socialProfile(profile);
       });
     }
+  function socialProfile(profile){
+      if (profile.sub.match("google")) {
+        $scope.tProfile="google";
+      }else if (profile.sub.match("twitter")){
+        $scope.tProfile="twitter";
+      }
+      console.log(profile);
+  }   
 
   }
+
 
 })();
