@@ -1,7 +1,10 @@
 var exports = module.exports = {};
 var functions = require("./functions.js");
 var fs = require("fs");
-
+var csvjson = require('csvjson');
+var csvFilePath = './public/api/spain-births/spain-births.csv';
+var csv = require('csvtojson')
+var path = require('path');
 exports.initial = function(app, db, BASE_API_PATH) {
 
 
@@ -37,19 +40,57 @@ exports.initial = function(app, db, BASE_API_PATH) {
                 console.error('WARNING: Error while getting initial data from DB');
                 return 0;
             }
-            
+            var regionText='"region":"';
+            var content=[];
+            var array={};
+            csv()
+                .fromFile(csvFilePath)
+                .on('json', (jsonObj) => {
+                    // combine csv header row and csv line to a json object
+                    // jsonObj.a ==> 1 or 4
+                    var region=jsonObj.region;
+                    content.push('{'+'"region" : "'+region);
+                    console.log(content);
+                })
+                .on('done', (error) => {
+                    console.log('end')
+                })
 
-                fs.readFile('./public/api/spain-births/spain-births.json', 'utf8', (err, content) => {
+            /*var data = fs.readFileSync(path.join(__dirname, 'spain-births.csv'), { encoding: 'utf8' });
+            var options = {
+                delimiter: ';' // optional 
+                 // optional 
+            };
+            var content = csvjson.toObject(data, options);
+            var json=[];
+            content.forEach(function(element){
+                
+                json.add({"region"});
+                json.add(element.region);
+                    /*',"year":'+element.year+
+                    ',"men":'+element.men+
+                    ',"women":'+element.women+
+                    ',"totalbirth":'+element.totalbirth};
+                
+            });
+            console.log(data);
+            console.log(json);*/
+
+
+            /*db.insert(json, function(err, doc) {
+                if (err) throw err;
+            });*/
+            /*fs.readFile('./public/api/spain-births/spain-births.json', 'utf8', (err, content) => {
+                if (err) throw err;
+                var json = JSON.parse(content);
+                db.insert(json, function(err, doc) {
                     if (err) throw err;
-                    var json = JSON.parse(content);
-                    db.insert(json, function(err, doc) {
-                        if (err) throw err;
-                    });
                 });
-                console.log("INFO: Inserted");
-                //response.sendStatus(200);
-                response.sendStatus(200, BASE_API_PATH + "/");
-            
+            });*/
+            console.log("INFO: Inserted");
+            //response.sendStatus(200);
+            response.sendStatus(200, BASE_API_PATH + "/");
+
         });
     });
 
@@ -71,7 +112,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
             if (isNaN(region)) {
                 console.log("INFO: New GET request to /spain-births/" + region);
                 db.find({
-                   region: region
+                    region: region
                 }).toArray(function(err, filteredBirths) {
                     if (err) {
                         console.error('WARNING: Error getting data from DB');
@@ -91,7 +132,7 @@ exports.initial = function(app, db, BASE_API_PATH) {
                 });
             }
             else {
-                console.log("Soy un numero "+region);
+                console.log("Soy un numero " + region);
                 db.find({
                     year: Number(year)
                 }).toArray(function(err, filteredBirths) {
