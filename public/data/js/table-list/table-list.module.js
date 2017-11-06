@@ -3,5 +3,5 @@
 angular.module('tableList',[
     'geochart',
     'highcharts',
-    'curveChart'
+    'corechart'
     ]);

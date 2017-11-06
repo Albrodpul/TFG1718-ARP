@@ -14,7 +14,7 @@
           controller: ["$scope", "$http", function($scope, $http) {
             console.log("Geochart Controller initialized");
 
-            var baseURL = '/api/v1/spain-births';
+            var baseURL = '/api/v1/spain-births/2009';
             $http
               .get(baseURL)
               .then(function(response) {
@@ -24,7 +24,7 @@
                 google.charts.setOnLoadCallback(drawRegionsMap);
 
                 function drawRegionsMap() {
-                  console.log(dataFromServer);
+                  
                   var dataForWidget = [
                     ['Region', 'Total Birth']
                   ];
@@ -32,11 +32,11 @@
                   //Tranformación
                   for (var i = 0; i < dataFromServer.length; i++) {
                     var item = dataFromServer[i];
-                    console.log(item);
+                    
                     var itemForWidget = [item.region, item.totalbirth];
                     dataForWidget.push(itemForWidget);
                   }
-                  console.log(dataForWidget);
+                  
                   var data = google.visualization.arrayToDataTable(dataForWidget);
                   console.log("Success!");
 

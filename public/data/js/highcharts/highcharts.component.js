@@ -5,7 +5,7 @@ angular
         controller: ["$scope", "$http", function($scope, $http) {
             console.log("Highcharts Controller initialized");
 
-            var baseURL = '/api/v1/spain-births';
+            var baseURL = '/api/v1/spain-births/2009';
             $http
                 .get(baseURL)
                 .then(function(response) {

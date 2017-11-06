@@ -5,5 +5,5 @@ angular.module('dataApp', [
     'tableList',
     'geochart',
     'highcharts',
-    'curveChart'    
+    'corechart'    
     ]);
