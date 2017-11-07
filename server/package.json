@@ -1,0 +1,32 @@
+{
+  "name": "tfg1718-arp",
+  "version": "1.0.0",
+  "description": "<html> <body> <h2>Welcome to TFG1718-ARP</h2> <p>Take a look on my <a href=\"https://tfg1718-arp.herokuapp.com/\">application</a>: </p> </body> </html>",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TFG1718-ARP/TFG1718-ARP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TFG1718-ARP/TFG1718-ARP/issues"
+  },
+  "homepage": "https://github.com/TFG1718-ARP/TFG1718-ARP#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "csvjson": "^4.3.4",
+    "csvtojson": "^1.1.9",
+    "express": "^4.13.4",
+    "fs": "0.0.1-security",
+    "helmet": "^3.8.2",
+    "mongodb": "^2.2.31",
+    "request": "^2.72.0"   
+  }
+  
+}
