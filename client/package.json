@@ -1,6 +1,7 @@
 {
-  "name": "client",
-  "version": "0.0.0",
+  "name": "tfg1718-arp",
+  "version": "1.0.0",
+  "description": "<html> <body> <h2>Welcome to TFG1718-ARP</h2> <p>Take a look on my <a href=\"https://tfg1718-arp.herokuapp.com/\">application</a>: </p> </body> </html>",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -11,6 +12,15 @@
     "e2e": "ng e2e"
   },
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TFG1718-ARP/TFG1718-ARP.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/TFG1718-ARP/TFG1718-ARP/issues"
+  },  
+  "homepage": "https://github.com/TFG1718-ARP/TFG1718-ARP#readme",
   "dependencies": {
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
