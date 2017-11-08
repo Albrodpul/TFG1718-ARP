@@ -1,10 +1,10 @@
-import { AppPage } from './app.po';
+import { AngularCliHerokuPage } from './app.po';
 
-describe('tfg1718-arp App', () => {
-  let page: AppPage;
+describe('angular-cli-heroku App', () => {
+  let page: AngularCliHerokuPage;
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new AngularCliHerokuPage();
   });
 
   it('should display welcome message', () => {
