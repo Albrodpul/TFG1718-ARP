@@ -15,7 +15,7 @@ export class RestclientComponent implements OnInit {
   births: any;
   status: any;
   statusText: any;
-
+  log:any;
   public get(): void {
     this.http.get(this.url)
       .subscribe(
