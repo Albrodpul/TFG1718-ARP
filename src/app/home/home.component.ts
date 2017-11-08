@@ -8,7 +8,6 @@ import { AboutComponent } from './../about/about.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   constructor(public auth: AuthService) { }
 
   ngOnInit() {

@@ -3,16 +3,20 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+
 import { MaterializeModule } from 'angular2-materialize';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { ROUTES } from './app.routes';
 
+import { HomeComponent } from './home/home.component';
 import { AuthService } from './auth/auth.service';
 import { ProfileComponent } from './profile/profile.component';
 import { CallbackComponent } from './callback/callback.component';
 import { AboutComponent } from './about/about.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { DataComponent } from './data/data.component';
+import { JqueryComponent } from './RESTClient/jquery/jquery.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,7 @@ import { AboutComponent } from './about/about.component';
     ProfileComponent, 
     AboutComponent,   
     CallbackComponent, 
-    AboutComponent
+    AboutComponent, NavbarComponent, DataComponent, JqueryComponent
   ],
   imports: [
     BrowserModule,

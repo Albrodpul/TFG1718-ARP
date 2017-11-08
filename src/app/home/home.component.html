@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+<!-- Home Signed Up -->
 <div *ngIf="auth.isAuthenticated()">
   <br />
   <ul class="collapsible popout" data-collapsible="accordion">
@@ -14,6 +16,7 @@
   <br />
   <a routerLink="/about">About me</a>
 </div>
-<h4 *ngIf="!auth.isAuthenticated()">
+<!-- Not signed up -->
+<h6 *ngIf="!auth.isAuthenticated()">
   You are not logged in! Please <a (click)="auth.login()">Log In</a> to continue.
-</h4>
+</h6>

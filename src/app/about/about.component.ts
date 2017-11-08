@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 
@@ -11,10 +10,10 @@ import { Location } from '@angular/common';
 export class AboutComponent implements OnInit {
   goBack(): void {
     this.location.back();
+    location.reload();
   }
   constructor(
-    private route: ActivatedRoute,
-    private location: Location,
+    private location: Location
   ) { }
 
   ngOnInit() {

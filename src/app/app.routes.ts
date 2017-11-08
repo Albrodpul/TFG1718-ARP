@@ -3,11 +3,15 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CallbackComponent } from './callback/callback.component';
 import { AboutComponent } from './about/about.component';
+import { JqueryComponent } from './RESTClient/jquery/jquery.component';
+import { DataComponent } from './data/data.component';
 
 export const ROUTES: Routes = [
   { path: '', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'callback', component: CallbackComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'data', component: DataComponent },
+  { path: 'RESTClient/jquery', component: JqueryComponent },
   { path: '**', redirectTo: '' }
 ];
