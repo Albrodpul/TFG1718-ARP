@@ -1,8 +1,8 @@
 var exports = module.exports = {};
-var functions = require("./functions.js");
+var functions = require("./functions");
 var fs = require("fs");
 var csvjson = require('csvjson');
-var csvFilePath = './api/spain-births/spain-births.csv';
+var csvFilePath = '/api/spain-births/spain-births.csv';
 var path = require('path');
 exports.initial = function (app, db, BASE_API_PATH) {
 
