@@ -4,11 +4,11 @@ interface AuthConfig {
   callbackURL: string;
 }
 
-var host = window.location.host;
-var http = window.location.protocol;
+const host = window.location.host;
+const http = window.location.protocol;
 
 export const AUTH_CONFIG: AuthConfig = {
   clientID: 'XZJuYq4_-9ZBYQzhmlQafZC0boAbeAgI',
   domain: 'tfg1718-arp.eu.auth0.com',
-  callbackURL: 'http://localhost:8080/callback'
+  callbackURL: 'https://tfg1718-arp.herokuapp.com/callback'
 };
