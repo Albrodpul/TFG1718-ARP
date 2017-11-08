@@ -1,17 +1,21 @@
-const path = require('path');
-const express = require('express');
-const app = express();
-const cors=require("cors");
-const port = (process.env.PORT || 8080);
-const MongoClient = require('mongodb').MongoClient;
-const mdbURL = "mongodb://test:test@ds159344.mlab.com:59344/tfg1718-arp";
-const BASE_API_PATH = "/api/v1/spain-births";
-const db;
+var path = require('path');
+var express = require('express');
+var bodyParser = require("body-parser");
+var helmet = require("helmet");
+var path = require('path');
+var app = express();
+var cors=require("cors");
+var port = (process.env.PORT || 8080);
+var MongoClient = require('mongodb').MongoClient;
+var mdbURL = "mongodb://test:test@ds159344.mlab.com:59344/tfg1718-arp";
+var BASE_API_PATH = "./api/v1/spain-births";
+var db;
+var spainBirths=require("./api/spain-births/spain-births-api.js");
 // If an incoming request uses
 // a protocol other than HTTPS,
 // redirect that request to the
 // same url but with HTTPS
-const forceSSL = function() {
+var forceSSL = function() {
   return function (req, res, next) {
     if (req.headers['x-forwarded-proto'] !== 'https') {
       return res.redirect(['https://', req.get('Host'), req.url].join(''));
