@@ -1,0 +1,30 @@
+<h4>Spain Birth REST Client</h4>
+URL:
+<input [(ngModel)]="url" class="form-control" size="60" />
+<p>Payload:</p>
+<textarea ng-model="payload" cols="100" rows="2" value=''></textarea>
+<p>Method:</p>
+<button (click)="get()" class="btn">Get</button>
+<hr /> HTTP Status: {{status}} {{statusText}}
+<br />
+<br />
+<table border='1' rules="all" cellpadding="5" class="striped bordered centered highlight responsive-table">
+  <tr class="#42a5f5 blue lighten-1 z-depth-0">
+    <th class="white-text center-align">Region</th>
+    <th class="white-text center-align">Year</th>
+    <th class="white-text center-align">Men</th>
+    <th class="white-text center-align">Women</th>
+    <th class="white-text center-align">Total Birth</th>
+  </tr>
+  <tr *ngFor="let birth of births" class="white z-depth-0">
+    <td>{{birth.region}}</td>
+    <td>{{birth.year}}</td>
+    <td>{{birth.men}}</td>
+    <td>{{birth.women}}</td>
+    <td>{{birth.totalbirth}}</td>
+  </tr>
+</table>
+<br /> Log: {{log}}
+<br />
+<br />
+<a href="/about/">« Previous</a>

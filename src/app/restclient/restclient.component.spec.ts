@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JqueryComponent } from './jquery.component';
+import { RestclientComponent } from './restclient.component';
 
-describe('JqueryComponent', () => {
-  let component: JqueryComponent;
-  let fixture: ComponentFixture<JqueryComponent>;
+describe('RestclientComponent', () => {
+  let component: RestclientComponent;
+  let fixture: ComponentFixture<RestclientComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JqueryComponent ]
+      declarations: [ RestclientComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JqueryComponent);
+    fixture = TestBed.createComponent(RestclientComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

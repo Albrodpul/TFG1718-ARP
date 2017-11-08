@@ -16,22 +16,26 @@ import { CallbackComponent } from './callback/callback.component';
 import { AboutComponent } from './about/about.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DataComponent } from './data/data.component';
-import { JqueryComponent } from './RESTClient/jquery/jquery.component';
+import { RestclientComponent } from './restclient/restclient.component';
 
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     HomeComponent,
-    ProfileComponent, 
-    AboutComponent,   
-    CallbackComponent, 
-    AboutComponent, NavbarComponent, DataComponent, JqueryComponent
+    ProfileComponent,
+    AboutComponent,
+    CallbackComponent,
+    AboutComponent,
+    NavbarComponent, 
+    DataComponent, 
+    RestclientComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,    
+    FormsModule,
     MaterializeModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    HttpModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
