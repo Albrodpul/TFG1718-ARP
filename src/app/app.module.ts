@@ -3,33 +3,26 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { MaterializeModule } from 'angular2-materialize';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ROUTES } from './app.routes';
+import { SubrouteComponent } from './subroute/subroute.component';
 
-import { AuthService } from './auth/auth.service';
-import { ProfileComponent } from './profile/profile.component';
-import { CallbackComponent } from './callback/callback.component';
-import { AboutComponent } from './about/about.component';
+import { ROUTES } from './app.routes';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    HomeComponent,
-    ProfileComponent, 
-    AboutComponent,   
-    CallbackComponent, 
-    AboutComponent
+    AppComponent,
+    SubrouteComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,    
-    MaterializeModule,
+    FormsModule,
+    HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
