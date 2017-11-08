@@ -1,1 +1,39 @@
-<router-outlet></router-outlet>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Navbar-->
+<nav>
+  <div class="nav-wrapper #90caf9 blue lighten-3">
+    <a routerLink="/" class="brand-logo">
+      <i class="material-icons left">cloud</i>TFG1718 ARP</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li>
+        <li>
+          <a class="btn-margin" *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
+            Sign in
+          </a>
+        </li>
+        <li>
+          <a class="btn-margin" materialize="dropdown" *ngIf="auth.isAuthenticated()" data-activates='dropdown1'>
+            <img src="{{profile?.picture}}" class="circle avatar" alt="avatar">
+          </a>
+        </li>
+    </ul>
+
+  </div>
+</nav>
+<!-- Dropdown Structure -->
+<ul id='dropdown1' class='dropdown-content'>
+  <li>
+    <a class="btn-margin dropdown-button" data-activates='dropdown' data-beloworigin="true" *ngIf="auth.isAuthenticated()" routerLink="/profile">
+      <i class="material-icons left">perm_identity</i>Profile
+    </a>
+  </li>
+  <li>
+    <a *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
+      <i class="material-icons left">exit_to_app</i>Log out
+    </a>
+  </li>
+</ul>
+<!-- Main page -->
+<main>
+  <router-outlet></router-outlet>
+</main>
