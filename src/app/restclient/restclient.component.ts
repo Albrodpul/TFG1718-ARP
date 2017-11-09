@@ -13,6 +13,7 @@ export class RestclientComponent implements OnInit {
 
   port = window.location.port;
   baseURL = this.getUrl();
+  payload = "";
 
   public getUrl(): string {
     console.log(this.port);
@@ -28,7 +29,6 @@ export class RestclientComponent implements OnInit {
   births: any;
   status: any;
   statusText: any;
-  log: any;
 
   public refresh(): void {
     this.http.get(this.baseURL)
@@ -44,7 +44,7 @@ export class RestclientComponent implements OnInit {
     this.refresh();
   }
 
-  public loadInitialData(): void {
+  public loadBirth(): void {
     this.http.get(this.baseURL + '/loadInitialData')
       .subscribe(
       data => {

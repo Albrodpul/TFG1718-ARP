@@ -1,13 +1,14 @@
 <app-navbar></app-navbar>
 <h4>Spain Birth REST Client</h4>
 URL:
-<input [(ngModel)]="url" class="form-control" size="60" />
+<input [(ngModel)]="baseURL" class="form-control" size="60" />
 <p>Payload:</p>
 <textarea [(ngModel)]="payload" cols="100" rows="2" value=''></textarea>
-<p>Method:</p>
-<button (click)="get()" class="btn">Get</button>
-<button (click)="deleteAll()" class="btn">Delete All</button>
-<button (click)="loadInitialData()" class="btn">Load Initial Data</button>
+<div class="row centered">
+<div class="col s1"><button class="#4caf50 green btn-floating btn-large waves-effect waves-light" (click)="get()"><i class="material-icons">view_list</i></button></div>
+<div class="col s1"><button class="btn-floating btn-large waves-effect waves-light red" (click)="deleteAll()"><i class="material-icons">delete</i></button></div>
+<div class="col s1"><button class="#5d4037 brown darken-2 btn-floating btn-large waves-effect waves-light" (click)="loadBirth()"><i class="material-icons">restore</i></button></div>
+</div>
 <hr /> HTTP Status: {{status}} {{statusText}}
 <br />
 <br />
@@ -27,7 +28,6 @@ URL:
     <td>{{birth.totalbirth}}</td>
   </tr>
 </table>
-<br /> Log: 
 <br />
 <br />
 <a href="/about/">« Previous</a>
