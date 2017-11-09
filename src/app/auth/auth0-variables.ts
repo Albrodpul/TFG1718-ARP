@@ -4,8 +4,8 @@ interface AuthConfig {
   callbackURL: string;
 }
 
-const host = window.location.host;
 const http = window.location.protocol;
+const host = window.location.host;
 
 export const AUTH_CONFIG: AuthConfig = {
   clientID: 'XZJuYq4_-9ZBYQzhmlQafZC0boAbeAgI',

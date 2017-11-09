@@ -8,6 +8,7 @@ import { AboutComponent } from './../about/about.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  profile: any;
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
