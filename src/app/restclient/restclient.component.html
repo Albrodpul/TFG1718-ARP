@@ -1,24 +1,67 @@
 <app-navbar></app-navbar>
 <h4>Spain Birth REST Client</h4>
 URL:
-<input [(ngModel)]="baseURL" class="form-control" size="60" />
-<p>Payload:</p>
-<textarea [(ngModel)]="payload" cols="100" rows="2" value=''></textarea>
+<input [(ngModel)]="url" class="form-control" size="60" />
+<p>{{status}} {{statusText}}</p>
 <div class="row centered">
-<div class="col s1"><button class="#4caf50 green btn-floating btn-large waves-effect waves-light" (click)="get()"><i class="material-icons">view_list</i></button></div>
-<div class="col s1"><button class="btn-floating btn-large waves-effect waves-light red" (click)="deleteAll()"><i class="material-icons">delete</i></button></div>
-<div class="col s1"><button class="#5d4037 brown darken-2 btn-floating btn-large waves-effect waves-light" (click)="loadBirth()"><i class="material-icons">restore</i></button></div>
+  <div class="col s1">
+    <button class="#4caf50 green btn-floating btn-large waves-effect waves-light" (click)="get()">
+      <i class="material-icons">view_list</i>
+    </button>
+  </div>
+  <div class="col s1">
+    <button class="btn-floating btn-large waves-effect waves-light red" (click)="deleteAll()">
+      <i class="material-icons">delete</i>
+    </button>
+  </div>
+  <div class="col s1">
+    <button class="#5d4037 brown darken-2 btn-floating btn-large waves-effect waves-light" (click)="loadBirth()">
+      <i class="material-icons">restore</i>
+    </button>
+  </div>
 </div>
-<hr /> HTTP Status: {{status}} {{statusText}}
 <br />
-<br />
-<table border='1' rules="all" cellpadding="5" class="striped bordered centered highlight responsive-table">
+<table border='1' rules="all" cellpadding="5" class="striped">
   <tr class="#42a5f5 blue lighten-1 z-depth-0">
-    <th class="white-text center-align">Region</th>
-    <th class="white-text center-align">Year</th>
-    <th class="white-text center-align">Men</th>
-    <th class="white-text center-align">Women</th>
-    <th class="white-text center-align">Total Birth</th>
+    <td class="white-text center-align">Region</td>
+    <td class="white-text center-align">Year</td>
+    <td class="white-text center-align">Men</td>
+    <td class="white-text center-align">Women</td>
+    <td class="white-text center-align">Total Birth</td>
+    <td colspan="2" class="white-text center-align">Actions</td>
+  </tr>
+  <tr class="white z-depth-0">
+    <td>
+      <input type="text" class="form-control" #newBirthRegion placeholder="Andalucia" />
+    </td>
+    <td>
+      <input type="number" class="form-control" #newBirthYear placeholder="2009" />
+    </td>
+    <td>
+      <input type="number" class="form-control" #newBirthMen placeholder="43243" />
+    </td>
+    <td>
+      <input type="number" class="form-control" #newBirthWomen placeholder="43432" />
+    </td>
+    <td>
+      <input type="number" class="form-control" #newBirthTotalBirth placeholder="473824" />
+    </td>
+    <td colspan="2" class="center-align">
+      <button class="btn-floating btn-large waves-effect waves-light blue" (click)="addBirth(
+        newBirthRegion.value, 
+        newBirthYear.value, 
+        newBirthMen.value, 
+        newBirthWomen.value, 
+        newBirthTotalBirth.value
+      ); 
+      newBirthRegion.value=''; 
+      newBirthYear.value='';
+      newBirthMen.value='';
+      newBirthWomen.value='';
+      newBirthTotalBirth.value=''">
+        <i class="material-icons">add</i>
+      </button>
+    </td>
   </tr>
   <tr *ngFor="let birth of births" class="white z-depth-0">
     <td>{{birth.region}}</td>
@@ -26,8 +69,34 @@ URL:
     <td>{{birth.men}}</td>
     <td>{{birth.women}}</td>
     <td>{{birth.totalbirth}}</td>
+    <td>
+      <button class="btn-floating btn-large waves-effect waves-light purple" (click)="updateBirth(
+        birth.region,
+        birth.year,
+        newBirthRegion.value, 
+        newBirthYear.value, 
+        newBirthMen.value, 
+        newBirthWomen.value, 
+        newBirthTotalBirth.value
+      ); 
+      newBirthRegion.value=''; 
+      newBirthYear.value='';
+      newBirthMen.value='';
+      newBirthWomen.value='';
+      newBirthTotalBirth.value=''">
+        <i class="material-icons">mode_edit</i>
+      </button>
+    </td>
+    <td>
+      <button class="btn-floating btn-large waves-effect waves-light #f44336 red" (click)="deleteBirth(
+        birth.region,
+        birth.year
+        )">
+        <i class="material-icons">delete</i>
+      </button>
+    </td>
   </tr>
 </table>
 <br />
 <br />
-<a href="/about/">« Previous</a>
+<a routerLink="/data">« Previous</a>
