@@ -43,6 +43,23 @@ app.get("/profile", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/index.html"));
 });
 
+app.get("/about", function (req, res) {
+  res.sendFile(path.join(__dirname + "/dist/index.html"));
+});
+
+app.get("/data", function (req, res) {
+  res.sendFile(path.join(__dirname + "/dist/index.html"));
+});
+
+app.get("/home", function (req, res) {
+  res.sendFile(path.join(__dirname + "/dist/index.html"));
+});
+
+app.get("/restclient", function (req, res) {
+  res.sendFile(path.join(__dirname + "/dist/index.html"));
+});
+
+
 app.use(bodyParser.json()); //use default json enconding/decoding
 app.use(helmet()); //improve security
 app.use(cors());

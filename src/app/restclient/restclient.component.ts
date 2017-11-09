@@ -11,30 +11,59 @@ import { Observable } from 'rxjs/Observable';
 })
 export class RestclientComponent implements OnInit {
 
-  url = 'http://localhost:4200/api/v1/spain-births';
+  port = window.location.port;
+  baseURL = this.getUrl();
+
+  public getUrl(): string {
+    console.log(this.port);
+    if (this.port == '4200') {
+      this.baseURL = 'http://localhost:8080/api/v1/spain-births';
+    } else {
+      this.baseURL = '../api/v1/spain-births';
+    }
+    console.log(this.baseURL);
+    return this.baseURL;
+  }
+
   births: any;
   status: any;
   statusText: any;
-  log:any;
-  public get(): void {
-    this.http.get(this.url)
+  log: any;
+
+  public refresh(): void {
+    this.http.get(this.baseURL)
       .subscribe(
-        data => {
-        console.log(data);
+      data => {
         this.births = data.json();
         this.status = data.status;
         this.statusText = data.statusText;
-      },err => {
-        this.status = err.status;
-        this.statusText = err.statusText;
-        this.births = [];
       });
+  }
 
+  public get(): void {
+    this.refresh();
+  }
+
+  public loadInitialData(): void {
+    this.http.get(this.baseURL + '/loadInitialData')
+      .subscribe(
+      data => {
+        this.refresh();
+      });
+  }
+
+  public deleteAll(): void {
+    this.http.delete(this.baseURL)
+      .subscribe(
+      data => {
+        this.refresh();
+      });
   }
 
   constructor(public http: Http) { }
 
   ngOnInit() {
+    console.log("REST Client Component Initialized");
   }
 
 }

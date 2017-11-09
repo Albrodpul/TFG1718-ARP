@@ -1,10 +1,13 @@
+<app-navbar></app-navbar>
 <h4>Spain Birth REST Client</h4>
 URL:
 <input [(ngModel)]="url" class="form-control" size="60" />
 <p>Payload:</p>
-<textarea ng-model="payload" cols="100" rows="2" value=''></textarea>
+<textarea [(ngModel)]="payload" cols="100" rows="2" value=''></textarea>
 <p>Method:</p>
 <button (click)="get()" class="btn">Get</button>
+<button (click)="deleteAll()" class="btn">Delete All</button>
+<button (click)="loadInitialData()" class="btn">Load Initial Data</button>
 <hr /> HTTP Status: {{status}} {{statusText}}
 <br />
 <br />
