@@ -32,6 +32,7 @@ export class RestclientComponent implements OnInit {
   births: any;
   status: any;
   statusText: any;
+  error: any;
   newBirth: any;
   updatedBirth: any;
   vLimit = 3;
@@ -50,8 +51,9 @@ export class RestclientComponent implements OnInit {
       .subscribe(
       data => {
         this.births = data.json();
-        this.status = data.status;
-        this.statusText = data.statusText;
+        this.status = "";
+        this.statusText = "";
+        this.error = false;
       });
     this.http.get(this.baseURL)
       .subscribe(
@@ -84,20 +86,7 @@ export class RestclientComponent implements OnInit {
         this.refresh();
       },
       err => {
-        this.status = err.status;
-        this.statusText = err.statusText;
-      });
-  }
-
-  public updateBirth(region, year, updatedRegion, updatedYear, updatedMen, updatedWomen, updatedTotalbirth): void {
-    this.updatedBirth = { "region": updatedRegion, "year": Number(updatedYear), "men": Number(updatedMen), "women": Number(updatedWomen), "totalbirth": Number(updatedTotalbirth) };
-    console.log(this.updatedBirth);
-    this.http.put(this.baseURL + '/' + region + '/' + year, this.updatedBirth)
-      .subscribe(
-      res => {
-        this.refresh();
-      },
-      err => {
+        this.error = true;
         this.status = err.status;
         this.statusText = err.statusText;
       });
@@ -171,7 +160,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -188,7 +177,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -205,7 +194,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -221,7 +210,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -238,7 +227,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -255,7 +244,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -271,7 +260,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -287,7 +276,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -304,7 +293,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -321,7 +310,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -337,7 +326,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -353,7 +342,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -370,7 +359,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -387,7 +376,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -403,7 +392,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -419,7 +408,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -436,7 +425,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -453,7 +442,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -469,7 +458,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -485,7 +474,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -501,7 +490,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -517,7 +506,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -533,7 +522,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -549,7 +538,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -565,7 +554,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -581,7 +570,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -597,7 +586,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -613,7 +602,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -629,7 +618,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -645,7 +634,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -661,7 +650,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -677,7 +666,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -694,7 +683,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -711,7 +700,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -727,7 +716,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -743,7 +732,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -759,7 +748,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -775,7 +764,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -791,7 +780,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -807,7 +796,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -823,7 +812,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -839,7 +828,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -855,7 +844,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -871,7 +860,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -887,7 +876,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -903,7 +892,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -920,7 +909,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -937,7 +926,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -954,7 +943,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -971,7 +960,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -988,7 +977,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1005,7 +994,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1022,7 +1011,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1039,7 +1028,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1055,7 +1044,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1071,7 +1060,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1087,7 +1076,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1103,7 +1092,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1119,7 +1108,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1135,7 +1124,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });
@@ -1151,7 +1140,7 @@ export class RestclientComponent implements OnInit {
         data => {
           this.successCallbackSearch(data);
           this.http.get(this.baseURL)
-          .subscribe(
+            .subscribe(
             data => {
               this.successCallback(data);
             });

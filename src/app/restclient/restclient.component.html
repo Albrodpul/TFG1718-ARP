@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 <h4>Spain Birth REST Client</h4>
-<p>{{status}} {{statusText}}</p>
 <div class="row centered">
   <div class="col s1">
     <button class="#4caf50 green btn-floating btn-large waves-effect waves-light" (click)="get()">
@@ -16,6 +15,12 @@
     <button class="#5d4037 brown darken-2 btn-floating btn-large waves-effect waves-light" (click)="loadBirth()">
       <i class="material-icons">restore</i>
     </button>
+  </div>
+</div>
+<!-- Error message -->
+<div class="row">
+  <div class="col s12 center-align">
+    <div *ngIf="error" class="card-panel #f44336 red z-depth-0">{{status}} {{statusText}}</div>
   </div>
 </div>
 <!-- Search -->
@@ -83,7 +88,8 @@
       <input type="number" class="form-control" #newBirthWomen placeholder="43432" />
     </td>
     <td>
-      <input type="number" class="form-control" #newBirthTotalBirth placeholder="473824" />
+      <input type="number" class="form-control" #newBirthTotalBirth placeholder="473824" disabled value="{{newBirthMen.value -- newBirthWomen.value}}"
+      />
     </td>
     <td colspan="2" class="center-align">
       <button class="btn-floating btn-large waves-effect waves-light blue" (click)="addBirth(
@@ -91,7 +97,7 @@
         newBirthYear.value, 
         newBirthMen.value, 
         newBirthWomen.value, 
-        newBirthTotalBirth.value
+        newBirthMen.value -- newBirthWomen.value
       ); 
       newBirthRegion.value=''; 
       newBirthYear.value='';
@@ -111,22 +117,9 @@
     <td>{{birth.totalbirth}}</td>
     <td>
       <!-- Actions -->
-      <button class="btn-floating btn-large waves-effect waves-light purple" (click)="updateBirth(
-        birth.region,
-        birth.year,
-        newBirthRegion.value, 
-        newBirthYear.value, 
-        newBirthMen.value, 
-        newBirthWomen.value, 
-        newBirthTotalBirth.value
-      ); 
-      newBirthRegion.value=''; 
-      newBirthYear.value='';
-      newBirthMen.value='';
-      newBirthWomen.value='';
-      newBirthTotalBirth.value=''">
+      <a class="btn-floating btn-large waves-effect waves-light purple" routerLink="/RESTClient/{{birth.region}}/{{birth.year}}">
         <i class="material-icons">mode_edit</i>
-      </button>
+      </a>
     </td>
     <td>
       <button class="btn-floating btn-large waves-effect waves-light #f44336 red" (click)="deleteBirth(
@@ -138,6 +131,5 @@
     </td>
   </tr>
 </table>
-<br />
 <br />
 <a routerLink="/data">« Previous</a>

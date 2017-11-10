@@ -17,6 +17,7 @@ import { AboutComponent } from './about/about.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DataComponent } from './data/data.component';
 import { RestclientComponent } from './restclient/restclient.component';
+import { BirtheditComponent } from './restclient/birthedit/birthedit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { RestclientComponent } from './restclient/restclient.component';
     AboutComponent,
     NavbarComponent, 
     DataComponent, 
-    RestclientComponent
+    RestclientComponent, BirtheditComponent
   ],
   imports: [
     BrowserModule,
