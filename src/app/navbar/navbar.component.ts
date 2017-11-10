@@ -7,12 +7,17 @@ import { AuthService } from './../auth/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  userImage: string;
-  
+  profile:any;
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.userImageChange$.subscribe(image => this.userImage = image);
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
   }
 
 }
