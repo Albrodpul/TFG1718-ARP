@@ -6,11 +6,11 @@ var path = require('path');
 var app = express();
 var cors = require("cors");
 var port = (process.env.PORT || 8080);
-var MongoClient = require('mongodb').MongoClient;
-var mdbURL = "mongodb://test:test@ds159344.mlab.com:59344/tfg1718-arp";
-var BASE_API_PATH = "/api/v1/spain-births";
-var db;
-var spainBirths = require("./api/spain-births/spain-births-api.js");
+var db = require('./db');
+var spainBirths = require("./api/spain-births/spain-births.js");
+//var api = require("./api/spain-births/spain-births-api.js");
+var baseApiUrl = "/api/v1/spain-births";
+
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
@@ -23,17 +23,9 @@ app.get('/', function (req, res) {
 
 // Start the app by listening on the default
 // Heroku port
-MongoClient.connect(mdbURL, { native_parser: true }, function (err, database) {
-  if (err) {
-    console.log("Cannot connect to DB: " + err);
-    process.exit(1);
-  }
-  db = database.collection("spain-births");
-  spainBirths.initial(app, db, BASE_API_PATH);
-  app.listen(port, () => {
-    console.log("Magic happens on port: " + port);
-  });
-});
+app.get(baseApiUrl, spainBirths.get);
+app.get(baseApiUrl+'/loadInitialData', spainBirths.loadInitialData);
+app.delete(baseApiUrl, spainBirths.deleteAll);
 
 app.get("/callback", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/index.html"));
@@ -57,6 +49,10 @@ app.get("/home", function (req, res) {
 
 app.get("/restclient", function (req, res) {
   res.sendFile(path.join(__dirname + "/dist/index.html"));
+});
+
+app.listen(port, () => {
+  console.log("Magic happens on port: " + port);
 });
 
 

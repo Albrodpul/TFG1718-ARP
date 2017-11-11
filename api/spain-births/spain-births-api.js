@@ -1,4 +1,5 @@
-var exports = module.exports = {};
+
+/*var exports = module.exports = {};
 var functions = require("./functions");
 var fs = require("fs");
 var csvjson = require('csvjson');
@@ -68,7 +69,7 @@ exports.initial = function (app, db, BASE_API_PATH) {
                 db.insert(json, function(err, doc) {
                     if (err) throw err;
                 });
-            });*/
+            });
             console.log("INFO: Inserted");
             //response.sendStatus(200);
             response.sendStatus(200, BASE_API_PATH + "/");
@@ -391,4 +392,4 @@ exports.initial = function (app, db, BASE_API_PATH) {
             });
         }
     });
-}
+}*/
