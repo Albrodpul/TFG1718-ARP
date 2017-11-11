@@ -1249,7 +1249,6 @@ export class RestclientComponent implements OnInit {
     }
     this.texto+="Has subido "+lines.length+" datos nuevos";
     window.alert(this.texto);   
-
   }
   
 
