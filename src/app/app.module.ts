@@ -18,6 +18,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DataComponent } from './data/data.component';
 import { RestclientComponent } from './restclient/restclient.component';
 import { BirtheditComponent } from './restclient/birthedit/birthedit.component';
+import { GeochartComponent } from './data/geochart/geochart.component';
+import { CorechartComponent } from './data/corechart/corechart.component';
+import { HighchartsComponent } from './data/highcharts/highcharts.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +30,13 @@ import { BirtheditComponent } from './restclient/birthedit/birthedit.component';
     AboutComponent,
     CallbackComponent,
     AboutComponent,
-    NavbarComponent, 
-    DataComponent, 
-    RestclientComponent, BirtheditComponent
+    NavbarComponent,
+    DataComponent,
+    RestclientComponent,
+    BirtheditComponent,
+    GeochartComponent,
+    CorechartComponent,
+    HighchartsComponent
   ],
   imports: [
     BrowserModule,
