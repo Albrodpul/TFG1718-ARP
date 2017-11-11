@@ -1192,7 +1192,6 @@ export class RestclientComponent implements OnInit {
     var fromList = [];
     var toList = [];
     var page = Math.ceil((listAux.length) / (this.sLimit));
-    console.log("Página: "+page+", Longitud lista: "+listAux.length+", Límite: "+this.sLimit);
     for (var i = 1; i <= page; i++) {
       offsetList.push(i);
     }
