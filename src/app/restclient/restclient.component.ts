@@ -71,7 +71,6 @@ export class RestclientComponent implements OnInit {
     this.http.get(this.baseURL)
       .subscribe(
       data => {
-        console.log(data.json());
         this.successCallback(data);
       });
   }

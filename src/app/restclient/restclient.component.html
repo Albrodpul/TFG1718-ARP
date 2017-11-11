@@ -34,7 +34,7 @@
   <div class="col s1">
     <select materialize="material_select" [materializeSelectOptions]="offsetList" #offset [(ngModel)]="offsets" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
       <option selected value="">Page</option>
-      <option *ngFor="let o of offsetList" value="{{o}}">{{o}}</option>
+      <option *ngFor="let o of offsetList | filterUnique" value="{{o}}">{{o}}</option>
     </select>
   </div>
   <div class="col s2 offset-s4">
@@ -46,19 +46,19 @@
   <div class="col s1">
     <select materialize="material_select" [materializeSelectOptions]="yearList" #year [(ngModel)]="years" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
       <option value="">Year</option>
-      <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+      <option *ngFor="let y of yearList | filterUnique" value="{{y}}">{{y}}</option>
     </select>
   </div>
   <div class="col s1">
     <select materialize="material_select" [materializeSelectOptions]="fromList" #from [(ngModel)]="froms" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
       <option value="">From</option>
-      <option *ngFor="let f of fromList" value="{{f}}">{{f}}</option>
+      <option *ngFor="let f of fromList | filterUnique" value="{{f}}">{{f}}</option>
     </select>
   </div>
   <div class="col s1">
     <select materialize="material_select" [materializeSelectOptions]="toList" #to [(ngModel)]="tos" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
       <option value="">To</option>
-      <option *ngFor="let t of toList" value="{{t}}">{{t}}</option>
+      <option *ngFor="let t of toList | filterUnique" value="{{t}}">{{t}}</option>
     </select>
   </div>
 </div>
