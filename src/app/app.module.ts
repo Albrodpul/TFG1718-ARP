@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { MaterializeModule } from 'angular2-materialize';
 
-import { AppComponent } from './app.component';
+import { AppComponent, FilterPipe } from './app.component';
 import { ROUTES } from './app.routes';
 
 import { HomeComponent } from './home/home.component';
@@ -36,7 +36,8 @@ import { HighchartsComponent } from './data/highcharts/highcharts.component';
     BirtheditComponent,
     GeochartComponent,
     CorechartComponent,
-    HighchartsComponent
+    HighchartsComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

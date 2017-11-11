@@ -23,36 +23,55 @@ export class RestclientComponent implements OnInit {
     return this.baseURL;
   }
 
+  /* Datos de la tabla */
   births: any;
+  /* Códigos de estado de errores */
   status: any;
   statusText: any;
+  /* Indica si debe o no salir el mensaje de error */
   error: any;
+  /* Nuevo dato a introducir */
   newBirth: any;
-  updatedBirth: any;
+  /* Límite por defecto */
   vLimit = 3;
+  /* Nuevo límite a modificar para cambiar los select */
   sLimit = 3;
-  vOffset: any;
-  vOffset2: any;
+  /* Listas que contienen los objetos de los select */
   limitList = [3, 4, 5];
   offsetList: any;
   regionList: any;
   yearList: any;
   fromList: any;
   toList: any;
-
+  /* Indicadores para resetear los select */
+  limits: any;
+  offsets: any;
+  regions: any;
+  years: any;
+  froms: any;
+  tos: any;
 
   public refresh(): void {
+    console.log("Refreshing...");
     this.http.get(this.baseURL + '?limit=' + this.vLimit)
       .subscribe(
       data => {
+        this.sLimit = 3;
         this.births = data.json();
         this.status = "";
         this.statusText = "";
         this.error = false;
+        this.limits = "";
+        this.offsets = "";
+        this.regions = "";
+        this.years = "";
+        this.froms = "";
+        this.tos = "";
       });
     this.http.get(this.baseURL)
       .subscribe(
       data => {
+        console.log(data.json());
         this.successCallback(data);
       });
   }
@@ -104,16 +123,23 @@ export class RestclientComponent implements OnInit {
   }
 
   public search(limit, offset, region, year, from, to): void {
+    var vOffset;
+    var vOffset2;
     if (offset) {
-      this.vOffset = (offset - 1) * this.vLimit;
-      this.vOffset2 = (offset - 1) * limit;
+      vOffset = (offset - 1) * this.vLimit;
+      vOffset2 = (offset - 1) * limit;
     } else {
-      this.vOffset = 0;
-      this.vOffset2 = 0;
+      vOffset = 0;
+      vOffset2 = 0;
     }
     //no hay búsqueda
     if (!region && !year && !limit && !offset && !from && !to) {
       this.refresh();
+      this.http.get(this.baseURL)
+      .subscribe(
+      data => {
+        this.successCallback(data);
+      });      
     }
     //búsqueda de región
     else if (region && !year && !limit && !offset && !from && !to) {
@@ -149,7 +175,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región y offset
     else if (region && !year && !limit && offset && !from && !to) {
-      this.http.get(this.baseURL + '/' + region + '?limit=' + limit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + region + '?limit=' + limit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -166,7 +192,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda de región, límite y offset
     else if (region && limit && !year && !from && !to && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '/' + region + '?limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + region + '?limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -199,7 +225,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, from y offset
     else if (region && from && !year && !limit && !to && offset) {
-      this.http.get(this.baseURL + '/' + region + '?from=' + from + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + region + '?from=' + from + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -233,7 +259,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda de región, from, límite y offset
     else if (region && from && !year && limit && !to && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '/' + region + '?from=' + from + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + region + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -265,7 +291,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, to y offset
     else if (region && to && !year && !from && !limit && offset) {
-      this.http.get(this.baseURL + '/' + region + '?to=' + to + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + region + '?to=' + to + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -299,7 +325,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda de región, to, limit y offset
     else if (region && to && !year && !from && limit && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '/' + region + '?to=' + to + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + region + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -331,7 +357,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, from, to y offset
     else if (region && from && to && !limit && !year && offset) {
-      this.http.get(this.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -365,7 +391,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda de región, from, to, limit y offset
     else if (region && from && to && limit && !year && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -397,7 +423,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de año y offset
     else if (year && !region && !limit && !from && !to && offset) {
-      this.http.get(this.baseURL + '/' + year + '?limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + year + '?limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -431,7 +457,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda de año, límite y offset
     else if (year && limit && !region && !from && !to && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '/' + year + '?limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + year + '?limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -463,7 +489,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de año, from y offset
     else if (year && from && !region && !limit && !to && offset) {
-      this.http.get(this.baseURL + '/' + year + '?from=' + from + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + year + '?from=' + from + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -495,7 +521,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de año, from, limit y offset
     else if (year && from && !region && limit && !to && offset) {
-      this.http.get(this.baseURL + '/' + year + '?from=' + from + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + year + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -527,7 +553,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de año, to y offset
     else if (year && to && !region && !from && !limit && offset) {
-      this.http.get(this.baseURL + '/' + year + '?to=' + to + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + year + '?to=' + to + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -559,7 +585,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de año, to, limit y offset
     else if (year && to && !region && !from && limit && offset) {
-      this.http.get(this.baseURL + '/' + year + '?to=' + to + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + year + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -591,7 +617,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de año, from, to y offset
     else if (year && from && to && !limit && !region && offset) {
-      this.http.get(this.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -623,7 +649,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de año, from, to, limit y offset
     else if (year && from && to && limit && !region && offset) {
-      this.http.get(this.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -655,7 +681,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, año y offset
     else if (region && year && !limit && !from && !to && offset) {
-      this.http.get(this.baseURL + '/' + region + '/' + year + '?limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + region + '/' + year + '?limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -689,7 +715,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda de región, año, límite y offset
     else if (region && year && limit && !from && !to && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '/' + region + '/' + year + '?limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + region + '/' + year + '?limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -721,7 +747,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, año, from y offset
     else if (region && year && !limit && from && !to && offset) {
-      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -753,7 +779,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, año, from, limit y offset
     else if (region && year && limit && from && !to && offset) {
-      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -785,7 +811,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, año, to y offset
     else if (region && year && !limit && !from && to && offset) {
-      this.http.get(this.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -817,7 +843,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, año, to, limit y offset
     else if (region && year && limit && !from && to && offset) {
-      this.http.get(this.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -849,7 +875,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, año, from, to y offset
     else if (region && year && !limit && from && to && offset) {
-      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' +vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -881,7 +907,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, año, from, to, limit y offset
     else if (region && year && limit && from && to && offset) {
-      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -915,7 +941,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda con límite y offset
     else if (limit && !region && !year && !from && !to && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '?limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '?limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -949,7 +975,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda con límite, from y offset
     else if (limit && !region && !year && from && !to && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '?from=' + from + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -983,7 +1009,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda con límite, to y offset
     else if (limit && !region && !year && !from && to && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '?to=' + to + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -1017,7 +1043,7 @@ export class RestclientComponent implements OnInit {
     //búsqueda con límite, from, to y offset
     else if (limit && !region && !year && from && to && offset) {
       this.sLimit = limit;
-      this.http.get(this.baseURL + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + this.vOffset2)
+      this.http.get(this.baseURL + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -1049,7 +1075,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda con from y offset
     else if (from && !region && !year && !limit && !to && offset) {
-      this.http.get(this.baseURL + '?from=' + from + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '?from=' + from + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -1081,7 +1107,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda con to y offset
     else if (!limit && !region && !year && !from && to && offset) {
-      this.http.get(this.baseURL + '?to=' + to + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '?to=' + to + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -1113,7 +1139,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda con from, to y offset
     else if (!limit && !region && !year && from && to && offset) {
-      this.http.get(this.baseURL + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -1129,7 +1155,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda con offset
     else if (!limit && !region && !year && !from && !to && offset) {
-      this.http.get(this.baseURL + '?limit=' + this.vLimit + '&offset=' + this.vOffset)
+      this.http.get(this.baseURL + '?limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -1164,19 +1190,24 @@ export class RestclientComponent implements OnInit {
     var offsetList = [];
     var regionList = [];
     var yearList = [];
+    var fromList = [];
+    var toList = [];
     var page = Math.ceil((listAux.length) / (this.sLimit));
+    console.log("Página: "+page+", Longitud lista: "+listAux.length+", Límite: "+this.sLimit);
     for (var i = 1; i <= page; i++) {
       offsetList.push(i);
     }
     for (var j = 0; j < listAux.length; j++) {
       regionList.push(listAux[j].region);
       yearList.push(listAux[j].year);
+      fromList.push(listAux[j].year);
+      toList.push(listAux[j].year);
     }
     this.offsetList = offsetList;
     this.regionList = regionList;
     this.yearList = yearList;
-    this.fromList = yearList;
-    this.toList = yearList;
+    this.fromList = fromList;
+    this.toList = toList;
   }
 
 
