@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {MaterializeDirective,MaterializeAction} from "angular2-materialize";
 
-import { Observable } from 'rxjs/Observable';
+declare var Materialize:any;
 
 @Component({
   selector: 'app-restclient',
@@ -50,8 +51,6 @@ export class RestclientComponent implements OnInit {
   years: any;
   froms: any;
   tos: any;
-  /* Variable para el informe */
-  texto: any;
 
   public refresh(): void {
     console.log("Refreshing...");
@@ -1209,6 +1208,7 @@ export class RestclientComponent implements OnInit {
     this.fromList = fromList;
     this.toList = toList;
   }
+ 
 
   public convertFile = () => {
     console.log("Inserting CSV...");
@@ -1223,7 +1223,7 @@ export class RestclientComponent implements OnInit {
       var json = this.csvJSON(text);
     };
     reader.readAsText(file);
-    this.texto="Has subido un fichero .CSV de "+file.size+"Bytes\n";
+    Materialize.toast("Has subido un fichero .CSV de "+file.size+"Bytes",4000);
   }
 
   public csvJSON(csv): void {
@@ -1246,9 +1246,9 @@ export class RestclientComponent implements OnInit {
       totalbirth = Number(currentline[4]);
       this.addBirth(region,year,men,women,totalbirth);
     }
-    this.texto+="Has subido "+lines.length+" datos nuevos";
-    window.alert(this.texto);   
+    Materialize.toast("Has subido "+lines.length+" datos nuevos",4000);
   }
+
   
 
   constructor(public http: Http) { }
