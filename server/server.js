@@ -5,7 +5,7 @@ var helmet = require("helmet");
 var app = express();
 var cors = require("cors");
 var port = (process.env.PORT || 8080);
-var routes = require("./server/routes.js");
+var routes = require("./routes.js");
 var mongoose = require('mongoose');
 
 
@@ -15,7 +15,7 @@ app.use(helmet()); //improve security
 
 // Run the app by serving the static files
 // in the dist directory
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/../dist'));
 
 // For all GET requests, send back index.html
 app.use("/",routes);
