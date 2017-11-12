@@ -1177,12 +1177,14 @@ export class RestclientComponent implements OnInit {
     this.births = data.json();
     this.status = data.status;
     this.statusText = data.statusText;
+    this.error = false;
   }
 
   public errorCallbackSearch(err): void {
     this.births = [];
     this.status = err.status;
     this.statusText = err.statusText;
+    this.error = true;
   }
 
   public successCallback(data): void {

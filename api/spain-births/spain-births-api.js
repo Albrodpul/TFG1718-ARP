@@ -176,11 +176,11 @@ exports.initial = function (app, db, BASE_API_PATH) {
             console.log("WARNING: New POST request to /spain-births/ without birth, sending 400...");
             response.sendStatus(400); // bad request
         } else {
-            console.log("INFO: New POST request to /contacts with body: " + JSON.stringify(newBirth, 2, null));
+            console.log("INFO: New POST request to /spain-births/ with body: " + JSON.stringify(newBirth, 2, null));
             if (!newBirth.region || !newBirth.year || !newBirth.men || !newBirth.women || !newBirth.totalbirth || Object.keys(newBirth).length !== 5 ||
                 newBirth.region === "undefined" || newBirth.year === "undefined" || newBirth.men === "undefined" || newBirth.women === "undefined" || newBirth.totalbirth === "undefined" ||
                 !isNaN(newBirth.region) || isNaN(newBirth.year) || isNaN(newBirth.men) || isNaN(newBirth.women) || isNaN(newBirth.totalbirth)) {
-                console.log("WARNING: The contact " + JSON.stringify(newBirth, 2, null) + " is not well-formed, sending 422...");
+                console.log("WARNING: The birth " + JSON.stringify(newBirth, 2, null) + " is not well-formed, sending 422...");
                 response.sendStatus(422); // unprocessable entity
             } else {
                 db.find({ region: newBirth.region, year: newBirth.year }).toArray(function (err, births) {
@@ -197,7 +197,7 @@ exports.initial = function (app, db, BASE_API_PATH) {
                             console.log("WARNING: The birth " + JSON.stringify(newBirth, 2, null) + " already exist, sending 409...");
                             response.sendStatus(409); // conflict
                         } else {
-                            console.log("INFO: Adding contact " + JSON.stringify(newBirth, 2, null));
+                            console.log("INFO: Adding birth " + JSON.stringify(newBirth, 2, null));
                             db.insert(newBirth);
                             response.sendStatus(201); // created
                         }
@@ -250,7 +250,7 @@ exports.initial = function (app, db, BASE_API_PATH) {
         var region = request.params.region;
         var year = request.params.year;
         if (!updatedBirth || updatedBirth.region != region || updatedBirth.year != year) {
-            console.log("WARNING: New PUT request to /contacts/ without contact, sending 400...");
+            console.log("WARNING: New PUT request to /spain-births/ without contact, sending 400...");
             response.sendStatus(400); // bad request
         } else {
             console.log("INFO: New PUT request to /spain-births/" + region + "/" + year + " with data " + JSON.stringify(updatedBirth, 2, null));
@@ -315,7 +315,7 @@ exports.initial = function (app, db, BASE_API_PATH) {
         var region = request.params.region;
         var year = request.params.region;
         if (!region || !year) {
-            console.log("WARNING: New DELETE request to /spain-births/:region without name, sending 400...");
+            console.log("WARNING: New DELETE request to /spain-births/" + region + " without region, sending 400...");
             response.sendStatus(400); // bad request
         } else {
             if (isNaN(region)) {
@@ -367,10 +367,10 @@ exports.initial = function (app, db, BASE_API_PATH) {
         var region = request.params.region;
         var year = request.params.year;
         if (!region) {
-            console.log("WARNING: New DELETE request to /spain-births/:region without name, sending 400...");
+            console.log("WARNING: New DELETE request to /spain-births/"+region+"/"+year+" without region, sending 400...");
             response.sendStatus(400); // bad request
         } else {
-            console.log("INFO: New DELETE request to /spain-births/" + region + year);
+            console.log("INFO: New DELETE request to /spain-births/" + region +"/" + year);    
             db.remove({
                 region: region,
                 year: Number(year)
@@ -382,7 +382,7 @@ exports.initial = function (app, db, BASE_API_PATH) {
                 } else {
                     console.log("INFO: Birth removed: " + region + " " + year);
                     if (birthRemoved.n !== 0) {
-                        console.log("INFO: The birth with region " + region + year + " has been succesfully deleted, sending 204...");
+                        console.log("INFO: The birth with region " + region +" "+ year + " has been succesfully deleted, sending 204...");
                         response.sendStatus(204); // no content
                     } else {
                         console.log("WARNING: There are no birth to delete");
