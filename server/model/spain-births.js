@@ -8,6 +8,3 @@ var SpainBirths = new mongoose.Schema({
 });
 
 mongoose.model('spain-births', SpainBirths);
-mongoose.connect('mongodb://test:test@ds159344.mlab.com:59344/tfg1718-arp');
-
-console.log('Mongoose and MongoDB are connected');

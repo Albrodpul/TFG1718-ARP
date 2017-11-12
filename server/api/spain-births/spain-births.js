@@ -1,5 +1,6 @@
+var spainBirthsModel = require("../../model/spain-births");
 require('mongoose').model('spain-births');
-var functions = require("./functions");
+var functions = require("./functions.js");
 var mongoose = require('mongoose');
 var SpainBirths = mongoose.model('spain-births');
 var csvjson = require('csvjson');
