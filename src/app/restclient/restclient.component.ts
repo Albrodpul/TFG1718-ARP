@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {MaterializeDirective,MaterializeAction} from "angular2-materialize";
 
-import { Observable } from 'rxjs/Observable';
+declare var Materialize:any;
 
 @Component({
   selector: 'app-restclient',
@@ -135,10 +136,10 @@ export class RestclientComponent implements OnInit {
     if (!region && !year && !limit && !offset && !from && !to) {
       this.refresh();
       this.http.get(this.baseURL)
-      .subscribe(
-      data => {
-        this.successCallback(data);
-      });      
+        .subscribe(
+        data => {
+          this.successCallback(data);
+        });
     }
     //búsqueda de región
     else if (region && !year && !limit && !offset && !from && !to) {
@@ -874,7 +875,7 @@ export class RestclientComponent implements OnInit {
     }
     //búsqueda de región, año, from, to y offset
     else if (region && year && !limit && from && to && offset) {
-      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' +vOffset)
+      this.http.get(this.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.vLimit + '&offset=' + vOffset)
         .subscribe(
         data => {
           this.successCallbackSearch(data);
@@ -1207,7 +1208,45 @@ export class RestclientComponent implements OnInit {
     this.fromList = fromList;
     this.toList = toList;
   }
+ 
 
+  public convertFile = () => {
+    console.log("Inserting CSV...");
+    var file = (<HTMLInputElement>document.getElementById('file-upload')).files[0];
+    const input = document.getElementById('file-upload');
+    const reader = new FileReader();
+    reader.onload = () => {
+      let text = reader.result;
+
+      //convert text to json here
+      var json = this.csvJSON(text);
+    };
+    reader.readAsText(file);
+    Materialize.toast("Has subido un fichero .CSV de "+file.size+"Bytes",4000);
+  }
+
+  public csvJSON(csv): void {
+    var line = csv.split("\n");
+    var lines = line.slice(0,line.length-1);
+    var header = lines[0].split(";");
+    for (var i = 1; i < lines.length; i++) {
+      var region:string;
+      var year:number;
+      var men:number;
+      var women:number;
+      var totalbirth:number;
+      var currentline = lines[i].split(";");
+      region = currentline[0];
+      year = Number(currentline[1]);
+      men = Number(currentline[2]);
+      women = Number(currentline[3]);
+      totalbirth = Number(currentline[4]);
+      this.addBirth(region,year,men,women,totalbirth);
+    }
+    Materialize.toast("Has subido "+lines.length+" datos nuevos",4000);
+  }
+
+  
 
   constructor(public http: Http) { }
 

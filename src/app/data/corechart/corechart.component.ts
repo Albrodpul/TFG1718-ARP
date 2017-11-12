@@ -12,19 +12,18 @@ export class CorechartComponent implements OnInit {
   port = window.location.port;
   baseURL = this.getUrl();
   public getUrl(): string {
-    console.log(this.port);
     if (this.port == '4200') {
       this.baseURL = 'http://localhost:8080/api/v1/spain-births';
     } else {
       this.baseURL = '../api/v1/spain-births';
     }
-    console.log(this.baseURL);
     return this.baseURL;
   }
 
   constructor(public http: Http) { }
 
   ngOnInit() {
+    console.log("Corechart Component initialized");
     google.charts.load('current', {
       'packages': ['corechart']
     });
@@ -51,7 +50,6 @@ export class CorechartComponent implements OnInit {
           }
 
           var data = google.visualization.arrayToDataTable(dataForWidget);
-          console.log("Success!");
 
           var options = {
             title: 'Evolution of men births vs women births in Spain',
