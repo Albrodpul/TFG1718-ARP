@@ -1214,7 +1214,6 @@ export class RestclientComponent implements OnInit {
     console.log("Inserting CSV...");
     var file = (<HTMLInputElement>document.getElementById('file-upload')).files[0];
     const input = document.getElementById('file-upload');
-
     const reader = new FileReader();
     reader.onload = () => {
       let text = reader.result;
@@ -1230,7 +1229,6 @@ export class RestclientComponent implements OnInit {
     var line = csv.split("\n");
     var lines = line.slice(0,line.length-1);
     var header = lines[0].split(";");
-    console.log(header);
     for (var i = 1; i < lines.length; i++) {
       var region:string;
       var year:number;
@@ -1238,7 +1236,6 @@ export class RestclientComponent implements OnInit {
       var women:number;
       var totalbirth:number;
       var currentline = lines[i].split(";");
-      console.log(currentline);
       region = currentline[0];
       year = Number(currentline[1]);
       men = Number(currentline[2]);
