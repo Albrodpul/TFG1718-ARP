@@ -39,37 +39,26 @@ module.exports = {
                 response.end();
             }
         });
+        var json = [];
         var data = fs.readFileSync(path.join(__dirname, 'spain-births.csv'), { encoding: 'utf-8' });
         var options = {
             delimiter: ';' // optional 
         };
         var content = csvjson.toObject(data, options);
-        console.log(content);
         content.forEach(function (element) {
-            console.log("Contenido: " + element);
-            new SpainBirths({
+            var datos = {
                 region: element.region,
                 year: Number(element.year),
                 men: Number(element.men),
                 women: Number(element.women),
                 totalbirth: Number(element.totalbirth)
-            }).save(function (err) {
-                if (err) {
-                    response.status(504);
-                    response.end(err);
-                } else {
-                    console.log("INFO: Inserted" + element.region);
-                    response.end();
-                }
-            });
-            /*fs.readFile('./public/api/spain-births/spain-births.json', 'utf8', (err, content) => {
-                if (err) throw err;
-                var json = JSON.parse(content);
-                console.log(json);
-                db.insert(json, function(err, doc) {
-                    if (err) throw err;
-                });
-            });*/
+            };
+            json.push(datos);
+        });   
+        console.log(json);     
+        SpainBirths.insertMany(json, function (err, doc) {
+            if (err) throw err;
+            
         });
     },
     // GET REGION OR YEAR

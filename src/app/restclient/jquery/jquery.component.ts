@@ -54,7 +54,6 @@ export class JqueryComponent implements OnInit {
     this.http.get(this.url)
       .subscribe(
         data => {
-        console.log(data);
         this.births = data.json();
         this.status = data.status;
         this.statusText = data.statusText;
@@ -71,6 +70,7 @@ export class JqueryComponent implements OnInit {
     this.http.get(this.baseURL+"/loadInitialData")
     .subscribe(
       data => {
+        this.refresh();
         this.refresh();
       });
   }

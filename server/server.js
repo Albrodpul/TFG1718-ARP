@@ -21,6 +21,7 @@ app.use(express.static(__dirname + '/../dist'));
 app.use("/",routes);
 
 // Connect to MongoDB using Mongoose
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://test:test@ds159344.mlab.com:59344/tfg1718-arp',{ useMongoClient: true });
 console.log('Mongoose and MongoDB are connected');
 

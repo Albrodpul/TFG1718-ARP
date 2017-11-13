@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import {MaterializeDirective,MaterializeAction} from "angular2-materialize";
+import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-declare var Materialize:any;
+declare var Materialize: any;
 
 @Component({
   selector: 'app-restclient',
@@ -84,10 +84,11 @@ export class RestclientComponent implements OnInit {
       });
   }
 
-  public loadBirth(): void {
-    this.http.get(this.baseURL + '/loadInitialData')
+  public loadInitialData(): void {
+    this.http.get(this.baseURL + "/loadInitialData")
       .subscribe(
       data => {
+        this.refresh();
         this.refresh();
       });
   }
@@ -1210,7 +1211,7 @@ export class RestclientComponent implements OnInit {
     this.fromList = fromList;
     this.toList = toList;
   }
- 
+
 
   public convertFile = () => {
     console.log("Inserting CSV...");
@@ -1224,31 +1225,31 @@ export class RestclientComponent implements OnInit {
       var json = this.csvJSON(text);
     };
     reader.readAsText(file);
-    Materialize.toast("Has subido un fichero .CSV de "+file.size+"Bytes",4000);
+    Materialize.toast("Has subido un fichero .CSV de " + file.size + "Bytes", 4000);
   }
 
   public csvJSON(csv): void {
     var line = csv.split("\n");
-    var lines = line.slice(0,line.length-1);
+    var lines = line.slice(0, line.length - 1);
     var header = lines[0].split(";");
     for (var i = 1; i < lines.length; i++) {
-      var region:string;
-      var year:number;
-      var men:number;
-      var women:number;
-      var totalbirth:number;
+      var region: string;
+      var year: number;
+      var men: number;
+      var women: number;
+      var totalbirth: number;
       var currentline = lines[i].split(";");
       region = currentline[0];
       year = Number(currentline[1]);
       men = Number(currentline[2]);
       women = Number(currentline[3]);
       totalbirth = Number(currentline[4]);
-      this.addBirth(region,year,men,women,totalbirth);
+      this.addBirth(region, year, men, women, totalbirth);
     }
-    Materialize.toast("Has subido "+lines.length+" datos nuevos",4000);
+    Materialize.toast("Has subido " + lines.length + " datos nuevos", 4000);
   }
 
-  
+
 
   constructor(public http: Http) { }
 
