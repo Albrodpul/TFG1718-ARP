@@ -44,7 +44,8 @@ router.get(baseApiUrl+'/loadInitialData', spainBirths.loadInitialData);
 router.get(baseApiUrl+"/:region", spainBirths.getRegionOrYear);
 router.get(baseApiUrl+"/:region/:year", spainBirths.getRegionYear);
 router.post(baseApiUrl,spainBirths.post);
-router.post(baseApiUrl+"/:region/:year",spainBirths.postRegion);
+router.post(baseApiUrl+"/:region",spainBirths.postRegion)
+router.post(baseApiUrl+"/:region/:year",spainBirths.postRegionYear);
 router.put(baseApiUrl,spainBirths.put);
 router.put(baseApiUrl+"/:region",spainBirths.putRegion);
 router.put(baseApiUrl+"/:year",spainBirths.putRegion);

@@ -250,7 +250,7 @@ module.exports = {
         var region = request.params.region;
         var year = request.params.year;
         if (!updatedBirth || updatedBirth.region != region || updatedBirth.year != year) {
-            console.log("WARNING: New PUT request to /spain-births/ without contact, sending 400...");
+            console.log("WARNING: New PUT request to /spain-births/ without birth, sending 400...");
             response.sendStatus(400); // bad request
         } else {
             console.log("INFO: New PUT request to /spain-births/" + region + "/" + year + " with data " + JSON.stringify(updatedBirth, 2, null));

@@ -21,6 +21,7 @@ import { BirtheditComponent } from './restclient/birthedit/birthedit.component';
 import { GeochartComponent } from './data/geochart/geochart.component';
 import { CorechartComponent } from './data/corechart/corechart.component';
 import { HighchartsComponent } from './data/highcharts/highcharts.component';
+import { JqueryComponent } from './restclient/jquery/jquery.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HighchartsComponent } from './data/highcharts/highcharts.component';
     GeochartComponent,
     CorechartComponent,
     HighchartsComponent,
-    FilterPipe
+    FilterPipe,
+    JqueryComponent
   ],
   imports: [
     BrowserModule,
