@@ -54,11 +54,13 @@ module.exports = {
                 totalbirth: Number(element.totalbirth)
             };
             json.push(datos);
-        });   
-        console.log(json);     
-        SpainBirths.insertMany(json, function (err, doc) {
+        });
+        console.log(json);
+        SpainBirths.insertMany(json, {
+            ordered: true
+        }, function (err, doc) {
             if (err) throw err;
-            
+
         });
     },
     // GET REGION OR YEAR
@@ -180,14 +182,9 @@ module.exports = {
                             console.log("WARNING: The birth " + JSON.stringify(newBirth, 2, null) + " already exist, sending 409...");
                             response.sendStatus(409); // conflict
                         } else {
-                            new SpainBirths({
-                                region: newBirth.region,
-                                year: Number(newBirth.year),
-                                men: Number(newBirth.men),
-                                women: Number(newBirth.women),
-                                totalbirth: Number(newBirth.totalbirth)
-                            })
-                                .save(function (err) {
+                            SpainBirths.collection.insert(newBirth,{
+                                ordered:true
+                            },function (err) {
                                     if (err) {
                                         response.status(504); //gateway timeout
                                         response.end(err);
