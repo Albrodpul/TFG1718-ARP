@@ -213,6 +213,37 @@ module.exports = {
         console.log("WARNING: New POST request to /spain-births/" + region + ", sending 405...");
         response.sendStatus(405); // method not allowed
     },
+    postFiles: function(req, res){
+        console.log("He llegado al server");
+        if (!req.files){
+            return res.status(400).send('No files were uploaded.');
+        }
+        var csv=req.files;
+        /*var data = fs.readFileSync(path.join(__dirname, 'spain-births.csv'), { encoding: 'utf-8' });
+        var options = {
+            delimiter: ';' // optional 
+        };
+        var content = csvjson.toObject(data, options);
+        content.forEach(function (element) {
+            var datos = {
+                region: element.region,
+                year: Number(element.year),
+                men: Number(element.men),
+                women: Number(element.women),
+                totalbirth: Number(element.totalbirth)
+            };
+            json.push(datos);
+        });
+        console.log(json);
+        SpainBirths.collection.insertMany(json, {
+            ordered: false
+        }, function (err, doc) {
+            if (err) throw err;
+
+        });*/
+        console.log(csv);
+        res.sendStatus(200);
+    },
     //PUT over a collection
     put: function (request, response, next) {
         console.log("WARNING: New PUT request to /spain-births, sending 405...");
