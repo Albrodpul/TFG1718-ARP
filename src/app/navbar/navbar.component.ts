@@ -11,15 +11,7 @@ export class NavbarComponent implements OnInit {
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
-    if (this.auth.isAuthenticated) {
-      if (this.auth.userProfile) {
-        this.profile = this.auth.userProfile;
-      } else {
-        this.auth.getProfile((err, profile) => {
-          this.profile = profile;
-        });
-      }
-    }
+
   }
 
 }
