@@ -115,23 +115,6 @@ export class JqueryComponent implements OnInit {
     )
   }
 
-  public csv(){
-    console.log("Inserting CSV...");
-    var file = (<HTMLInputElement>document.getElementById('file-upload')).files[0];
-    console.log(file);
-    this.http.post("http://localhost:8080/uploadfiles",file)
-    .subscribe(
-      data => {
-        console.log("No error");
-      },
-      err => {
-        this.status = err.status;
-        this.statusText = err.statusText;
-        console.log(err);
-      }
-    )
-  }
-
   constructor(public http: Http) { }
 
   ngOnInit() {

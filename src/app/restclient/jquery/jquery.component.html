@@ -53,10 +53,6 @@ newBirthWomen.value='';
 newBirthTotalBirth.value=''" class="btn">Put</button>
 <button (click)="delete()" class="btn">Delete</button>
 <button (click)="loadInitialData()" class="btn">Load Initial Data</button>
-<form action="/uploadfiles" method="POST" encType="multipart/form-data">
-  <input type="file" name="file" accept="*.csv" /><br/><br/>
-  <input type="submit" value="Upload Authors" />
-</form>
 <p>HTTP Status: {{status}} {{statusText}}</p>
 <br />
 <table border='1' rules="all" cellpadding="5" class="striped bordered centered highlight responsive-table">
