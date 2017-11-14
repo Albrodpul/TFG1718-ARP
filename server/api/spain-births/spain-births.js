@@ -56,8 +56,8 @@ module.exports = {
             json.push(datos);
         });
         console.log(json);
-        SpainBirths.insertMany(json, {
-            ordered: true
+        SpainBirths.collection.insertMany(json, {
+            ordered: false
         }, function (err, doc) {
             if (err) throw err;
 
