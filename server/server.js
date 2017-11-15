@@ -11,6 +11,8 @@ var mongoose = require('mongoose');
 
 app.use(cors()); // allow Cross-Origin Resource Sharing 
 app.use(bodyParser.json()); //use default json enconding/decoding
+app.use(bodyParser.text());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(helmet()); //improve security
 
 
