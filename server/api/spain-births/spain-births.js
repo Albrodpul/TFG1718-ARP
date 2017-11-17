@@ -63,35 +63,6 @@ module.exports = {
 
         });
     },
-    postFiles: function (request, response, next) {
-        var json = [];
-        var data = request.body;
-        var options = {
-            delimiter: ';' // optional 
-        };
-        var content = csvjson.toObject(data, options);
-        content.forEach(function (element) {
-            var datos = {
-                region: element.region,
-                year: Number(element.year),
-                men: Number(element.men),
-                women: Number(element.women),
-                totalbirth: Number(element.totalbirth)
-            };
-            json.push(datos);
-        });
-        console.log(json);
-        SpainBirths.collection.insertMany(json, {
-            ordered: false
-        }, function (err, doc) {
-            if (err) {
-                response.sendStatus(400);
-            } else {
-                response.sendStatus(200);
-            }
-
-        });
-    },
     // GET REGION OR YEAR
     getRegionOrYear: function (request, response, next) {
         var region = request.params.region;

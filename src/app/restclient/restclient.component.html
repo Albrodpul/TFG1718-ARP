@@ -43,25 +43,25 @@
   <div class="col s2 offset-s4">
     <select materialize="material_select" [materializeSelectOptions]="regionList" #region [(ngModel)]="regions" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
       <option value="">Region</option>
-      <option *ngFor="let r of regionList | filterUnique" value="{{r}}">{{r}}</option>
+      <option *ngFor="let r of (regionList | sortByString) | filterUnique" value="{{r}}">{{r}}</option>
     </select>
   </div>
   <div class="col s1">
     <select materialize="material_select" [materializeSelectOptions]="yearList" #year [(ngModel)]="years" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
       <option value="">Year</option>
-      <option *ngFor="let y of yearList | filterUnique" value="{{y}}">{{y}}</option>
+      <option *ngFor="let y of (yearList | sortByNumber) | filterUnique" value="{{y}}">{{y}}</option>
     </select>
   </div>
   <div class="col s1">
     <select materialize="material_select" [materializeSelectOptions]="fromList" #from [(ngModel)]="froms" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
       <option value="">From</option>
-      <option *ngFor="let f of fromList | filterUnique" value="{{f}}">{{f}}</option>
+      <option *ngFor="let f of (fromList | sortByNumber) | filterUnique" value="{{f}}">{{f}}</option>
     </select>
   </div>
   <div class="col s1">
     <select materialize="material_select" [materializeSelectOptions]="toList" #to [(ngModel)]="tos" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
       <option value="">To</option>
-      <option *ngFor="let t of toList | filterUnique" value="{{t}}">{{t}}</option>
+      <option *ngFor="let t of (toList | sortByNumber) | filterUnique" value="{{t}}">{{t}}</option>
     </select>
   </div>
 </div>
@@ -113,12 +113,13 @@
   </tr>
   <tr>
     <td colspan="5">
-      <textarea #payload id="textarea1" name="payload" class="materialize-textarea"></textarea>
+      <textarea #payload id="textarea1" name="payload" class="materialize-textarea" placeholder="region;year;men;women;totalbirth
+Andalucía;2009;3232;3232;3232"></textarea>
       <label for="textarea1">Textarea for CSV</label>
     </td>
     <td>
-      <button (click)="csvJSON(payload.value)" class="tooltipped btn-floating btn-large waves-effect waves-light blue" data-position="top"
-      data-delay="50" data-tooltip="Insert a .CSV text!">
+      <button (click)="csv(payload.value);payload.value=''" class="tooltipped btn-floating btn-large waves-effect waves-light blue" data-position="top"
+        data-delay="50" data-tooltip="Insert a .CSV text!">
         <i class="material-icons">add</i>
       </button>
     </td>
@@ -131,7 +132,7 @@
     </td>
   </tr>
   <!-- Data -->
-  <tr *ngFor="let birth of births" class="white z-depth-0">
+  <tr *ngFor="let birth of births | sort: 'year'" class="white z-depth-0">
     <td>{{birth.region}}</td>
     <td>{{birth.year}}</td>
     <td>{{birth.men}}</td>

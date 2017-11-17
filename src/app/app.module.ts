@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { MaterializeModule } from 'angular2-materialize';
 
-import { AppComponent, FilterPipe } from './app.component';
+import { AppComponent  } from './app.component';
 import { ROUTES } from './app.routes';
 
 import { HomeComponent } from './home/home.component';
@@ -22,6 +22,8 @@ import { GeochartComponent } from './data/geochart/geochart.component';
 import { CorechartComponent } from './data/corechart/corechart.component';
 import { HighchartsComponent } from './data/highcharts/highcharts.component';
 import { JqueryComponent } from './restclient/jquery/jquery.component';
+import { ArraySortByFieldPipe, ArraySortByNumberPipe, ArraySortByStringPipe } from './pipes/arraysort.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { JqueryComponent } from './restclient/jquery/jquery.component';
     CorechartComponent,
     HighchartsComponent,
     FilterPipe,
-    JqueryComponent
+    JqueryComponent,
+    ArraySortByFieldPipe, ArraySortByNumberPipe, ArraySortByStringPipe
   ],
   imports: [
     BrowserModule,

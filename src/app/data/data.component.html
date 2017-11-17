@@ -13,7 +13,7 @@
     <th class="white-text center-align">Women</th>
     <th class="white-text center-align">Total Birth</th>
   </tr>
-  <tr *ngFor="let birth of births" class="white z-depth-0">
+  <tr *ngFor="let birth of births | sort: 'year'" class="white z-depth-0">
     <td>{{birth.region}}</td>
     <td>{{birth.year}}</td>
     <td>{{birth.men}}</td>

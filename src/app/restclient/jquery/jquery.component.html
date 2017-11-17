@@ -28,7 +28,8 @@ URL:
 <p>CSV Payload: </p>
 <div class="row">
   <div class="input-field col s12">
-    <textarea #payload id="textarea1" name="payload" class="materialize-textarea"></textarea>
+    <textarea #payload id="textarea1" name="payload" class="materialize-textarea" placeholder="region;year;men;women;totalbirth
+Andalucía;2009;3232;3232;3232"></textarea>
     <label for="textarea1">Textarea for CSV</label>
   </div>
 </div>
@@ -75,7 +76,7 @@ newBirthTotalBirth.value=''" class="btn">Put</button>
     <th class="white-text center-align">Women</th>
     <th class="white-text center-align">Total Birth</th>
   </tr>
-  <tr *ngFor="let birth of births" class="white z-depth-0">
+  <tr *ngFor="let birth of births | sort: 'year'" class="white z-depth-0">
     <td>{{birth.region}}</td>
     <td>{{birth.year}}</td>
     <td>{{birth.men}}</td>

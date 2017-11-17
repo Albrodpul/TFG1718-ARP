@@ -50,7 +50,7 @@ export class CorechartComponent implements OnInit {
           }
 
           var data = google.visualization.arrayToDataTable(dataForWidget);
-
+          data.sort({column: 0, desc: true});
           var options = {
             title: 'Evolution of men births vs women births in Spain',
             hAxis: { title: 'Year', titleTextStyle: { color: '#333' } },

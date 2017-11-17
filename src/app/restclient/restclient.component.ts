@@ -14,7 +14,6 @@ export class RestclientComponent implements OnInit {
 
   port = window.location.port;
   baseURL = this.getUrl();
-  uploadURL = this.getUploadUrl();
 
   public getUrl(): string {
     if (this.port == '4200') {
@@ -24,15 +23,6 @@ export class RestclientComponent implements OnInit {
     }
     return this.baseURL;
   }
-
-  public getUploadUrl(): string {
-    if ( this.port == '4200'){
-      this.uploadURL = 'http://localhost:8080/upload';
-    }else{
-      this.uploadURL = '../upload';
-    }
-    return this.uploadURL;
-  } 
 
   /* Datos de la tabla */
   births: any;
@@ -1238,26 +1228,49 @@ export class RestclientComponent implements OnInit {
     Materialize.toast("Has subido un fichero .CSV de " + file.size + "Bytes", 4000);
   }
 
-  public csvJSON(payload): void {
-    var line = payload.split("\n");
+  public csvJSON(csv): void {
+    var line = csv.split("\n");
     var lines = line.slice(0, line.length - 1);
-    var text: string;
-    text = payload;
-    console.log(text);
-    this.http.post(this.uploadURL, text)
-      .subscribe(
-      res => {
-        this.status= res.status;
-        this.statusText=res.statusText;
-        this.refresh();
-      },
-      err => {
-        this.status = err.status;
-        this.statusText = err.statusText;
-      });
-    Materialize.toast("Has subido " + lines.length + " datos nuevos", 4000);
+    var header = lines[0].split(";");
+    for (var i = 1; i < lines.length; i++) {
+      var region: string;
+      var year: number;
+      var men: number;
+      var women: number;
+      var totalbirth: number;
+      var currentline = lines[i].split(";");
+      region = currentline[0];
+      year = Number(currentline[1]);
+      men = Number(currentline[2]);
+      women = Number(currentline[3]);
+      totalbirth = Number(currentline[4]);
+      this.addBirth(region, year, men, women, totalbirth);
+    }
+    Materialize.toast("Has subido " + i + " dato(s) nuevo(s)", 4000);
   }
 
+  public csv(payload): void {
+    if (payload != "") {
+      var line = payload.split("\n");
+      var lines = line.slice(1, line.length);
+      var header = lines[0].split(";");
+      for (var i = 0; i < lines.length; i++) {
+        var region: string;
+        var year: number;
+        var men: number;
+        var women: number;
+        var totalbirth: number;
+        var currentline = lines[i].split(";");
+        region = currentline[0];
+        year = Number(currentline[1]);
+        men = Number(currentline[2]);
+        women = Number(currentline[3]);
+        totalbirth = Number(currentline[4]);
+        this.addBirth(region, year, men, women, totalbirth);
+      }
+      Materialize.toast("Has subido " + i + " dato(s) nuevos", 4000);
+    }
+  }
 
 
   constructor(public http: Http) { }

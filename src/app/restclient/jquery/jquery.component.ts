@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
+declare var Materialize: any;
 
 @Component({
   selector: 'app-jquery',
@@ -13,7 +15,6 @@ export class JqueryComponent implements OnInit {
   port = window.location.port;
   url = this.getUrl();
   baseURL = this.getUrl();
-  uploadURL = this.getUploadUrl();
 
   public getUrl(): string {
     if (this.port == '4200') {
@@ -24,15 +25,6 @@ export class JqueryComponent implements OnInit {
       this.baseURL = '../api/v1/spain-births';
     }
     return this.url;
-  }
-
-  public getUploadUrl(): string {
-    if ( this.port == '4200'){
-      this.uploadURL = 'http://localhost:8080/upload';
-    }else{
-      this.uploadURL = '../upload';
-    }
-    return this.uploadURL;
   }
 
   births: any;
@@ -108,27 +100,55 @@ export class JqueryComponent implements OnInit {
       let text = reader.result;
 
       //convert text to json here
-      var json = this.csv(text);
+      var json = this.csvJSON(text);
     };
     reader.readAsText(file);
+    Materialize.toast("Has subido un fichero .CSV de " + file.size + "Bytes", 4000);
+  }
+
+  public csvJSON(csv): void {
+    var line = csv.split("\n");
+    var lines = line.slice(0, line.length - 1);
+    var header = lines[0].split(";");
+    for (var i = 1; i < lines.length; i++) {
+      var region: string;
+      var year: number;
+      var men: number;
+      var women: number;
+      var totalbirth: number;
+      var currentline = lines[i].split(";");
+      region = currentline[0];
+      year = Number(currentline[1]);
+      men = Number(currentline[2]);
+      women = Number(currentline[3]);
+      totalbirth = Number(currentline[4]);
+      this.post(region, year, men, women, totalbirth);
+    }
+    Materialize.toast("Has subido " + i + " dato(s) nuevo(s)", 4000);
   }
 
   public csv(payload): void {
-    var text: string;
-    text = payload;
-    console.log(text);
-    this.http.post(this.uploadURL, text)
-      .subscribe(
-      res => {
-        this.status= res.status;
-        this.statusText=res.statusText;
-        this.refresh();
-      },
-      err => {
-        this.status = err.status;
-        this.statusText = err.statusText;
-      });
-
+    if (payload != "") {
+      var line = payload.split("\n");
+      var lines = line.slice(1, line.length);
+      var header = lines[0].split(";");
+      console.log(lines);
+      for (var i = 0; i < lines.length; i++) {
+        var region: string;
+        var year: number;
+        var men: number;
+        var women: number;
+        var totalbirth: number;
+        var currentline = lines[i].split(";");
+        region = currentline[0];
+        year = Number(currentline[1]);
+        men = Number(currentline[2]);
+        women = Number(currentline[3]);
+        totalbirth = Number(currentline[4]);
+        this.post(region, year, men, women, totalbirth);
+      }
+    }
+    Materialize.toast("Has subido " + i + " dato(s) nuevo(s)", 4000);
   }
 
 
@@ -142,8 +162,7 @@ export class JqueryComponent implements OnInit {
       err => {
         this.status = err.status;
         this.statusText = err.statusText;
-      }
-      )
+      });
   }
 
   public delete(): void {
@@ -155,8 +174,7 @@ export class JqueryComponent implements OnInit {
       err => {
         this.status = err.status;
         this.statusText = err.statusText;
-      }
-      )
+      });
   }
 
   constructor(public http: Http) { }
@@ -165,3 +183,4 @@ export class JqueryComponent implements OnInit {
   }
 
 }
+

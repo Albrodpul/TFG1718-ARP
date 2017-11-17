@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+
 
 
 @Component({
@@ -23,14 +24,14 @@ export class DataComponent implements OnInit {
   }
 
   constructor(public http: Http) { }
-  
+
   ngOnInit() {
     console.log("Data Component Initialized");
     this.http.get(this.baseURL)
-    .subscribe(
-    data => {
-      this.births = data.json();
-    });    
+      .subscribe(
+      data => {
+        this.births = data.json();
+      });
   }
 
 }
