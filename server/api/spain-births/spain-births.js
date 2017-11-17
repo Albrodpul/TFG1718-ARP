@@ -63,6 +63,35 @@ module.exports = {
 
         });
     },
+    postFiles: function (request, response, next) {
+        var json = [];
+        var data = request.body;
+        var options = {
+            delimiter: ';' // optional 
+        };
+        var content = csvjson.toObject(data, options);
+        content.forEach(function (element) {
+            var datos = {
+                region: element.region,
+                year: Number(element.year),
+                men: Number(element.men),
+                women: Number(element.women),
+                totalbirth: Number(element.totalbirth)
+            };
+            json.push(datos);
+        });
+        console.log(json);
+        SpainBirths.collection.insertMany(json, {
+            ordered: false
+        }, function (err, doc) {
+            if (err) {
+                response.sendStatus(400);
+            } else {
+                response.sendStatus(200);
+            }
+
+        });
+    },
     // GET REGION OR YEAR
     getRegionOrYear: function (request, response, next) {
         var region = request.params.region;
@@ -182,18 +211,18 @@ module.exports = {
                             console.log("WARNING: The birth " + JSON.stringify(newBirth, 2, null) + " already exist, sending 409...");
                             response.sendStatus(409); // conflict
                         } else {
-                            SpainBirths.collection.insert(newBirth,{
-                                ordered:true
-                            },function (err) {
-                                    if (err) {
-                                        response.status(504); //gateway timeout
-                                        response.end(err);
-                                    } else {
-                                        console.log("INFO: Adding birth " + JSON.stringify(newBirth, 2, null));
-                                        response.sendStatus(201); // created
-                                        response.end();
-                                    }
-                                });
+                            SpainBirths.collection.insert(newBirth, {
+                                ordered: true
+                            }, function (err) {
+                                if (err) {
+                                    response.status(504); //gateway timeout
+                                    response.end(err);
+                                } else {
+                                    console.log("INFO: Adding birth " + JSON.stringify(newBirth, 2, null));
+                                    response.sendStatus(201); // created
+                                    response.end();
+                                }
+                            });
                         }
                     }
                 });

@@ -2,7 +2,7 @@
 <h4>Simple REST Client</h4>
 URL:
 <input [(ngModel)]="url" class="form-control" size="60" />
-<p>Payload:</p>
+<p>Input Payload:</p>
 <div class="row">
   <div class="input-field col s3">
     <input type="text" id="region" class="form-control" #newBirthRegion placeholder="Andalucia" />
@@ -23,6 +23,13 @@ URL:
   <div class="input-field col s3">
     <input type="number" id="total_birth" class="form-control" #newBirthTotalBirth placeholder="473824" />
     <label for="total_birth">Total Birth</label>
+  </div>
+</div>
+<p>CSV Payload: </p>
+<div class="row">
+  <div class="input-field col s12">
+    <textarea #payload id="textarea1" name="payload" class="materialize-textarea"></textarea>
+    <label for="textarea1">Textarea for CSV</label>
   </div>
 </div>
 <p>Method:</p>
@@ -52,7 +59,12 @@ newBirthMen.value='';
 newBirthWomen.value='';
 newBirthTotalBirth.value=''" class="btn">Put</button>
 <button (click)="delete()" class="btn">Delete</button>
-<button (click)="loadInitialData()" class="btn">Load Initial Data</button>
+<button (click)="loadInitialData()" class="btn">Load</button>
+<button (click)="csv(payload.value)" class="btn">CSV</button>
+<label for="file-upload" class="btn">
+  File
+</label>
+<input id="file-upload" type="file" (change)='convertFile()' materialize/>
 <p>HTTP Status: {{status}} {{statusText}}</p>
 <br />
 <table border='1' rules="all" cellpadding="5" class="striped bordered centered highlight responsive-table">
