@@ -1,41 +1,42 @@
-<app-navbar></app-navbar>
-<h4>Simple REST Client</h4>
-URL:
-<input [(ngModel)]="url" class="form-control" size="60" />
-<p>Input Payload:</p>
-<div class="row">
-  <div class="input-field col s3">
-    <input type="text" id="region" class="form-control" #newBirthRegion placeholder="Andalucia" />
-    <label for="region">Region</label>
+<!-- Signed Up -->
+<div *ngIf="auth.isAuthenticated()">
+  <h4>Simple REST Client</h4>
+  URL:
+  <input [(ngModel)]="url" class="form-control" size="60" />
+  <p>Input Payload:</p>
+  <div class="row">
+    <div class="input-field col s3">
+      <input type="text" id="region" class="form-control" #newBirthRegion placeholder="Andalucia" />
+      <label for="region">Region</label>
+    </div>
+    <div class="input-field col s2">
+      <input type="number" id="year" class="form-control" #newBirthYear placeholder="2009" />
+      <label for="year">Year</label>
+    </div>
+    <div class="input-field col s2">
+      <input type="number" id="men" class="form-control" #newBirthMen placeholder="43243" />
+      <label for="men">Men</label>
+    </div>
+    <div class="input-field col s2">
+      <input type="number" id="women" class="form-control" #newBirthWomen placeholder="43432" />
+      <label for="women">Women</label>
+    </div>
+    <div class="input-field col s3">
+      <input type="number" id="total_birth" class="form-control" #newBirthTotalBirth placeholder="473824" />
+      <label for="total_birth">Total Birth</label>
+    </div>
   </div>
-  <div class="input-field col s2">
-    <input type="number" id="year" class="form-control" #newBirthYear placeholder="2009" />
-    <label for="year">Year</label>
-  </div>
-  <div class="input-field col s2">
-    <input type="number" id="men" class="form-control" #newBirthMen placeholder="43243" />
-    <label for="men">Men</label>
-  </div>
-  <div class="input-field col s2">
-    <input type="number" id="women" class="form-control" #newBirthWomen placeholder="43432" />
-    <label for="women">Women</label>
-  </div>
-  <div class="input-field col s3">
-    <input type="number" id="total_birth" class="form-control" #newBirthTotalBirth placeholder="473824" />
-    <label for="total_birth">Total Birth</label>
-  </div>
-</div>
-<p>CSV Payload: </p>
-<div class="row">
-  <div class="input-field col s12">
-    <textarea #payload id="textarea1" name="payload" class="materialize-textarea" placeholder="region;year;men;women;totalbirth
+  <p>CSV Payload: </p>
+  <div class="row">
+    <div class="input-field col s12">
+      <textarea #payload id="textarea1" name="payload" class="materialize-textarea" placeholder="region;year;men;women;totalbirth
 Andalucía;2009;3232;3232;3232"></textarea>
-    <label for="textarea1">Textarea for CSV</label>
+      <label for="textarea1">Textarea for CSV</label>
+    </div>
   </div>
-</div>
-<p>Method:</p>
-<button (click)="get()" class="btn">Get</button>
-<button (click)="post(
+  <p>Method:</p>
+  <button (click)="get()" class="btn">Get</button>
+  <button (click)="post(
   newBirthRegion.value, 
   newBirthYear.value, 
   newBirthMen.value, 
@@ -47,7 +48,7 @@ newBirthYear.value='';
 newBirthMen.value='';
 newBirthWomen.value='';
 newBirthTotalBirth.value=''" class="btn">Post</button>
-<button (click)="put(
+  <button (click)="put(
   newBirthRegion.value, 
   newBirthYear.value, 
   newBirthMen.value, 
@@ -59,32 +60,38 @@ newBirthYear.value='';
 newBirthMen.value='';
 newBirthWomen.value='';
 newBirthTotalBirth.value=''" class="btn">Put</button>
-<button (click)="delete()" class="btn">Delete</button>
-<button (click)="loadInitialData()" class="btn">Load</button>
-<button (click)="csv(payload.value)" class="btn">CSV</button>
-<label for="file-upload" class="btn">
-  File
-</label>
-<input id="file-upload" type="file" (change)='convertFile()' materialize/>
-<p>HTTP Status: {{status}} {{statusText}}</p>
-<br />
-<table border='1' rules="all" cellpadding="5" class="striped bordered centered highlight responsive-table">
-  <tr class="#42a5f5 blue lighten-1 z-depth-0">
-    <th class="white-text center-align">Region</th>
-    <th class="white-text center-align">Year</th>
-    <th class="white-text center-align">Men</th>
-    <th class="white-text center-align">Women</th>
-    <th class="white-text center-align">Total Birth</th>
-  </tr>
-  <tr *ngFor="let birth of births | sort: 'year'" class="white z-depth-0">
-    <td>{{birth.region}}</td>
-    <td>{{birth.year}}</td>
-    <td>{{birth.men}}</td>
-    <td>{{birth.women}}</td>
-    <td>{{birth.totalbirth}}</td>
-  </tr>
-</table>
-<br /> Log: {{log}}
-<br />
-<br />
-<a routerLink="/about">« Previous</a>
+  <button (click)="delete()" class="btn">Delete</button>
+  <button (click)="loadInitialData()" class="btn">Load</button>
+  <button (click)="csv(payload.value)" class="btn">CSV</button>
+  <label for="file-upload" class="btn">
+    File
+  </label>
+  <input id="file-upload" type="file" (change)='convertFile()' materialize/>
+  <p>HTTP Status: {{status}} {{statusText}}</p>
+  <br />
+  <table border='1' rules="all" cellpadding="5" class="striped bordered centered highlight responsive-table">
+    <tr class="#42a5f5 blue lighten-1 z-depth-0">
+      <th class="white-text center-align">Region</th>
+      <th class="white-text center-align">Year</th>
+      <th class="white-text center-align">Men</th>
+      <th class="white-text center-align">Women</th>
+      <th class="white-text center-align">Total Birth</th>
+    </tr>
+    <tr *ngFor="let birth of births | sort: 'year'" class="white z-depth-0">
+      <td>{{birth.region}}</td>
+      <td>{{birth.year}}</td>
+      <td>{{birth.men}}</td>
+      <td>{{birth.women}}</td>
+      <td>{{birth.totalbirth}}</td>
+    </tr>
+  </table>
+  <br /> Log: {{log}}
+  <br />
+  <br />
+  <a routerLink="/about">« Previous</a>
+</div>
+<!-- Not signed up -->
+<h6 *ngIf="!auth.isAuthenticated()">
+  You are not logged in! Please
+  <a (click)="auth.login()">Log In</a> to continue.
+</h6>

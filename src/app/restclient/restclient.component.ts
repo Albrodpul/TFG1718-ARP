@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
+import { AuthService } from '../auth/auth.service';
 
 declare var Materialize: any;
 
@@ -1273,7 +1274,8 @@ export class RestclientComponent implements OnInit {
   }
 
 
-  constructor(public http: Http) { }
+  constructor(public http: Http,
+    public auth: AuthService) { }
 
   ngOnInit() {
     console.log("REST Client Component Initialized");

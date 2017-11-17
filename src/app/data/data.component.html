@@ -1,34 +1,39 @@
-<app-navbar></app-navbar>
+<!-- Signed up -->
+<div *ngIf="auth.isAuthenticated()">
+  <h4>Spain Births Analysis</h4>
+  <br />
+  <!-- Data table -->
+  <h5>Data</h5>
 
-<h4>Spain Births Analysis</h4>
-<br />
-<!-- Data table -->
-<h5>Data</h5>
-
-<table border='1' rules="all" cellpadding="5" class="striped">
-  <tr class="#42a5f5 blue lighten-1 z-depth-0">
-    <th class="white-text center-align">Region</th>
-    <th class="white-text center-align">Year</th>
-    <th class="white-text center-align">Men</th>
-    <th class="white-text center-align">Women</th>
-    <th class="white-text center-align">Total Birth</th>
-  </tr>
-  <tr *ngFor="let birth of births | sort: 'year'" class="white z-depth-0">
-    <td>{{birth.region}}</td>
-    <td>{{birth.year}}</td>
-    <td>{{birth.men}}</td>
-    <td>{{birth.women}}</td>
-    <td>{{birth.totalbirth}}</td>
-  </tr>
-</table>
-<br />
-<app-geochart></app-geochart>
-<br />
-<app-corechart></app-corechart>
-<br />
-<app-highcharts></app-highcharts>
-<br />
-<div class="row">
-  <a class="col s11" routerLink="/about">« Previous</a>
-  <a class="col s1" routerLink="/RESTClient">Next »</a>
+  <table border='1' rules="all" cellpadding="5" class="striped">
+    <tr class="#42a5f5 blue lighten-1 z-depth-0">
+      <th class="white-text center-align">Region</th>
+      <th class="white-text center-align">Year</th>
+      <th class="white-text center-align">Men</th>
+      <th class="white-text center-align">Women</th>
+      <th class="white-text center-align">Total Birth</th>
+    </tr>
+    <tr *ngFor="let birth of births | sort: 'year'" class="white z-depth-0">
+      <td>{{birth.region}}</td>
+      <td>{{birth.year}}</td>
+      <td>{{birth.men}}</td>
+      <td>{{birth.women}}</td>
+      <td>{{birth.totalbirth}}</td>
+    </tr>
+  </table>
+  <br />
+  <app-geochart></app-geochart>
+  <br />
+  <app-corechart></app-corechart>
+  <br />
+  <app-highcharts></app-highcharts>
+  <br />
+  <div class="row">
+    <a class="col s11" routerLink="/about">« Previous</a>
+    <a class="col s1" routerLink="/RESTClient">Next »</a>
+  </div>
 </div>
+<!-- Not signed up -->
+<h6 *ngIf="!auth.isAuthenticated()">
+    You are not logged in! Please <a (click)="auth.login()">Log In</a> to continue.
+</h6>

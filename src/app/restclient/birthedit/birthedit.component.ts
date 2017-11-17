@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-birthedit',
@@ -52,7 +53,8 @@ export class BirtheditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private location: Location,
-    public http: Http) { }
+    public http: Http,
+    public auth: AuthService) { }
 
   ngOnInit() {
     console.log("Birth Edit Component initialized");

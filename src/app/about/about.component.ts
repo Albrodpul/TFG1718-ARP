@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class AboutComponent implements OnInit {
     location.reload();
   }
   constructor(
-    private location: Location
+    private location: Location,
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
