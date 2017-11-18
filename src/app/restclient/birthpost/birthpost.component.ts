@@ -12,11 +12,11 @@ export class BirthpostComponent implements OnInit {
   /* Nuevo dato a introducir */
   newBirth: any;
   /* Input provenientes del parent component */
-  @Input() newBirthRegion:string;
-  @Input() newBirthYear:number;
-  @Input() newBirthMen: number;
-  @Input() newBirthWomen: number;
-  @Input() newBirthTotalBirth: number;
+  @Input() newBirthRegion:any;
+  @Input() newBirthYear:any;
+  @Input() newBirthMen: any;
+  @Input() newBirthWomen: any;
+  @Input() newBirthTotalBirth: any;
 
   constructor(public http: Http,
     public restclient: RestclientComponent) { }

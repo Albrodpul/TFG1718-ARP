@@ -10,7 +10,7 @@ import { RestclientComponent } from './../restclient.component';
 export class BirthdeleteComponent implements OnInit {
 
   /* Recoge el valor del birth del parent component */
-  @Input() birth:string;
+  @Input() birth:any;
   
 
   constructor(public http: Http,
