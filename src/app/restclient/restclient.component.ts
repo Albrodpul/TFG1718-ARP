@@ -39,6 +39,9 @@ export class RestclientComponent implements OnInit {
   froms: any;
   tos: any;
 
+  tMethod="input";
+  methods: any;
+
   constructor(public http: Http,
     public auth: AuthService) { }
 
@@ -72,6 +75,7 @@ export class RestclientComponent implements OnInit {
         this.years = "";
         this.froms = "";
         this.tos = "";
+        this.methods = "";
       });
     this.http.get(this.baseURL)
       .subscribe(
@@ -118,5 +122,15 @@ export class RestclientComponent implements OnInit {
     this.fromList = fromList;
     this.toList = toList;
   }
+
+  public input(method){
+    if(!method){
+      this.tMethod='input';
+    }else if(method=='input'){
+      this.tMethod=method;
+    }else if(method=='csv'){
+      this.tMethod=method;
+    }
+  }  
 
 }
