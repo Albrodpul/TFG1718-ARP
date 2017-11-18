@@ -38,7 +38,7 @@ export class RestclientComponent implements OnInit {
   years: any;
   froms: any;
   tos: any;
-
+  /* Indicador para el valor inicial selector de method y reseteo */
   tMethod="input";
   methods: any;
 
@@ -75,6 +75,7 @@ export class RestclientComponent implements OnInit {
         this.years = "";
         this.froms = "";
         this.tos = "";
+        this.tMethod="input";
         this.methods = "";
       });
     this.http.get(this.baseURL)
