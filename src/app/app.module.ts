@@ -24,6 +24,14 @@ import { HighchartsComponent } from './data/highcharts/highcharts.component';
 import { JqueryComponent } from './restclient/jquery/jquery.component';
 import { ArraySortByFieldPipe, ArraySortByNumberPipe, ArraySortByStringPipe } from './pipes/arraysort.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { BirthloadComponent } from './restclient/birthload/birthload.component';
+import { BirthdeleteallComponent } from './restclient/birthdeleteall/birthdeleteall.component';
+import { BirthgetComponent } from './restclient/birthget/birthget.component';
+import { BirthpostComponent } from './restclient/birthpost/birthpost.component';
+import { BirthdeleteComponent } from './restclient/birthdelete/birthdelete.component';
+import { BirthsearchComponent } from './restclient/birthsearch/birthsearch.component';
+import { BirthuploadComponent } from './restclient/birthcsv/birthupload/birthupload.component';
+import { BirthtextareaComponent } from './restclient/birthcsv/birthtextarea/birthtextarea.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +44,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     NavbarComponent,
     DataComponent,
     RestclientComponent,
-    BirtheditComponent,
+    BirtheditComponent, BirthloadComponent, BirthdeleteallComponent, BirthgetComponent, BirthpostComponent, BirthdeleteComponent, BirthsearchComponent, BirthuploadComponent, BirthtextareaComponent,
     GeochartComponent,
     CorechartComponent,
     HighchartsComponent,

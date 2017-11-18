@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col s2">
+      <select materialize="material_select" [materializeSelectOptions]="limitList" #limit [(ngModel)]="this.restclient.limits" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
+        <option value="">Entries</option>
+        <option *ngFor="let l of this.restclient.limitList" value="{{l}}">{{l}}</option>
+      </select>
+    </div>
+    <div class="col s1">
+      <select materialize="material_select" [materializeSelectOptions]="offsetList" #offset [(ngModel)]="this.restclient.offsets" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
+        <option selected value="">Page</option>
+        <option *ngFor="let o of this.restclient.offsetList | filterUnique" value="{{o}}">{{o}}</option>
+      </select>
+    </div>
+    <div class="col s2 offset-s4">
+      <select materialize="material_select" [materializeSelectOptions]="regionList" #region [(ngModel)]="this.restclient.regions" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
+        <option value="">Region</option>
+        <option *ngFor="let r of (this.restclient.regionList | sortByString) | filterUnique" value="{{r}}">{{r}}</option>
+      </select>
+    </div>
+    <div class="col s1">
+      <select materialize="material_select" [materializeSelectOptions]="yearList" #year [(ngModel)]="this.restclient.years" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
+        <option value="">Year</option>
+        <option *ngFor="let y of (this.restclient.yearList | sortByNumber) | filterUnique" value="{{y}}">{{y}}</option>
+      </select>
+    </div>
+    <div class="col s1">
+      <select materialize="material_select" [materializeSelectOptions]="fromList" #from [(ngModel)]="this.restclient.froms" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
+        <option value="">From</option>
+        <option *ngFor="let f of (this.restclient.fromList | sortByNumber) | filterUnique" value="{{f}}">{{f}}</option>
+      </select>
+    </div>
+    <div class="col s1">
+      <select materialize="material_select" [materializeSelectOptions]="toList" #to [(ngModel)]="this.restclient.tos" (change)="search(limit.value,offset.value,region.value,year.value,from.value,to.value)">
+        <option value="">To</option>
+        <option *ngFor="let t of (this.restclient.toList | sortByNumber) | filterUnique" value="{{t}}">{{t}}</option>
+      </select>
+    </div>
+  </div>
