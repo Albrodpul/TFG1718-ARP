@@ -1,59 +1,52 @@
-<div *ngIf="auth.isAuthenticated()">
-  <h4>Project theme:</h4>
-  <p style="text-align: justify;">My sources of information are aimed at analyzing the relationship between the number of births over the years in the regions
-    of Spain.</p>
-  <div class="list-group">
-    <table rules="all" cellpadding="5" class="bordered">
-      <tr class="#42a5f5 card-panel blue lighten-1 z-depth-0">
-        <td class="center-align white-text centered">Group member</td>
-        <td class="center-align white-text centered">Alberto Jesús Rodríguez Pulido</td>
-      </tr>
-      <tr class="#ffffff white z-index 0">
-        <td>Data</td>
-        <td>
-          <a routerLink="/data">Spain Births Data</a>
-        </td>
-      </tr>
-      <tr class="#ffffff white z-index 0">
-        <td>GitHub</td>
-        <td>
-          <a href="https://github.com/albrodpul">Albrodpul</a>
-        </td>
-      </tr>
-      <tr class="#ffffff white z-index 0">
-        <td> Codeschool Badges</td>
-        <td>
-          <a href="https://www.codeschool.com/users/Albrodpul/">Albrodpul</a>
-        </td>
-      </tr>
-      <tr class="#ffffff white z-index 0">
-        <td>API Rest</td>
-        <td>
-          <a href="/api/v1/spain-births">Spain Births API</a>
-        </td>
-      </tr>
-      <tr class="#ffffff white z-index 0">
-        <td>Simple Angular2 GUI</td>
-        <td>
-          <a routerLink="/RESTClient/jquery">Simple Spain Births GUI</a>
-        </td>
-      </tr>
-      <tr class="#ffffff white z-index 0">
-        <td>Angular2 GUI</td>
-        <td>
-          <a routerLink="/RESTClient">Spain Births GUI</a>
-        </td>
-      </tr>
-    </table>
-    <br />
-    <div class="row">
-      <a class="col s11" routerLink='/'>« Previous</a>
-      <a class="col s1" routerLink="/data">Next »</a>
-    </div>
+<h4>Project theme:</h4>
+<p style="text-align: justify;">My sources of information are aimed at analyzing the relationship between the number of births over the years in the regions
+  of Spain.</p>
+<div class="list-group">
+  <table rules="all" cellpadding="5" class="bordered">
+    <tr class="#42a5f5 card-panel blue lighten-1 z-depth-0">
+      <td class="center-align white-text centered">Group member</td>
+      <td class="center-align white-text centered">Alberto Jesús Rodríguez Pulido</td>
+    </tr>
+    <tr class="#ffffff white z-index 0">
+      <td>Data</td>
+      <td>
+        <a routerLink="/data">Spain Births Data</a>
+      </td>
+    </tr>
+    <tr class="#ffffff white z-index 0">
+      <td>GitHub</td>
+      <td>
+        <a href="https://github.com/albrodpul">Albrodpul</a>
+      </td>
+    </tr>
+    <tr class="#ffffff white z-index 0">
+      <td> Codeschool Badges</td>
+      <td>
+        <a href="https://www.codeschool.com/users/Albrodpul/">Albrodpul</a>
+      </td>
+    </tr>
+    <tr class="#ffffff white z-index 0">
+      <td>API Rest</td>
+      <td>
+        <a href="/api/v1/spain-births">Spain Births API</a>
+      </td>
+    </tr>
+    <tr class="#ffffff white z-index 0">
+      <td>Simple Angular2 GUI</td>
+      <td>
+        <a routerLink="/RESTClient/jquery">Simple Spain Births GUI</a>
+      </td>
+    </tr>
+    <tr class="#ffffff white z-index 0">
+      <td>Angular2 GUI</td>
+      <td>
+        <a routerLink="/RESTClient">Spain Births GUI</a>
+      </td>
+    </tr>
+  </table>
+  <br />
+  <div class="row">
+    <a class="col s11" routerLink='/'>« Previous</a>
+    <a class="col s1" routerLink="/data">Next »</a>
   </div>
 </div>
-<!-- Not signed up -->
-<h6 *ngIf="!auth.isAuthenticated()">
-  You are not logged in! Please
-  <a (click)="auth.login()">Log In</a> to continue.
-</h6>

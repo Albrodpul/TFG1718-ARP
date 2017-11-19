@@ -1,5 +1,13 @@
 <!-- Main page -->
 <main>
   <app-navbar></app-navbar>
-  <router-outlet></router-outlet>
+  <!-- Signed Up -->
+  <div *ngIf="auth.isAuthenticated(); else forbidden">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- Not signed up -->
+  <ng-template #forbidden>
+    You are not logged in! Please
+    <a (click)="auth.login()">Log In</a> to continue.
+  </ng-template>
 </main>

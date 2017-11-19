@@ -1,102 +1,90 @@
-<!-- Signed Up -->
-<div *ngIf="auth.isAuthenticated()">
-  <h4>Spain Birth REST Client</h4>
-  <div class="row centered">
-    <!-- Get all elements -->
-    <app-birthget></app-birthget>
-    <!-- Delete all elements -->
-    <app-birthdeleteall></app-birthdeleteall>
-    <!-- Load Initial Data -->
-    <app-birthload></app-birthload>
-    <!-- Select input method -->
-    <div class="col s3 offset-s6">
-        <select materialize="material_select" #method [(ngModel)]="methods" (change)="input(method.value)">
-          <option value="">Input Method</option>
-          <option *ngFor="let i of ['input','csv']" value="{{i}}">{{i}}</option>
-        </select>
-      </div>
+<h4>Spain Birth REST Client</h4>
+<div class="row centered">
+  <!-- Get all elements -->
+  <app-birthget></app-birthget>
+  <!-- Delete all elements -->
+  <app-birthdeleteall></app-birthdeleteall>
+  <!-- Load Initial Data -->
+  <app-birthload></app-birthload>
+  <!-- Select input method -->
+  <div class="col s3 offset-s6">
+    <select materialize="material_select" #method [(ngModel)]="methods" (change)="input(method.value)">
+      <option value="">Input Method</option>
+      <option *ngFor="let i of ['input','csv']" value="{{i}}">{{i}}</option>
+    </select>
   </div>
-  <!-- Error message -->
-  <div class="row">
-    <div class="col s12 center-align">
-      <div *ngIf="error" class="card-panel #f44336 red z-depth-0">{{status}} {{statusText}}</div>
-    </div>
-  </div>
-  <!-- Search -->
-  <app-birthsearch [limitList]="limitList" [offsetList]="offsetList" [regionList]="regionList" [yearList]="yearList" [fromList]="fromList"
-    [toList]="toList" [limits]="limits" [offsets]="offsets" [regions]="regions" [years]="years" [froms]="froms" [tos]="tos"></app-birthsearch>
-  <!-- Data table -->
-  <br />
-  <table border='1' rules="all" cellpadding="5" class="striped">
-    <tr class="#42a5f5 blue lighten-1 z-depth-0">
-      <td class="white-text center-align">Region</td>
-      <td class="white-text center-align">Year</td>
-      <td class="white-text center-align">Men</td>
-      <td class="white-text center-align">Women</td>
-      <td class="white-text center-align">Total Birth</td>
-      <td colspan="2" class="white-text center-align">Actions</td>
-    </tr>
-    <!-- Post -->
-    <tr class="white z-depth-0" *ngIf="tMethod=='input'">
-      <td>
-        <input type="text" class="form-control" #newBirthRegion placeholder="Andalucia" />
-      </td>
-      <td>
-        <input type="number" class="form-control" #newBirthYear placeholder="2009" />
-      </td>
-      <td>
-        <input type="number" class="form-control" #newBirthMen placeholder="43243" />
-      </td>
-      <td>
-        <input type="number" class="form-control" #newBirthWomen placeholder="43432" />
-      </td>
-      <td>
-        <input type="number" class="form-control" #newBirthTotalBirth placeholder="473824" disabled value="{{newBirthMen.value -- newBirthWomen.value}}"
-        />
-      </td>
-      <td colspan="2" class="center-align">
-        <app-birthpost [newBirthRegion]="newBirthRegion" [newBirthYear]="newBirthYear" [newBirthMen]="newBirthMen" [newBirthWomen]="newBirthWomen"
-          [newBirthTotalBirth]="newBirthTotalBirth"></app-birthpost>
-      </td>
-    </tr>
-    <!-- Upload CSV -->
-    <tr class="white z-depth-0" *ngIf="tMethod=='csv'">
-      <td colspan="5" class="center-align">
-        <textarea #payload id="textarea1" name="payload" class="materialize-textarea" placeholder="region;year;men;women;totalbirth
-Andalucía;2009;3232;3232;3232"></textarea>
-      </td>
-      <td>
-        <app-birthtextarea [payload]="payload"></app-birthtextarea>
-      </td>
-      <td>
-        <app-birthupload></app-birthupload>
-      </td>
-    </tr>
-    <!-- Data -->
-    <tr *ngFor="let birth of births | sort: 'year'" class="white z-depth-0">
-      <td>{{birth.region}}</td>
-      <td>{{birth.year}}</td>
-      <td>{{birth.men}}</td>
-      <td>{{birth.women}}</td>
-      <td>{{birth.totalbirth}}</td>
-      <td>
-        <!-- Actions -->
-        <!-- Put -->
-        <a class="btn-floating btn-large waves-effect waves-light purple" routerLink="/RESTClient/{{birth.region}}/{{birth.year}}">
-          <i class="material-icons">mode_edit</i>
-        </a>
-      </td>
-      <td>
-        <!-- Delete birth -->
-        <app-birthdelete [birth]="birth"></app-birthdelete>
-      </td>
-    </tr>
-  </table>
-  <br />
-  <a routerLink="/data">« Previous</a>
 </div>
-<!-- Not signed up -->
-<h6 *ngIf="!auth.isAuthenticated()">
-  You are not logged in! Please
-  <a (click)="auth.login()">Log In</a> to continue.
-</h6>
+<!-- Error message -->
+<div class="row">
+  <div class="col s12 center-align">
+    <div *ngIf="error" class="card-panel #f44336 red z-depth-0">{{status}} {{statusText}}</div>
+  </div>
+</div>
+<!-- Search -->
+<app-birthsearch [limitList]="limitList" [offsetList]="offsetList" [regionList]="regionList" [yearList]="yearList" [fromList]="fromList"
+  [toList]="toList" [limits]="limits" [offsets]="offsets" [regions]="regions" [years]="years" [froms]="froms" [tos]="tos"></app-birthsearch>
+<!-- Data table -->
+<br />
+<table border='1' rules="all" cellpadding="5" class="striped">
+  <tr class="#42a5f5 blue lighten-1 z-depth-0">
+    <td class="white-text center-align">Region</td>
+    <td class="white-text center-align">Year</td>
+    <td class="white-text center-align">Men</td>
+    <td class="white-text center-align">Women</td>
+    <td class="white-text center-align">Total Birth</td>
+    <td colspan="2" class="white-text center-align">Actions</td>
+  </tr>
+  <!-- Post -->
+  <tr class="white z-depth-0" *ngIf="tMethod=='input'">
+    <td>
+      <input type="text" class="form-control" #newBirthRegion placeholder="Andalucia" />
+    </td>
+    <td>
+      <input type="number" class="form-control" #newBirthYear placeholder="2009" />
+    </td>
+    <td>
+      <input type="number" class="form-control" #newBirthMen placeholder="43243" />
+    </td>
+    <td>
+      <input type="number" class="form-control" #newBirthWomen placeholder="43432" />
+    </td>
+    <td>
+      <input type="number" class="form-control" #newBirthTotalBirth placeholder="473824" disabled value="{{newBirthMen.value -- newBirthWomen.value}}"
+      />
+    </td>
+    <td class="center-align">
+      <app-birthpost [newBirthRegion]="newBirthRegion" [newBirthYear]="newBirthYear" [newBirthMen]="newBirthMen" [newBirthWomen]="newBirthWomen"
+        [newBirthTotalBirth]="newBirthTotalBirth"></app-birthpost>
+    </td>
+  </tr>
+  <!-- Upload CSV -->
+  <tr class="white z-depth-0" *ngIf="tMethod=='csv'">
+    <td colspan="5" class="center-align">
+      <textarea #payload id="textarea1" name="payload" class="materialize-textarea" placeholder="region;year;men;women;totalbirth
+Andalucía;2009;3232;3232;3232"></textarea>
+    </td>
+    <td class="center-align">
+      <app-birthtextarea [payload]="payload"></app-birthtextarea>
+      <app-birthupload></app-birthupload>
+    </td>
+  </tr>
+  <!-- Data -->
+  <tr *ngFor="let birth of births | sort: 'year'" class="white z-depth-0">
+    <td class="center-align">{{birth.region}}</td>
+    <td class="center-align">{{birth.year}}</td>
+    <td class="center-align">{{birth.men}}</td>
+    <td class="center-align">{{birth.women}}</td>
+    <td class="center-align">{{birth.totalbirth}}</td>
+    <td class="center-align">
+      <!-- Actions -->
+      <!-- Put -->
+      <a class="btn-floating btn-large waves-effect waves-light purple" routerLink="/RESTClient/{{birth.region}}/{{birth.year}}">
+        <i class="material-icons">mode_edit</i>
+      </a>
+      <!-- Delete birth -->
+      <app-birthdelete [birth]="birth"></app-birthdelete>
+    </td>
+  </tr>
+</table>
+<br />
+<a routerLink="/data">« Previous</a>

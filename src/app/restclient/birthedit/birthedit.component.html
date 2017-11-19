@@ -1,53 +1,45 @@
-<!-- Signed Up -->
-<div *ngIf="auth.isAuthenticated()">
-  <h4>Spain Birth REST Client</h4>
-  <br />
-  <table class="striped">
-    <thead>
-      <tr class="#42a5f5 blue lighten-1 z-depth-0">
-        <th class="center-align white-text centered">Region</th>
-        <th class="center-align white-text centered">Year</th>
-        <th class="center-align white-text centered">Men</th>
-        <th class="center-align white-text centered">Women</th>
-        <th class="center-align white-text centered">Totalbirth</th>
-        <th class="center-align white-text centered">Update</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let updatedBirth of updatedBirths" class="white z-depth-0">
-        <td>
-          <input disabled #updatedBirthRegion value="{{updatedBirth.region}}" />
-        </td>
-        <td>
-          <input disabled #updatedBirthYear value="{{updatedBirth.year}}" />
-        </td>
-        <td>
-          <input type="number" #updatedBirthMen value="{{updatedBirth.men}}" />
-        </td>
-        <td>
-          <input type="number" #updatedBirthWomen value="{{updatedBirth.women}}" />
-        </td>
-        <td>
-          <input type="number" disabled #updatedBirthTotalBirth value="{{updatedBirth.men -- updatedBirth.women}}" />
-        </td>
-        <td>
-          <button class="btn-floating btn-large waves-effect waves-light purple" (click)="updateBirth(
+<h4>Spain Birth REST Client</h4>
+<br />
+<table class="striped">
+  <thead>
+    <tr class="#42a5f5 blue lighten-1 z-depth-0">
+      <th class="center-align white-text centered">Region</th>
+      <th class="center-align white-text centered">Year</th>
+      <th class="center-align white-text centered">Men</th>
+      <th class="center-align white-text centered">Women</th>
+      <th class="center-align white-text centered">Totalbirth</th>
+      <th class="center-align white-text centered">Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let updatedBirth of updatedBirths" class="white z-depth-0">
+      <td>
+        <input disabled #updatedBirthRegion value="{{updatedBirth.region}}" />
+      </td>
+      <td>
+        <input disabled #updatedBirthYear value="{{updatedBirth.year}}" />
+      </td>
+      <td>
+        <input type="number" #updatedBirthMen value="{{updatedBirth.men}}" />
+      </td>
+      <td>
+        <input type="number" #updatedBirthWomen value="{{updatedBirth.women}}" />
+      </td>
+      <td>
+        <input type="number" disabled #updatedBirthTotalBirth value="{{updatedBirth.men -- updatedBirth.women}}" />
+      </td>
+      <td>
+        <button class="btn-floating btn-large waves-effect waves-light purple" (click)="updateBirth(
           updatedBirthRegion.value,
           updatedBirthYear.value,
           updatedBirthMen.value,
           updatedBirthWomen.value,
           updatedBirthMen.value -- updatedBirthWomen.value)">
-            <i class="material-icons">mode_edit</i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <br />
-  <a class="col s1" routerLink="/RESTClient">« Previous</a>
-</div>
-<!-- Not signed up -->
-<h6 *ngIf="!auth.isAuthenticated()">
-  You are not logged in! Please
-  <a (click)="auth.login()">Log In</a> to continue.
-</h6>
+          <i class="material-icons">mode_edit</i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<a class="col s1" routerLink="/RESTClient">« Previous</a>
