@@ -1,0 +1,156 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.css"></link>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.4.1/css/alertify.min.css"></link>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.4.1/css/themes/bootstrap.min.css"></link>
+<script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+<script src="//cdn.jsdelivr.net/alertifyjs/1.4.1/alertify.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="rest.js"></script>
+<script type="text/javascript">
+
+
+
+alertify.defaults.theme.ok = "btn btn-primary";
+alertify.defaults.theme.cancel = "btn btn-danger";
+alertify.defaults.theme.input = "form-control";
+
+$(document).ready(function() {
+  var date = procesarDatos();
+  var table = IniciarTabla(date);
+  //seleccionarCelda(table);
+});
+
+</script>
+</head>
+<body>
+<div class="container">
+<div class="jumbotron">
+<div><h1 align="center">Population growth</h1></div>
+    <div class="container-fluid">
+          <input onclick="botonMenu()" type="button" name="Datos" value="Data" class="btn btn-default"></input>       
+          <input onclick="botonAnadirDato()" type="button" name="Add new" class="btn btn-primary" value="Add new"></input>
+          <input onclick="botonEliminarTodo()" type="button" name="Eliminar todos los datos" class="btn btn-warning" value="Delete All"></input>
+          <input onclick="cargaInicial()" type="button" name="Carga inicial" class="btn btn-danger" value="Load Initial Data"></input>
+    </div>
+</br>
+</br>
+
+<div>
+  <select id="apikey">
+    <option value="multiPlan_C4_sos-2016-03-asu_ag" selected="selected">Read</option>
+    <option value="multiPlan_C4_sos-2016-03-asu_ag">Write</option>
+  </select>
+</div>
+
+<!--<div>Apikey:<input type="text" name="apikey" id="apikey" placeholder="Apikey"/></div>
+<label>(Para los métodos: Eliminar dato seleccionado, Eliminar todos los datos, Carga inicial)</label>-->
+  
+<div class="container" id="formulario2">
+ <h2 id="tituloFormulario">Add new:</h2>
+  <form role="form">
+    <div class="form-group">
+      <label for="region2">Region:</label>
+      <input type="text" class="form-control" id="region2" placeholder="Region" >
+    </div>
+    <div class="form-group">
+      <label for="year2">Year:</label>
+      <input type="text" class="form-control" id="year2" placeholder="Year" >
+    </div>
+    <div class="form-group">
+      <label for="age2">Age:</label>
+      <input type="text" class="form-control" id="age2" placeholder="Age" >
+    </div>
+    <div class="form-group">
+      <label for="men2">Men:</label>
+      <input type="text" class="form-control" id="men2" placeholder="Men" >
+    </div>
+     <div class="form-group">
+      <label for="women2">Women:</label>
+      <input type="text" class="form-control" id="women2" placeholder="Women" >
+    </div>
+    <div class="form-group">
+      <label for="totalpopulation2">Total population:</label>
+      <input type="text" class="form-control" id="totalpopulation2" placeholder="Totalpopulation" >
+    </div>
+    <div class="form-group">
+      <label for="apikey2">Key:</label>
+      <input type="text" class="form-control" id="apikey2" placeholder="Key" >
+    </div>
+    <input type="button" onclick="enviarDato()" name="Enviar" value="Send"></input>
+    
+  </form>
+</div>
+  
+</br>
+
+</br>
+
+<div class="container" id="formularioEliminar">
+<label>Delete: </label>
+<input type="text" class="form-control" id="reg" placeholder="region" required="true">
+<input type="text" class="form-control" id="yea" placeholder="year" required="true">
+<form role="form">
+  <input type="button" class="btn btn-info" onclick="eliminardato()" name="Elimdato" value="Delete"></input>
+</form>
+</div>
+
+</br>
+
+<div class="container" id="formularioEditar">
+<label>Edit: </label>
+<input type="text" class="form-control" id="reg2" placeholder="region" required="true">
+<input type="text" class="form-control" id="yea2" placeholder="year" required="true">
+<form role="form">
+  <input type="button" class="btn btn-success" onclick="editardato()" name="Editdato" value="Edit"></input>
+</form>
+</div>
+
+</br>
+
+<div class="container" id="formularioBusqueda">
+<label>Search: </label>
+<input type="text" class="form-control" id="busqueda" placeholder="region" required="true">
+<input type="text" class="form-control" id="busqueda2" placeholder="from" required="true">
+<input type="text" class="form-control" id="busqueda3" placeholder="to" required="true">
+<form role="form">
+  <input type="button" onclick="busqueda()" name="Buscar" value="Search"></input>
+</form>
+</div>
+
+</br>
+
+<div>
+  <label>Show </label><select id="limit" onchange="paginacion()">
+  <option value="3">3</option>
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="15">15</option>
+</select><label> entries</label>
+</div>
+
+<div id="tabla">
+ <table id="tablaid" class="display" width="100%">
+</table></div>
+
+</br>
+
+<div>
+  <label>Page: </label><select id="pag" onchange="paginacion2()">
+  <option value="0">0</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+</select>
+</div>
+
+</div>
+</div>
+</body>
+</html>

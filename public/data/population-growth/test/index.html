@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="PopulationListApp">
+<head>
+	<title>Population list</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+</head>
+<body>
+	<div class="container" ng-controller="AppCtrl">
+		<h1>Population List</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Region</th>
+					<th>Year</th>
+					<th>Age</th>
+					<th>Men</th>
+					<th>Women</th>
+					<th>Total population</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input class="form-control" ng-model="population.region"/></td>
+					<td><input class="form-control" ng-model="population.year"/></td>
+					<td><input class="form-control" ng-model="population.age"/></td>
+					<td><input class="form-control" ng-model="population.men"/></td>
+					<td><input class="form-control" ng-model="population.women"/></td>
+					<td><input class="form-control" ng-model="population.total_population"/></td>
+					<td><button class="btn btn-primary" ng-click="addPopulation()">Add</button></td>
+				</tr>
+				<tr ng-repeat="population in populationlist">
+					<td>{{population.region}}</td>
+					<td>{{population.year}}</td>
+					<td>{{population.age}}</td>
+					<td>{{population.men}}</td>
+					<td>{{population.women}}</td>
+					<td>{{population.total_population}}</td>
+					<td><button class="btn btn-danger" ng-click="deletePopulation(population.region,population.year)">Delete</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<script type="text/javascript" src="controllers.js"></script>
+
+
+</body>
+</html>

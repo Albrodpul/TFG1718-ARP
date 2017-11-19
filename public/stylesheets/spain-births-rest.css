@@ -1,0 +1,22 @@
+body{
+  width: 85%;
+  margin-left: 7% !important;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #778899;
+    text-align: center;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #778899;
+   opacity:  1;
+   text-align: center;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #778899;
+   opacity:  1;
+   text-align: center;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #778899;
+   text-align: center;
+}
