@@ -43,6 +43,7 @@
         cb(err, profile);
       });
     }
+    
 
     function setUserProfile(profile) {
       userProfile = profile;

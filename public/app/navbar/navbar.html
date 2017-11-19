@@ -3,7 +3,7 @@
 <!--Navbar-->
 <nav>
   <div class="nav-wrapper #90caf9 blue lighten-3">
-    <a href="/" class="brand-logo"><i class="material-icons left">cloud</i>TFG1718 ARP</a>
+    <a ui-sref="home" class="brand-logo"><i class="material-icons left">cloud</i>TFG1718 ARP</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li>
         <a class="btn-margin" ng-if="!vm.auth.isAuthenticated()" ng-click="vm.auth.login()">
@@ -12,7 +12,7 @@
       </li>
       <li>
         <a class="btn-margin dropdown-button" data-activates='dropdown' data-beloworigin="true" ng-if="vm.auth.isAuthenticated()">
-          <img ng-src="{{ vm.profile.picture }}" class="circle" alt="avatar">
+          <img ng-src="{{ vm.profile.picture }}" class="circle avatar" alt="avatar">
       </a>
       </li>
     </ul>

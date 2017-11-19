@@ -1,0 +1,41 @@
+<nav>
+    <div class="nav-wrapper #90caf9 blue lighten-3">
+        <div>
+            <a href="/" class="breadcrumb">Homepage</a>
+            <a href="/about/" class="breadcrumb">About Me</a>
+            <a href="/data" class="breadcrumb">Data</a>
+            <a href="/RESTClient/angular" class="breadcrumb">AngularJS REST Client</a>
+        </div>
+    </div>
+</nav>
+<h4>AngularJS REST Client</h4>
+<br />
+<table class="striped">
+    <thead>
+        <tr class="#42a5f5 blue lighten-1 z-depth-0">
+            <th class="center-align white-text centered">Region</th>
+            <th class="center-align white-text centered">Year</th>
+            <th class="center-align white-text centered">Men</th>
+            <th class="center-align white-text centered">Women</th>
+            <th class="center-align white-text centered">Totalbirth</th>
+            <th class="center-align white-text centered">Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input value="{{updatedBirth.region}}" disabled /></td>
+            <td><input value="{{updatedBirth.year}}" disabled /></td>
+            <td><input type="number" ng-model="updatedBirth.men" /></td>
+            <td><input type="number" ng-model="updatedBirth.women" /></td>
+            <td><input type="number" ng-model="updatedBirth.totalbirth" disabled value="{{updatedBirth.men -- updatedBirth.women}}"/></td>
+            <td><button class="btn-floating btn-large waves-effect waves-light purple" ng-click="put(
+                updatedBirth.region,
+                updatedBirth.year,
+                updatedBirth.men,
+                updatedBirth.women,
+                updatedBirth.men -- updatedBirth.women)"><i class="material-icons">mode_edit</i></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <a class="col s1" href="/RESTClient/angular">« Previous</a>

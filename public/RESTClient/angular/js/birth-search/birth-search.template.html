@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col s2">
+    <select material-select watch ng-model="limit" ng-change="search(region, year, limit, offset, from, to)" ng-options="l for l in $parent.limitlist">
+    <option value="">Entries</option>
+  </select>
+  </div>
+  <div class="col s1">
+    <select material-select watch ng-model="offset" ng-change="search(region, year, limit, offset, from, to)" ng-options="o for o in $parent.offsetlist">
+    <option selected value="">Page</option>
+  </select>
+  </div>
+
+<div class="col s2 offset-s4">
+  <select material-select watch ng-model="region" ng-change="search(region, year, limit, offset, from, to)" ng-options="r for r in $parent.regionlist | unique">
+    <option value="">Region</option>
+  </select>
+</div>
+<div class="col s1">
+  <select material-select watch ng-model="year" ng-change="search(region, year, limit, offset, from, to)" ng-options="y for y in $parent.yearlist | unique">
+    <option value="">Year</option>
+  </select>
+</div>
+<div class="col s1">
+  <select material-select watch ng-model="from" ng-change="search(region, year, limit, offset, from, to)" ng-options="f for f in $parent.fromlist | unique">
+    <option value="">From</option>
+  </select>
+</div>
+<div class="col s1">
+  <select material-select watch ng-model="to" ng-change="search(region, year, limit, offset, from, to)" ng-options="t for t in $parent.tolist | unique">
+    <option value="">To</option>
+  </select>
+</div>
+</div>
