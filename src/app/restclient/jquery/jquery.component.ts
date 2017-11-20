@@ -125,7 +125,7 @@ export class JqueryComponent implements OnInit {
       totalbirth = Number(currentline[4]);
       this.post(region, year, men, women, totalbirth);
     }
-    Materialize.toast("Has subido " + i + " dato(s) nuevo(s)", 4000);
+    Materialize.toast("Has subido " + (i-1) + " dato(s) nuevo(s)", 4000);
   }
 
   public csv(payload): void {

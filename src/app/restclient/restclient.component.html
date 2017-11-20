@@ -25,7 +25,7 @@
   [toList]="toList" [limits]="limits" [offsets]="offsets" [regions]="regions" [years]="years" [froms]="froms" [tos]="tos"></app-birthsearch>
 <!-- Data table -->
 <br />
-<table border='1' rules="all" cellpadding="5" class="striped">
+<table border='1' rules="all" cellpadding="5" class="striped datatable">
   <tr class="#42a5f5 blue lighten-1 z-depth-0">
     <td class="white-text center-align">Region</td>
     <td class="white-text center-align">Year</td>
@@ -52,7 +52,7 @@
       <input type="number" class="form-control" #newBirthTotalBirth placeholder="473824" disabled value="{{newBirthMen.value -- newBirthWomen.value}}"
       />
     </td>
-    <td class="center-align">
+    <td colspan="2" class="center-align">
       <app-birthpost [newBirthRegion]="newBirthRegion" [newBirthYear]="newBirthYear" [newBirthMen]="newBirthMen" [newBirthWomen]="newBirthWomen"
         [newBirthTotalBirth]="newBirthTotalBirth"></app-birthpost>
     </td>
@@ -63,7 +63,7 @@
       <textarea #payload id="textarea1" name="payload" class="materialize-textarea" placeholder="region;year;men;women;totalbirth
 Andalucía;2009;3232;3232;3232"></textarea>
     </td>
-    <td class="center-align">
+    <td colspan="2" class="center-align">
       <app-birthtextarea [payload]="payload"></app-birthtextarea>
       <app-birthupload></app-birthupload>
     </td>
@@ -75,7 +75,7 @@ Andalucía;2009;3232;3232;3232"></textarea>
     <td class="center-align">{{birth.men}}</td>
     <td class="center-align">{{birth.women}}</td>
     <td class="center-align">{{birth.totalbirth}}</td>
-    <td class="center-align">
+    <td colspan="2" class="center-align">
       <!-- Actions -->
       <!-- Put -->
       <a class="btn-floating btn-large waves-effect waves-light purple" routerLink="/RESTClient/{{birth.region}}/{{birth.year}}">

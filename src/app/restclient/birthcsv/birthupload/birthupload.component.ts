@@ -64,7 +64,7 @@ export class BirthuploadComponent implements OnInit {
           this.restclient.statusText = err.statusText;
         });      
     }
-    Materialize.toast("Has subido " + i + " dato(s) nuevo(s)", 4000);
+    Materialize.toast("Has subido " + (i-1) + " dato(s) nuevo(s)", 4000);
   }
 
 }
