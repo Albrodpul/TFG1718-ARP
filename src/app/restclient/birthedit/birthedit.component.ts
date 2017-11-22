@@ -13,6 +13,9 @@ export class BirtheditComponent implements OnInit {
 
   port = window.location.port;
   baseURL = this.getUrl();
+  status: any;
+  statusText: any;
+  error: any;
 
   constructor(private route: ActivatedRoute,
     private location: Location,
@@ -46,8 +49,7 @@ export class BirtheditComponent implements OnInit {
       .subscribe(
       data => {
         this.updatedBirths = data;
-      }
-      )
+      });
   }
 
   public updateBirth(updatedRegion, updatedYear, updatedMen, updatedWomen, updatedTotalBirth): void {
@@ -57,6 +59,10 @@ export class BirtheditComponent implements OnInit {
       .subscribe(
       res => {
         this.location.back();
+      }, err => {
+        this.status = err.status;
+        this.statusText = err.statusText;
+        this.error = true;
       });
   }
 

@@ -1,5 +1,11 @@
-<h4>Spain Birth REST Client</h4>
+<h4>Spain Birth GUI</h4>
 <br />
+<!-- Error message -->
+<div class="row">
+  <div class="col s12 center-align">
+    <div *ngIf="error" class="card-panel #f44336 red z-depth-0">{{status}} {{statusText}}</div>
+  </div>
+</div>
 <table class="striped">
   <thead>
     <tr class="#42a5f5 blue lighten-1 z-depth-0">
