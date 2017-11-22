@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { RestclientComponent } from './../restclient.component';
 
 @Component({
@@ -18,7 +18,7 @@ export class BirthpostComponent implements OnInit {
   @Input() newBirthWomen: any;
   @Input() newBirthTotalBirth: any;
 
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
     public restclient: RestclientComponent) { }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class BirthpostComponent implements OnInit {
 
   public addBirth(region, year, men, women, totalbirth): void {
     this.newBirth = { "region": region, "year": Number(year), "men": Number(men), "women": Number(women), "totalbirth": Number(totalbirth) };
-    this.http.post(this.restclient.baseURL, this.newBirth)
+    this.http.post(this.restclient.baseURL, this.newBirth, { responseType: 'text' })
       .subscribe(
       res => {
         this.restclient.refresh();

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+//import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -42,7 +43,7 @@ export class RestclientComponent implements OnInit {
   tMethod="input";
   methods: any;
 
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
     public auth: AuthService) { }
 
   ngOnInit() {
@@ -61,11 +62,11 @@ export class RestclientComponent implements OnInit {
 
   public refresh(): void {
     console.log("Refreshing...");
-    this.http.get(this.baseURL + '?limit=' + this.vLimit)
+    this.http.get(this.baseURL + '?limit=' + this.vLimit, { observe: 'response' })
       .subscribe(
       data => {
         this.sLimit = 3;
-        this.births = data.json();
+        this.births = data.body;
         this.status = "";
         this.statusText = "";
         this.error = false;
@@ -78,7 +79,7 @@ export class RestclientComponent implements OnInit {
         this.tMethod="input";
         this.methods = "";
       });
-    this.http.get(this.baseURL)
+    this.http.get(this.baseURL, { observe: 'response' })
       .subscribe(
       data => {
         this.successCallback(data);
@@ -87,7 +88,7 @@ export class RestclientComponent implements OnInit {
 
 
   public successCallbackSearch(data): void {
-    this.births = data.json();
+    this.births = data.body;
     this.status = data.status;
     this.statusText = data.statusText;
     this.error = false;
@@ -101,7 +102,7 @@ export class RestclientComponent implements OnInit {
   }
 
   public successCallback(data): void {
-    var listAux = data.json();
+    var listAux = data.body;
     var offsetList = [];
     var regionList = [];
     var yearList = [];

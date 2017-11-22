@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 declare var google: any;
 
@@ -20,7 +20,7 @@ export class CorechartComponent implements OnInit {
     return this.baseURL;
   }
 
-  constructor(public http: Http) { }
+  constructor(public http: HttpClient) { }
 
   ngOnInit() {
     console.log("Corechart Component initialized");
@@ -31,7 +31,7 @@ export class CorechartComponent implements OnInit {
       .subscribe(
       data => {
 
-        var dataFromServer = data.json();
+        var dataFromServer = data;
 
         google.charts.setOnLoadCallback(drawChart);
 
@@ -42,7 +42,7 @@ export class CorechartComponent implements OnInit {
           ];
 
           //Tranformación
-          for (var i = 0; i < dataFromServer.length; i++) {
+          for (var i = 0; i < Object.keys(dataFromServer).length; i++) {
             var item = dataFromServer[i];
 
             var itemForWidget = [item.year, item.men, item.women];

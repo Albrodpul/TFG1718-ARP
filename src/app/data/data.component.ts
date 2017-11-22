@@ -1,5 +1,5 @@
 import { Component, OnInit, Pipe } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 
 
@@ -24,15 +24,15 @@ export class DataComponent implements OnInit {
     return this.baseURL;
   }
 
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
     public auth: AuthService) { }
 
   ngOnInit() {
     console.log("Data Component Initialized");
-    this.http.get(this.baseURL)
+    this.http.get(this.baseURL, { observe: 'response' })
       .subscribe(
       data => {
-        this.births = data.json();
+        this.births = data.body;
       });
   }
 

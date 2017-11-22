@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { RestclientComponent } from './../restclient.component';
 
 @Component({
@@ -10,14 +10,14 @@ import { RestclientComponent } from './../restclient.component';
 export class BirthloadComponent implements OnInit {
 
   public loadInitialData(): void {
-    this.http.get(this.restclient.baseURL + "/loadInitialData")
+    this.http.get(this.restclient.baseURL + "/loadInitialData", { responseType: 'text' })
       .subscribe(
       data => {
         this.restclient.refresh();
       });
   }
 
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
   public restclient: RestclientComponent) { }
 
   ngOnInit() {

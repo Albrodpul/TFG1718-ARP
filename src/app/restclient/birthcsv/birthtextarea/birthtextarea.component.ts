@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 import { RestclientComponent } from '../../restclient.component';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 declare var Materialize: any;
 
@@ -18,7 +18,7 @@ export class BirthtextareaComponent implements OnInit {
   @Input() payload: any;
 
   constructor(public restclient: RestclientComponent,
-    public http: Http) { }
+    public http: HttpClient) { }
 
   ngOnInit() {
     console.log("Birth Textarea Component initialized");
@@ -43,7 +43,7 @@ export class BirthtextareaComponent implements OnInit {
         women = Number(currentline[3]);
         totalbirth = Number(currentline[4]);
         this.newBirth = { "region": region, "year": Number(year), "men": Number(men), "women": Number(women), "totalbirth": Number(totalbirth) };
-        this.http.post(this.restclient.baseURL, this.newBirth)
+        this.http.post(this.restclient.baseURL, this.newBirth, { responseType: 'text' })
           .subscribe(
           res => {
             this.restclient.refresh();

@@ -1,6 +1,6 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 import { AuthService } from '../../auth/auth.service';
 
@@ -12,6 +12,12 @@ declare var Materialize: any;
   styleUrls: ['./jquery.component.css']
 })
 export class JqueryComponent implements OnInit {
+
+  constructor(public http: HttpClient,
+    public auth: AuthService) { }
+
+  ngOnInit() {
+  }
 
   port = window.location.port;
   url = this.getUrl();
@@ -37,12 +43,12 @@ export class JqueryComponent implements OnInit {
   updatedBirth: any;
 
   public refresh(): void {
+    console.log("Refreshing...");
     this.log = "Sending request...";
-    this.http.get(this.baseURL)
+    this.http.get(this.baseURL, { observe: 'response' })
       .subscribe(
       data => {
-        console.log(data);
-        this.births = data.json();
+        this.births = data.body;
         this.status = data.status;
         this.statusText = data.statusText;
         this.log = "Data received";
@@ -55,10 +61,10 @@ export class JqueryComponent implements OnInit {
 
   public get(): void {
     this.log = "Sending request...";
-    this.http.get(this.url)
+    this.http.get(this.url, { observe: 'response' })
       .subscribe(
       data => {
-        this.births = data.json();
+        this.births = data.body;
         this.status = data.status;
         this.statusText = data.statusText;
         this.log = "Data received";
@@ -71,7 +77,7 @@ export class JqueryComponent implements OnInit {
   }
 
   public loadInitialData(): void {
-    this.http.get(this.baseURL + "/loadInitialData")
+    this.http.get(this.baseURL + "/loadInitialData", { responseType: 'text' })
       .subscribe(
       data => {
         this.refresh();
@@ -81,7 +87,7 @@ export class JqueryComponent implements OnInit {
 
   public post(region, year, men, women, totalbirth): void {
     this.newBirth = { "region": region, "year": Number(year), "men": Number(men), "women": Number(women), "totalbirth": Number(totalbirth) };
-    this.http.post(this.url, this.newBirth)
+    this.http.post(this.url, this.newBirth, { responseType: 'text' })
       .subscribe(
       res => {
         this.refresh();
@@ -125,7 +131,7 @@ export class JqueryComponent implements OnInit {
       totalbirth = Number(currentline[4]);
       this.post(region, year, men, women, totalbirth);
     }
-    Materialize.toast("Has subido " + (i-1) + " dato(s) nuevo(s)", 4000);
+    Materialize.toast("Has subido " + (i - 1) + " dato(s) nuevo(s)", 4000);
   }
 
   public csv(payload): void {
@@ -155,7 +161,7 @@ export class JqueryComponent implements OnInit {
 
   public put(region, year, men, women, totalbirth): void {
     this.updatedBirth = { "region": region, "year": Number(year), "men": Number(men), "women": Number(women), "totalbirth": Number(totalbirth) };
-    this.http.put(this.url, this.updatedBirth)
+    this.http.put(this.url, this.updatedBirth, { responseType: 'text' })
       .subscribe(
       res => {
         this.refresh();
@@ -167,7 +173,7 @@ export class JqueryComponent implements OnInit {
   }
 
   public delete(): void {
-    this.http.delete(this.url)
+    this.http.delete(this.url, { responseType: 'text' })
       .subscribe(
       res => {
         this.refresh();
@@ -178,11 +184,6 @@ export class JqueryComponent implements OnInit {
       });
   }
 
-  constructor(public http: Http,
-    public auth: AuthService) { }
-
-  ngOnInit() {
-  }
 
 }
 

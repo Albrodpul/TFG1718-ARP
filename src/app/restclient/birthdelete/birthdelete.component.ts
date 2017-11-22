@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { RestclientComponent } from './../restclient.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class BirthdeleteComponent implements OnInit {
   @Input() birth:any;
   
 
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
     public restclient: RestclientComponent) { }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class BirthdeleteComponent implements OnInit {
   }
 
   public deleteBirth(region, year): void {
-    this.http.delete(this.restclient.baseURL + '/' + region + '/' + year)
+    this.http.delete(this.restclient.baseURL + '/' + region + '/' + year, { responseType: 'text' })
       .subscribe(
       res => {
         this.restclient.refresh();

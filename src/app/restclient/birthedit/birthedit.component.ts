@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth/auth.service';
 
 @Component({
@@ -13,6 +13,16 @@ export class BirtheditComponent implements OnInit {
 
   port = window.location.port;
   baseURL = this.getUrl();
+
+  constructor(private route: ActivatedRoute,
+    private location: Location,
+    public http: HttpClient,
+    public auth: AuthService) { }
+
+  ngOnInit() {
+    console.log("Birth Edit Component initialized");
+    this.getBirth();
+  }
 
   public getUrl(): string {
     console.log(this.port);
@@ -35,7 +45,7 @@ export class BirtheditComponent implements OnInit {
     this.http.get(this.baseURL + '/' + this.region + '/' + this.year)
       .subscribe(
       data => {
-        this.updatedBirths = data.json();
+        this.updatedBirths = data;
       }
       )
   }
@@ -43,22 +53,11 @@ export class BirtheditComponent implements OnInit {
   public updateBirth(updatedRegion, updatedYear, updatedMen, updatedWomen, updatedTotalBirth): void {
     this.updatedBirth = { "region": updatedRegion, "year": Number(updatedYear), "men": Number(updatedMen), "women": Number(updatedWomen), "totalbirth": Number(updatedTotalBirth) };
     console.log(this.updatedBirth);
-    this.http.put(this.baseURL + '/' + this.region + '/' + this.year, this.updatedBirth)
+    this.http.put(this.baseURL + '/' + this.region + '/' + this.year, this.updatedBirth, { responseType: 'text' })
       .subscribe(
       res => {
         this.location.back();
       });
-  }
-
-
-  constructor(private route: ActivatedRoute,
-    private location: Location,
-    public http: Http,
-    public auth: AuthService) { }
-
-  ngOnInit() {
-    console.log("Birth Edit Component initialized");
-    this.getBirth();
   }
 
 }

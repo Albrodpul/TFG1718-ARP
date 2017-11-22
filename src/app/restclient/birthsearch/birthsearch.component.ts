@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { RestclientComponent } from './../restclient.component';
 
 
@@ -24,7 +24,7 @@ export class BirthsearchComponent implements OnInit {
   @Input() froms: any;
   @Input() tos: any;  
 
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
     public restclient: RestclientComponent) { }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class BirthsearchComponent implements OnInit {
     //no hay búsqueda
     if (!region && !year && !limit && !offset && !from && !to) {
       this.restclient.refresh();
-      this.http.get(this.restclient.baseURL)
+      this.http.get(this.restclient.baseURL, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallback(data);
@@ -52,11 +52,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región
     else if (region && !year && !limit && !offset && !from && !to) {
-      this.http.get(this.restclient.baseURL + '/' + region + '?limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + region + '?limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -68,11 +68,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región y limit
     else if (region && !year && limit && !offset && !from && !to) {
-      this.http.get(this.restclient.baseURL + '/' + region + '?limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + region + '?limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -84,11 +84,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región y offset
     else if (region && !year && !limit && offset && !from && !to) {
-      this.http.get(this.restclient.baseURL + '/' + region + '?limit=' + limit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + region + '?limit=' + limit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -101,11 +101,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de región, límite y offset
     else if (region && limit && !year && !from && !to && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + region + '?limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + region + '?limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -118,11 +118,11 @@ export class BirthsearchComponent implements OnInit {
 
     //búsqueda de región y from
     else if (region && from && !year && !limit && !to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -134,11 +134,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, from y offset
     else if (region && from && !year && !limit && !to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -151,11 +151,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de región, from y límite
     else if (region && from && !year && limit && !to && !offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -168,11 +168,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de región, from, límite y offset
     else if (region && from && !year && limit && !to && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -184,11 +184,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región y to
     else if (region && to && !year && !from && !limit && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '?to=' + to + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + region + '?to=' + to + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -200,11 +200,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, to y offset
     else if (region && to && !year && !from && !limit && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '?to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + region + '?to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -217,11 +217,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de región, to y limit
     else if (region && to && !year && !from && limit && !offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + region + '?to=' + to + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + region + '?to=' + to + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -234,11 +234,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de región, to, limit y offset
     else if (region && to && !year && !from && limit && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + region + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + region + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -250,11 +250,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, from y to
     else if (region && from && to && !limit && !year && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -266,11 +266,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, from, to y offset
     else if (region && from && to && !limit && !year && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -283,11 +283,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de región, from, to y limit
     else if (region && from && to && limit && !year && !offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -300,11 +300,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de región, from, to, limit y offset
     else if (region && from && to && limit && !year && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + region + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -316,11 +316,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año
     else if (year && !region && !limit && !from && !to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + year + '?limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -332,11 +332,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año y offset
     else if (year && !region && !limit && !from && !to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + year + '?limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -349,11 +349,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de año y límite
     else if (year && limit && !region && !from && !to && !offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + year + '?limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + year + '?limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -366,11 +366,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de año, límite y offset
     else if (year && limit && !region && !from && !to && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + year + '?limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + year + '?limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -382,11 +382,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año y from
     else if (year && from && !region && !limit && !to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -398,11 +398,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, from y offset
     else if (year && from && !region && !limit && !to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -414,11 +414,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, from y limit
     else if (year && from && !region && limit && !to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -430,11 +430,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, from, limit y offset
     else if (year && from && !region && limit && !to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -446,11 +446,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año y to
     else if (year && to && !region && !from && !limit && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?to=' + to + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + year + '?to=' + to + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -462,11 +462,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, to y offset
     else if (year && to && !region && !from && !limit && offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + year + '?to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -478,11 +478,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, to y limit
     else if (year && to && !region && !from && limit && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?to=' + to + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + year + '?to=' + to + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -494,11 +494,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, to, limit y offset
     else if (year && to && !region && !from && limit && offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + year + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -510,11 +510,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, from y to
     else if (year && from && to && !limit && !region && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -526,11 +526,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, from, to y offset
     else if (year && from && to && !limit && !region && offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -542,11 +542,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, from, to y limit
     else if (year && from && to && limit && !region && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -558,11 +558,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de año, from, to, limit y offset
     else if (year && from && to && limit && !region && offset) {
-      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -574,11 +574,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región y año
     else if (region && year && !limit && !from && !to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -590,11 +590,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año y offset
     else if (region && year && !limit && !from && !to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -607,11 +607,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de región, año, límite
     else if (region && year && limit && !from && !to && !offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -624,11 +624,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda de región, año, límite y offset
     else if (region && year && limit && !from && !to && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -640,11 +640,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, from
     else if (region && year && !limit && from && !to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -656,11 +656,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, from y offset
     else if (region && year && !limit && from && !to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -672,11 +672,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, from y limit
     else if (region && year && limit && from && !to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -688,11 +688,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, from, limit y offset
     else if (region && year && limit && from && !to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -704,11 +704,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, to
     else if (region && year && !limit && !from && to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -720,11 +720,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, to y offset
     else if (region && year && !limit && !from && to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -736,11 +736,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, to y limit
     else if (region && year && limit && !from && to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -752,11 +752,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, to, limit y offset
     else if (region && year && limit && !from && to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -768,11 +768,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, from y to
     else if (region && year && !limit && from && to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -784,11 +784,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, from, to y offset
     else if (region && year && !limit && from && to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -800,11 +800,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, from, to y limit
     else if (region && year && limit && from && to && !offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -816,11 +816,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda de región, año, from, to, limit y offset
     else if (region && year && limit && from && to && offset) {
-      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '/' + region + '/' + year + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -833,11 +833,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda con límite
     else if (limit && !region && !year && !offset && !from && !to) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '?limit=' + limit)
+      this.http.get(this.restclient.baseURL + '?limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -850,11 +850,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda con límite y offset
     else if (limit && !region && !year && !from && !to && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '?limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '?limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -867,11 +867,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda con límite y from
     else if (limit && !region && !year && from && !to && !offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '?from=' + from + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '?from=' + from + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -884,11 +884,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda con límite, from y offset
     else if (limit && !region && !year && from && !to && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '?from=' + from + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -901,11 +901,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda con límite y to
     else if (limit && !region && !year && !from && to && !offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '?to=' + to + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '?to=' + to + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -918,11 +918,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda con límite, to y offset
     else if (limit && !region && !year && !from && to && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '?to=' + to + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -935,11 +935,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda con límite, from y to
     else if (limit && !region && !year && from && to && !offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '?from=' + from + '&to=' + to + '&limit=' + limit)
+      this.http.get(this.restclient.baseURL + '?from=' + from + '&to=' + to + '&limit=' + limit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -952,11 +952,11 @@ export class BirthsearchComponent implements OnInit {
     //búsqueda con límite, from, to y offset
     else if (limit && !region && !year && from && to && offset) {
       this.restclient.sLimit = limit;
-      this.http.get(this.restclient.baseURL + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2)
+      this.http.get(this.restclient.baseURL + '?from=' + from + '&to=' + to + '&limit=' + limit + '&offset=' + vOffset2, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -968,11 +968,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda con from
     else if (from && !region && !year && !limit && !to && !offset) {
-      this.http.get(this.restclient.baseURL + '?from=' + from + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '?from=' + from + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -984,11 +984,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda con from y offset
     else if (from && !region && !year && !limit && !to && offset) {
-      this.http.get(this.restclient.baseURL + '?from=' + from + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '?from=' + from + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -1000,11 +1000,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda con to
     else if (!limit && !region && !year && !from && to && !offset) {
-      this.http.get(this.restclient.baseURL + '?to=' + to + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '?to=' + to + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -1016,11 +1016,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda con to y offset
     else if (!limit && !region && !year && !from && to && offset) {
-      this.http.get(this.restclient.baseURL + '?to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '?to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -1032,11 +1032,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda con from y to
     else if (!limit && !region && !year && from && to && !offset) {
-      this.http.get(this.restclient.baseURL + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit)
+      this.http.get(this.restclient.baseURL + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -1048,11 +1048,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda con from, to y offset
     else if (!limit && !region && !year && from && to && offset) {
-      this.http.get(this.restclient.baseURL + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '?from=' + from + '&to=' + to + '&limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);
@@ -1064,11 +1064,11 @@ export class BirthsearchComponent implements OnInit {
     }
     //búsqueda con offset
     else if (!limit && !region && !year && !from && !to && offset) {
-      this.http.get(this.restclient.baseURL + '?limit=' + this.restclient.vLimit + '&offset=' + vOffset)
+      this.http.get(this.restclient.baseURL + '?limit=' + this.restclient.vLimit + '&offset=' + vOffset, { observe: 'response' })
         .subscribe(
         data => {
           this.restclient.successCallbackSearch(data);
-          this.http.get(this.restclient.baseURL)
+          this.http.get(this.restclient.baseURL, { observe: 'response' })
             .subscribe(
             data => {
               this.restclient.successCallback(data);

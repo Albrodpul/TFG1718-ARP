@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { RestclientComponent } from './../restclient.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { RestclientComponent } from './../restclient.component';
 })
 export class BirthgetComponent implements OnInit {
 
-  constructor(public http: Http,
+  constructor(public http: HttpClient,
     public restclient: RestclientComponent) { }
 
   ngOnInit() {
@@ -17,7 +17,7 @@ export class BirthgetComponent implements OnInit {
   }
 
   public get(): void {
-    this.http.get(this.restclient.baseURL)
+    this.http.get(this.restclient.baseURL, { observe: 'response' })
       .subscribe(
       data => {
         this.restclient.refresh();
