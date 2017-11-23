@@ -6,7 +6,8 @@ import { AboutComponent } from './about/about.component';
 import { DataComponent } from './data/data.component';
 import { RestclientComponent } from './restclient/restclient.component';
 import { BirtheditComponent } from './restclient/birthedit/birthedit.component';
-import { JqueryComponent } from './restclient/jquery/jquery.component';
+import { SimplerestclientComponent } from './simplerestclient/simplerestclient.component';
+import { JqueryclientComponent } from './jqueryclient/jqueryclient.component';
 
 
 export const ROUTES: Routes = [
@@ -17,6 +18,7 @@ export const ROUTES: Routes = [
   { path: 'data', component: DataComponent },
   { path: 'RESTClient', component: RestclientComponent },  
   { path: 'RESTClient/:region/:year', component: BirtheditComponent },
-  { path: 'RESTClient/jquery', component: JqueryComponent },
+  { path: 'SimpleRESTClient', component: SimplerestclientComponent },
+  { path: 'jquery', component: JqueryclientComponent },
   { path: '**', redirectTo: '' }
 ];

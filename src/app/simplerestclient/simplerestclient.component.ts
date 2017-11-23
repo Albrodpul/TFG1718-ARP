@@ -2,16 +2,16 @@ import { Component, OnInit, Pipe } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 
 declare var Materialize: any;
 
 @Component({
-  selector: 'app-jquery',
-  templateUrl: './jquery.component.html',
-  styleUrls: ['./jquery.component.css']
+  selector: 'app-simplerestclient',
+  templateUrl: './simplerestclient.component.html',
+  styleUrls: ['./simplerestclient.component.css']
 })
-export class JqueryComponent implements OnInit {
+export class SimplerestclientComponent implements OnInit {
 
   constructor(public http: HttpClient,
     public auth: AuthService) { }

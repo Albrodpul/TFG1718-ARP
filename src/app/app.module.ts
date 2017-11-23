@@ -21,7 +21,7 @@ import { BirtheditComponent } from './restclient/birthedit/birthedit.component';
 import { GeochartComponent } from './data/geochart/geochart.component';
 import { CorechartComponent } from './data/corechart/corechart.component';
 import { HighchartsComponent } from './data/highcharts/highcharts.component';
-import { JqueryComponent } from './restclient/jquery/jquery.component';
+import { SimplerestclientComponent } from './simplerestclient/simplerestclient.component';
 import { ArraySortByFieldPipe, ArraySortByNumberPipe, ArraySortByStringPipe } from './pipes/arraysort.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { BirthloadComponent } from './restclient/birthload/birthload.component';
@@ -32,6 +32,8 @@ import { BirthdeleteComponent } from './restclient/birthdelete/birthdelete.compo
 import { BirthsearchComponent } from './restclient/birthsearch/birthsearch.component';
 import { BirthuploadComponent } from './restclient/birthcsv/birthupload/birthupload.component';
 import { BirthtextareaComponent } from './restclient/birthcsv/birthtextarea/birthtextarea.component';
+import { JqueryclientComponent } from './jqueryclient/jqueryclient.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +51,8 @@ import { BirthtextareaComponent } from './restclient/birthcsv/birthtextarea/birt
     CorechartComponent,
     HighchartsComponent,
     FilterPipe,
-    JqueryComponent,
-    ArraySortByFieldPipe, ArraySortByNumberPipe, ArraySortByStringPipe
+    SimplerestclientComponent,
+    ArraySortByFieldPipe, ArraySortByNumberPipe, ArraySortByStringPipe, JqueryclientComponent, FooterComponent
   ],
   imports: [
     BrowserModule,
