@@ -31,6 +31,8 @@ export class ProfileComponent implements OnInit {
     }else if(profile.sub.match("twitter")){
       this.tProfile = "twitter";
       
+    }else if(profile.sub.match("facebook")){
+      this.tProfile = "facebook";
     }
   }
 
