@@ -28,7 +28,7 @@ export class BirthuploadComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       let text = reader.result;
-
+      console.log(text);
       //convert text to json here
       var json = this.csvJSON(text);
     };
@@ -38,15 +38,15 @@ export class BirthuploadComponent implements OnInit {
 
   public csvJSON(csv): void {
     var line = csv.split("\n");
-    var lines = line.slice(0, line.length - 1);
-    var header = lines[0].split(";");
+    var lines = line.slice(0, line.length);
+    var header = lines[0].split(",");
     for (var i = 1; i < lines.length; i++) {
       var region: string;
       var year: number;
       var men: number;
       var women: number;
       var totalbirth: number;
-      var currentline = lines[i].split(";");
+      var currentline = lines[i].split(",");
       region = currentline[0];
       year = Number(currentline[1]);
       men = Number(currentline[2]);
@@ -62,7 +62,7 @@ export class BirthuploadComponent implements OnInit {
           this.restclient.error = true;
           this.restclient.status = err.status;
           this.restclient.statusText = err.statusText;
-        });      
+        });  
     }
     Materialize.toast("Has subido " + (i-1) + " dato(s) nuevo(s)", 4000);
   }
