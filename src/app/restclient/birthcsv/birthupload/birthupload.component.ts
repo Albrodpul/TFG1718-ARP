@@ -15,7 +15,7 @@ export class BirthuploadComponent implements OnInit {
   /* Nuevo dato a introducir */
   newBirth: any;
 
-  constructor(private restclient:RestclientComponent,private http:HttpClient) { }
+  constructor(private restclient: RestclientComponent, private http: HttpClient) { }
 
   ngOnInit() {
     console.log("Birth Upload Component initialized");
@@ -24,16 +24,21 @@ export class BirthuploadComponent implements OnInit {
   public convertFile = () => {
     console.log("Inserting CSV...");
     var file = (<HTMLInputElement>document.getElementById('file-upload')).files[0];
-    const input = document.getElementById('file-upload');
-    const reader = new FileReader();
-    reader.onload = () => {
-      let text = reader.result;
-      console.log(text);
-      //convert text to json here
-      var json = this.csvJSON(text);
-    };
-    reader.readAsText(file);
-    Materialize.toast("Has subido un fichero .CSV de " + file.size + "Bytes", 4000);
+    var extension = file.name.split(".")[1];
+    if (extension != "csv") {
+      this.restclient.error = true;
+      this.restclient.statusText = "File extension must be .csv";
+    } else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        let text = reader.result;
+        console.log(text);
+        //convert text to json here
+        var json = this.csvJSON(text);
+      };
+      reader.readAsText(file);
+      Materialize.toast("Has subido un fichero .CSV de " + file.size + "Bytes", 4000);
+    }
   }
 
   public csvJSON(csv): void {
@@ -62,9 +67,9 @@ export class BirthuploadComponent implements OnInit {
           this.restclient.error = true;
           this.restclient.status = err.status;
           this.restclient.statusText = err.statusText;
-        });  
+        });
     }
-    Materialize.toast("Has subido " + (i-1) + " dato(s) nuevo(s)", 4000);
+    Materialize.toast("Has subido " + (i - 1) + " dato(s) nuevo(s)", 4000);
   }
 
 }
