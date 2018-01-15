@@ -32,8 +32,10 @@ import { BirthdeleteComponent } from './restclient/birthdelete/birthdelete.compo
 import { BirthsearchComponent } from './restclient/birthsearch/birthsearch.component';
 import { BirthuploadComponent } from './restclient/birthcsv/birthupload/birthupload.component';
 import { BirthtextareaComponent } from './restclient/birthcsv/birthtextarea/birthtextarea.component';
+import { BirthfileComponent } from './restclient/birthcsv/birthfile/birthfile.component';
 import { JqueryclientComponent } from './jqueryclient/jqueryclient.component';
 import { FooterComponent } from './footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +54,7 @@ import { FooterComponent } from './footer/footer.component';
     HighchartsComponent,
     FilterPipe,
     SimplerestclientComponent,
-    ArraySortByFieldPipe, ArraySortByNumberPipe, ArraySortByStringPipe, JqueryclientComponent, FooterComponent
+    ArraySortByFieldPipe, ArraySortByNumberPipe, ArraySortByStringPipe, JqueryclientComponent, FooterComponent, BirthfileComponent
   ],
   imports: [
     BrowserModule,
